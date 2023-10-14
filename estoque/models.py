@@ -3,12 +3,21 @@ from django.contrib.auth.hashers import make_password, check_password
 
 TIPOS_PRODUTOS = (
     ('BEBIDAS', 'Bebidas'),
+    ('BEBIDAS_ALC', 'Bebidas alcoólicas'),
     ('CARNES', 'Carnes'),
     ('FRUTAS', 'Frutas'),
     ('LATICINIOS', 'Laticínios'),
     ('LEGUMES', 'Legumes'),
     ('OVOS', 'Ovos'),
     ('PREPARADOS', 'Alimentos preparados'),
+)
+
+UNIDADES_MEDIDA = (
+    ('UNIDADE', 'un'),
+    ('GRAMA', 'g'),
+    ('KILOGRAMA', 'kg'),
+    ('MILILITRO', 'ml'),
+    ('LITRO', 'lt'),
 )
 
 
@@ -18,6 +27,7 @@ class Usuario(models.Model):
     email = models.EmailField(max_length=80, null=False, blank=False, unique=True)
     senha = models.CharField(max_length=30, null=False, blank=False)
     senha_cripto = make_password(str(senha))
+    dt_criacao = models.DateField(auto_now=True, blank=False)
 
     def __str__(self):
         return self.nome_user
@@ -44,7 +54,9 @@ class Lista(models.Model):
 
 class Produto(models.Model):
     nome_produto = models.CharField(max_length=100)
-    tipo = models.CharField(max_length=15, choices=TIPOS_PRODUTOS)
+    tipo = models.CharField(max_length=20, choices=TIPOS_PRODUTOS)
+    imagem_produto = models.ImageField(upload_to='imagens_produto', default='default_image_produto')
+    unidade_medida = models.tipo = models.CharField(max_length=20, choices=UNIDADES_MEDIDA, default='un')
     produto_geladeira = models.ManyToManyField(Geladeira, through='Item_Geladeira')
     produto_lista = models.ManyToManyField(Lista, through='Item_Lista')
 
@@ -57,7 +69,7 @@ class Item_Geladeira(models.Model):
     validade = models.DateField(null=False, blank=False)
     quantidade = models.IntegerField(null=False, blank=False)
     def __str__(self):
-        return f"{self.pk}° item da geladeira"
+        return f"{self.produto.nome_produto} - {self.geladeira.nome_geladeira}"
 
 class Item_Lista(models.Model):
     lista = models.ForeignKey(Lista, on_delete=models.CASCADE)
@@ -65,4 +77,4 @@ class Item_Lista(models.Model):
     quantidade = models.IntegerField(null=False, blank=False)
 
     def __str__(self):
-        return f"{self.pk}° item da lista"
+        return f"{self.produto.nome_produto} - {self.lista.titulo_lista}"
