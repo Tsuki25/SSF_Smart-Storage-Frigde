@@ -4,19 +4,34 @@
         <form method="post" action="{% url 'estoque:profile' %}" id="user_profile">
             {% csrf_token %}
             <label for="username">Usuário</label>
-            <input type="text" id="username" value="{{ object.username }}" disabled>
+            <input type="text" id="username" name="{{ form.username.name }}" value="{{ object.username }}" style="background-color: lavender" readOnly>
             <label for="email">Email</label>
-            <input type="email" id="email" value="{{ object.email }}" disabled="False">
-            <button type="submit" id="btn_submit" style="display:none" onclick="alter_display_enviar()">Enviar dados</button>
+            <input type="email" id="email" name="{{ form.email.name }}" value="{{ object.email }}" style="background-color: lavender" readOnly>
+            <button type="submit" id="btn_submit" onclick="alter_display_enviar()" style="display: none">Enviar dados</button>
         </form>
         <button id="btn_edit" onclick="alter_display_edit()">Editar Usuario</button>
 
         <button><a href="../accounts/password/change">Alterar senha</a> </button>
+        <button><a href="{% url 'estoque:excluir_conta' object.pk %}">Excluir Conta</a></button>
 
 {% endblock %}
 
+
 <script>
-    function alter_display_edit(){
+    const btn_edit = document.getElementById('btn_edit')
+    var input_user = document.getElementById('username')
+    var input_email = document.getElementById('email')
+    btn_edit.addEventListener("click", function(){
+        if(input_user.readOnly && input_email.readOnly){
+            input_user.readOnly = false
+            input_email.readOnly = false
+        }else{
+            input_user.readOnly = true
+            input_email.readOnly = true
+        }
+    })
+
+    function alter_display_edit(qualifiedName){
         document.getElementById('btn_edit').style.display = 'none'
         document.getElementById('btn_submit').style.display = 'block'
     }
