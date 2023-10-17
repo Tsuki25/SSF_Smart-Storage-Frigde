@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, UpdateView, DeleteView, CreateView, ListView
 
-from estoque.forms import UpdateUsuarioForm
+from estoque.forms import UpdateUsuarioForm, CreateGeladeiraForm
+from estoque.models import Geladeira
 
 
 class Homepage(TemplateView):
@@ -25,6 +26,7 @@ class Profile(LoginRequiredMixin, UpdateView):
         self.object = get_object_or_404(User, username=self.request.user)
         return self.object
 
+
 class DeleteAccount(DeleteView):
     template_name = "delete_account.html"
     model = User
@@ -36,3 +38,27 @@ class DeleteAccount(DeleteView):
         user.delete()
 
         return HttpResponseRedirect(self.success_url)
+
+
+class CreateGeladeira(CreateView, LoginRequiredMixin):
+    template_name = "form_geladeira.html"
+    model = Geladeira
+    form_class = CreateGeladeiraForm
+    success_url = reverse_lazy('estoque:geladeiras')
+
+    def form_valid(self, form):
+        geladeira = form.save(commit=False)
+        geladeira.save()
+        geladeira.usuarios_proprietarios.add(self.request.user)
+
+        return super().form_valid(form)
+
+
+class Geladeiras(ListView):
+    template_name = "home_geladeiras.html"
+    model = Geladeira
+
+    def get_context_data(self, **kwargs):#DEFINE O CONTEXTO DE GELADEIRAS
+        context = super().get_context_data(**kwargs)
+        context['geladeiras'] = Geladeira.objects.all()#PEGA TODOS OS OBJETOS GELADEIRA E ADICIONA A UMA LISTA
+        return context

@@ -1,0 +1,18 @@
+{% load static %}
+
+{% block content %}
+<div>
+    <h1>PAGINA PRINCIPAL GELADEIRAS</h1>
+    {% for geladeira in object_list %}
+        {% if request.user in geladeira.usuarios_proprietarios.all %}
+            <section style="background-color: lightseagreen; margin: 10px;">
+                <p>{{ geladeira.nome_geladeira }}</p>
+                {% for usuario in geladeira.usuarios_proprietarios.all %}<!-- CASO DESEJADO REMOVE A LISTA DE USUARIOS -->
+                    <p>{{ usuario }}</p>
+                {% endfor %}
+            </section>
+        {% endif %}
+    {% endfor %}
+    <a href="{% url 'estoque:criar_geladeira' %}"><button> + </button></a>
+</div>
+{% endblock %}
