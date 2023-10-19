@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, UpdateView, DeleteView, CreateView, ListView
+from django.views.generic import TemplateView, UpdateView, DeleteView, CreateView, ListView, DetailView
 
-from estoque.forms import UpdateUsuarioForm, CreateGeladeiraForm
-from estoque.models import Geladeira
+from estoque.forms import UpdateUsuarioForm, CreateGeladeiraForm, UpdateGeladeiraForm
+from estoque.models import Geladeira, Produto, Item_Geladeira
 
 
 class Homepage(TemplateView):
@@ -58,7 +58,32 @@ class Geladeiras(ListView):
     template_name = "home_geladeiras.html"
     model = Geladeira
 
-    def get_context_data(self, **kwargs):#DEFINE O CONTEXTO DE GELADEIRAS
+    def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO DE GELADEIRAS
         context = super().get_context_data(**kwargs)
-        context['geladeiras'] = Geladeira.objects.all()#PEGA TODOS OS OBJETOS GELADEIRA E ADICIONA A UMA LISTA
+        context['geladeiras'] = Geladeira.objects.all()  # PEGA TODOS OS OBJETOS GELADEIRA E ADICIONA A UMA LISTA
         return context
+
+
+class DetalhesGeladeira(LoginRequiredMixin, DetailView):
+    template_name = "detalhes_geladeira.html"
+    model = Geladeira
+
+    # FALTA CONSEGUIR MEXER NO VALOR DOS ITENS DIRETAMENTE NA GELADEIRA
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item_geladeira'] = Item_Geladeira.objects.all()#PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+        return context
+
+
+class UpdateGeladeira(UpdateView):
+    template_name = "update_geladeira.html"
+    model = Geladeira
+    form_class = UpdateGeladeiraForm
+
+    def get_success_url(self):
+        return reverse('estoque:detalhes_geladeira', args=[self.object.pk])
+
+class DeleteGeladeira(DeleteView):
+    template_name = "delete_geladeira.html"
+    model = Geladeira
+    success_url = reverse_lazy('estoque:geladeiras')

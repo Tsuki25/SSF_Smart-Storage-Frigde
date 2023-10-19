@@ -14,3 +14,8 @@ class CreateGeladeiraForm(ModelForm):
     class Meta:
         model = Geladeira
         fields = ["nome_geladeira"]
+
+class UpdateGeladeiraForm(ModelForm):
+    class Meta:
+        model = Geladeira
+        fields = ['nome_geladeira']

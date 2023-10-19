@@ -6,7 +6,7 @@
     {% for geladeira in object_list %}
         {% if request.user in geladeira.usuarios_proprietarios.all %}
             <section style="background-color: lightseagreen; margin: 10px;">
-                <p>{{ geladeira.nome_geladeira }}</p>
+               <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
                 {% for usuario in geladeira.usuarios_proprietarios.all %}<!-- CASO DESEJADO REMOVE A LISTA DE USUARIOS -->
                     <p>{{ usuario }}</p>
                 {% endfor %}

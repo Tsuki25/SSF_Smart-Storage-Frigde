@@ -1,0 +1,30 @@
+{% block content %}
+    <div>
+        <h1 style="display: block">{{ object.nome_geladeira }}</h1>
+        <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}"><button id="btn_edit">Editar</button></a>
+        <a href="{% url 'estoque:excluir_geladeira' geladeira.pk %}"><button id="btn_excluir">Excluir</button></a>
+        <p>Data de criação: {{ object.dt_criacao }}</p>
+
+        {% for item in item_geladeira %}
+            {% if item.geladeira.pk == geladeira.pk %}
+                <div style="background-color: lightseagreen">
+                    <p>{{ item.produto.nome_produto }}</p>
+                    <img src="/media/{{ item.produto.imagem_produto }}" width="100px" height="100px">
+                    <p>{{ item.validade }}</p>
+                    <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <label for="nova_quantidade">Quantidade</label><br>
+                        <input type="number" id="nova_quantidade" name="nova_quantidade" value="{{ item.quantidade }}">
+
+                        <button type="button" onclick="add_or_sub_item(-1)">-</button><!-- Não tá funfando ainda -->
+                        <button type="button" onclick="add_or_sub_item(1)">+</button>
+                        <button type="submit">Guardar</button>
+                    </form>
+                    <br>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <a href="{% url 'estoque:geladeiras' %}"><button id="btn_voltar">Voltar</button></a>
+{% endblock %}

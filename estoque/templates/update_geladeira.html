@@ -1,0 +1,10 @@
+{% load crispy_forms_filters %}
+{% block main %}
+{%  load crispy_forms_tags %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }} <br>
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}
