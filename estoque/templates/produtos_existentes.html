@@ -1,0 +1,47 @@
+{% block content %}
+    <div>
+        <h1>Produtos</h1>
+
+        <a href="{% url 'estoque:cadastrar_produto' %}">
+            <div style="background-color: lightseagreen; width: 100px; height: 100px;">
+                <h1 style="font-size: 50pt">+</h1>
+            </div>
+        </a>
+
+        {% for produto in produtos %}
+            {% if geladeira %}
+                <a href="{% url 'estoque:cadastrar_item_geladeira' geladeira.pk produto.pk %}" id="item_geladeira{{ produto.pk }}" style="display: none">
+                    <div style="background-color: lightseagreen">
+                        <p>{{ produto.nome_produto }}</p>
+                        <img src="/media/{{ produto.imagem_produto }}" width="100px" height="100px">
+                        <p>{{ produto.unidade_medida }}</p>
+                    </div>
+                </a>
+            {% endif %}
+            {% if lista %}
+                <a href="{% url 'estoque:cadastrar_item_lista' lista.pk produto.pk %}" id="item_lista{{ produto.pk }}" style="display: none">
+                    <div style="background-color: lightseagreen">
+                        <p>{{ produto.nome_produto }}</p>
+                        <img src="/media/{{ produto.imagem_produto }}" width="100px" height="100px">
+                        <p>{{ produto.unidade_medida }}</p>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+<script>
+    let url_atual = window.location.href;
+
+    // Verifique a URL atual e mostre ou oculte os links com base nas condições
+    if (url_atual.includes('/geladeira/produtos/')) {
+        document.querySelectorAll('[id^="item_geladeira"]').forEach(function(element) {
+            element.style.display = 'block';
+        });
+    } else if (url_atual.includes('geladeira/produtos_lista/')) {
+        document.querySelectorAll('[id^="item_lista"]').forEach(function(element) {
+            element.style.display = 'block';
+        });
+    }
+</script>

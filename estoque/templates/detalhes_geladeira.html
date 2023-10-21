@@ -26,6 +26,8 @@
         {% endfor %}
         <!-- <a href=""><button>Adicionar item</button></a> -->
     </div>
+    <a href="{% url 'estoque:produtos_geladeira' object.pk %}"><button> Adicionar Item </button></a>
+
     <a href="{% url 'estoque:geladeiras' %}"><button id="btn_voltar">Voltar</button></a>
     <a href="{% url 'estoque:criar_lista' object.pk %}"><button> Criar Lista </button></a>
     <a href="{% url 'estoque:listas' geladeira.pk %}"><button> Visualizar Listas de Compras </button></a>

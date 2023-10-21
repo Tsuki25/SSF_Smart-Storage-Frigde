@@ -28,6 +28,6 @@
         {% endfor %}
         <!-- <a href=""><button>Adicionar item</button></a> -->
     </div>
-    <a href="{% url 'estoque:criar_lista' object.geladeira.pk %}"><button> Adicionar item (não configurado) </button></a>
+    <a href="{% url 'estoque:produtos_lista' lista.pk %}"><button> Adicionar item </button></a>
     <a href="{% url 'estoque:listas' object.geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
 {% endblock %}
