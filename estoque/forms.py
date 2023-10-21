@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.forms import ModelForm, ClearableFileInput, ImageField
 
-from estoque.models import Geladeira, Produto
+from estoque.models import Geladeira, Produto, Lista
 
 
 class UpdateUsuarioForm(ModelForm):
@@ -9,13 +9,7 @@ class UpdateUsuarioForm(ModelForm):
         model = User
         fields = ['username', 'email']
 
-class CreateGeladeiraForm(ModelForm):
-
-    class Meta:
-        model = Geladeira
-        fields = ["nome_geladeira"]
-
-class UpdateGeladeiraForm(ModelForm):
+class GeladeiraForm(ModelForm):
     class Meta:
         model = Geladeira
         fields = ['nome_geladeira']
@@ -28,3 +22,7 @@ class ProdutoForm(ModelForm):
 
     imagem_produto = ImageField(widget=ClearableFileInput(attrs={'multiple': False}))
 
+class ListaForm(ModelForm):
+    class Meta:
+        model = Lista
+        fields = ['titulo_lista', 'descricao']

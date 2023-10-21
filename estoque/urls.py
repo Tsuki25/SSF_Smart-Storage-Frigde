@@ -1,21 +1,28 @@
 from django.conf import settings
 from django.urls import path
-from .views import Homepage, Profile, DeleteAccount, CreateGeladeira, Geladeiras, DetalhesGeladeira, UpdateGeladeira, \
-    DeleteGeladeira, CreateProduto, UpdateProduto, DeleteProduto
+import estoque.views as views
 from django.conf.urls.static import static
 
 app_name = 'estoque'
 
 urlpatterns = [
-    path('', Homepage.as_view(), name="homepage"),
-    path('profile/', Profile.as_view(), name="profile"),
-    path('excluir_conta/<int:pk>/', DeleteAccount.as_view(), name="excluir_conta"),
-    path('geladeiras/', Geladeiras.as_view(), name="geladeiras"),
-    path('geladeiras/criar_geladeira', CreateGeladeira.as_view(), name="criar_geladeira"),
-    path('geladeiras/geladeira/<int:pk>/', DetalhesGeladeira.as_view(), name="detalhes_geladeira"),
-    path('geladeiras/geladeira/edit/<int:pk>/', UpdateGeladeira.as_view(), name="editar_geladeira"),
-    path('geladeiras/geladeira/excluir_geladeira/<int:pk>/', DeleteGeladeira.as_view(), name="excluir_geladeira"),
-    path('produtos/cadastrar_produto', CreateProduto.as_view(), name="cadastrar_produto"),
-    path('produtos/editar_produto/<int:pk>', UpdateProduto.as_view(), name="editar_produto"),# TALVEZ DEVA SER REMOVIDO
-    path('produtos/excluir_produto/<int:pk>', DeleteProduto.as_view(), name="excluir_produto"),# TALVEZ DEVA SER REMOVIDO
+    path('', views.Homepage.as_view(), name="homepage"),
+    path('profile/', views.Profile.as_view(), name="profile"),
+    path('excluir_conta/<int:pk>/', views.DeleteAccount.as_view(), name="excluir_conta"),
+
+    path('geladeiras/', views.Geladeiras.as_view(), name="geladeiras"),
+    path('geladeiras/criar_geladeira', views.CreateGeladeira.as_view(), name="criar_geladeira"),
+    path('geladeiras/geladeira/<int:pk>/', views.DetalhesGeladeira.as_view(), name="detalhes_geladeira"),
+    path('geladeiras/geladeira/edit/<int:pk>/', views.UpdateGeladeira.as_view(), name="editar_geladeira"),
+    path('geladeiras/geladeira/excluir_geladeira/<int:pk>/', views.DeleteGeladeira.as_view(), name="excluir_geladeira"),
+
+    path('produtos/cadastrar_produto', views.CreateProduto.as_view(), name="cadastrar_produto"),
+    path('produtos/editar_produto/<int:pk>', views.UpdateProduto.as_view(), name="editar_produto"),# TALVEZ DEVA SER REMOVIDO
+    path('produtos/excluir_produto/<int:pk>', views.DeleteProduto.as_view(), name="excluir_produto"),# TALVEZ DEVA SER REMOVIDO
+
+    path('geladeiras/listas/<int:pk>', views.Listas.as_view(), name="listas"),
+    path('geladeiras/lista/criar_lista/<int:pk>', views.CreateLista.as_view(), name="criar_lista"),
+    path('geladeiras/lista/<int:pk>/', views.DetalhesLista.as_view(), name="detalhes_lista"),
+    path('geladeiras/lista/edit/<int:pk>/', views.UpdateLista.as_view(), name="editar_lista"),
+    path('geladeiras/lista/<int:geladeira>/excluir_lista/<int:pk>/', views.DeleteLista.as_view(), name="excluir_lista"),
 ]
