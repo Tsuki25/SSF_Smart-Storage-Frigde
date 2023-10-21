@@ -43,7 +43,7 @@ class Lista(models.Model):
 class Produto(models.Model):
     nome_produto = models.CharField(max_length=100)
     tipo = models.CharField(max_length=20, choices=TIPOS_PRODUTOS)
-    imagem_produto = models.ImageField(upload_to='imagens_produto', default='default_image_produto')#default = '/media/imagens_produto/default_image_produto'
+    imagem_produto = models.ImageField(upload_to='media', default='media/default_image_produtos')
     unidade_medida = models.tipo = models.CharField(max_length=20, choices=UNIDADES_MEDIDA, default='un')
     produto_geladeira = models.ManyToManyField(Geladeira, through='Item_Geladeira')
     produto_lista = models.ManyToManyField(Lista, through='Item_Lista')

@@ -1,12 +1,13 @@
 from allauth.account.views import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.forms import ImageField, ClearableFileInput
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, UpdateView, DeleteView, CreateView, ListView, DetailView
 
-from estoque.forms import UpdateUsuarioForm, CreateGeladeiraForm, UpdateGeladeiraForm
+from estoque.forms import UpdateUsuarioForm, CreateGeladeiraForm, UpdateGeladeiraForm, ProdutoForm
 from estoque.models import Geladeira, Produto, Item_Geladeira
 
 
@@ -28,7 +29,7 @@ class Profile(LoginRequiredMixin, UpdateView):
 
 
 class DeleteAccount(DeleteView):
-    template_name = "delete_account.html"
+    template_name = "delete.html"
     model = User
     success_url = reverse_lazy('estoque:homepage')
 
@@ -76,7 +77,7 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
 
 
 class UpdateGeladeira(UpdateView):
-    template_name = "update_geladeira.html"
+    template_name = "form_geladeira.html"
     model = Geladeira
     form_class = UpdateGeladeiraForm
 
@@ -84,6 +85,24 @@ class UpdateGeladeira(UpdateView):
         return reverse('estoque:detalhes_geladeira', args=[self.object.pk])
 
 class DeleteGeladeira(DeleteView):
-    template_name = "delete_geladeira.html"
+    template_name = "delete.html"
     model = Geladeira
+    success_url = reverse_lazy('estoque:geladeiras')
+
+
+class CreateProduto(CreateView, LoginRequiredMixin):
+    template_name = "form_produto.html"
+    model = Produto
+    form_class = ProdutoForm
+    success_url = reverse_lazy('estoque:geladeiras')
+
+class UpdateProduto(UpdateView, LoginRequiredMixin):
+    template_name = "form_produto.html"
+    model = Produto
+    form_class = ProdutoForm
+    success_url = reverse_lazy('estoque:geladeiras')
+
+class DeleteProduto(DeleteView):
+    template_name = "delete.html"
+    model = Produto
     success_url = reverse_lazy('estoque:geladeiras')

@@ -2,9 +2,9 @@
 {% block main %}
 {%  load crispy_forms_tags %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form | crispy }} <br>
+        {{ form.as_p }} <br>
         <input type="submit" value="Save">
     </form>
 {% endblock %}
