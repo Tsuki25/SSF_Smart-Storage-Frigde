@@ -6,24 +6,24 @@
         <p>Data de criação: {{ object.dt_criacao }}</p>
 
         {% for item in item_geladeira %}
-            {% if item.geladeira.pk == geladeira.pk %}
-                <div style="background-color: lightseagreen">
-                    <p>{{ item.produto.nome_produto }}</p>
-                    <img src="/media/{{ item.produto.imagem_produto }}" width="100px" height="100px">
-                    <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
-                    <form method="post">
-                        {% csrf_token %}
-                        <label for="nova_quantidade">Quantidade</label><br>
-                        <input type="number" id="nova_quantidade" name="nova_quantidade" value="{{ item.quantidade }}">
+            <div style="background-color: lightseagreen">
+                <p>{{ item.produto.nome_produto }}</p>
+                <img src="/media/{{ item.produto.imagem_produto }}" width="100px" height="100px">
+                <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
+                <form method="post" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                    <label for="quantidade{{ item.id }}">Quantidade</label><br>
+                    <input type="number" id="quantidade{{ item.id }}" name="quantidade{{ item.id }}" value="{{ item.quantidade }}" min="0"><br>
 
-                        <button type="button" onclick="add_or_sub_item(-1)">-</button><!-- Não tá funfando ainda -->
-                        <button type="button" onclick="add_or_sub_item(1)">+</button>
-                        <button type="submit">Guardar</button>
-                    </form>
-                    <br>
-                </div>
-            {% endif %}
+                    <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button><!-- Não tá funfando ainda -->
+                    <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
+                    <button type="submit">Guardar</button>
+                </form>
+                <br>
+            </div>
         {% endfor %}
+
         <!-- <a href=""><button>Adicionar item</button></a> -->
     </div>
     <a href="{% url 'estoque:produtos_geladeira' object.pk %}"><button> Adicionar Item </button></a>
@@ -31,4 +31,6 @@
     <a href="{% url 'estoque:geladeiras' %}"><button id="btn_voltar">Voltar</button></a>
     <a href="{% url 'estoque:criar_lista' object.pk %}"><button> Criar Lista </button></a>
     <a href="{% url 'estoque:listas' geladeira.pk %}"><button> Visualizar Listas de Compras </button></a>
+
 {% endblock %}
+

@@ -2,7 +2,7 @@ from allauth.account.views import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, UpdateView, DeleteView, CreateView, ListView, DetailView
 
@@ -71,11 +71,24 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
     template_name = "detalhes_geladeira.html"
     model = Geladeira
 
-    # FALTA CONSEGUIR MEXER NO VALOR DOS ITENS DIRETAMENTE NA GELADEIRA
+    def post(self, request, *args, **kwargs):
+        item_id = request.POST.get('item_id')
+        nova_quantidade = int(request.POST.get('quantidade' + item_id))
+        if nova_quantidade < 0: nova_quantidade = 0
+
+        if item_id and nova_quantidade >= 0:
+            try:
+                item = Item_Geladeira.objects.get(id=item_id)
+                item.quantidade = nova_quantidade
+                item.save()
+            except Item_Geladeira.DoesNotExist:
+                pass
+
+        return redirect('estoque:detalhes_geladeira', self.kwargs['pk'])
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context[
-            'item_geladeira'] = Item_Geladeira.objects.all()  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+        context['item_geladeira'] = Item_Geladeira.objects.filter(geladeira=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
         return context
 
 
@@ -183,11 +196,23 @@ class DetalhesLista(LoginRequiredMixin, DetailView):
     template_name = "detalhes_lista.html"
     model = Lista
 
-    # FALTA CONSEGUIR MEXER NO VALOR DOS ITENS DIRETAMENTE NA Lista
+    def post(self, request, *args, **kwargs):
+        item_id = request.POST.get('item_id')
+        nova_quantidade = int(request.POST.get('quantidade' + item_id))
+        if nova_quantidade < 0: nova_quantidade = 0
+
+        if item_id and nova_quantidade >= 0:
+            try:
+                item = Item_Lista.objects.get(id=item_id)
+                item.quantidade = nova_quantidade
+                item.save()
+            except Item_Lista.DoesNotExist:
+                pass
+
+        return redirect('estoque:detalhes_lista', self.kwargs['pk'])
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context[
-            'item_lista'] = Item_Lista.objects.all()  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+        context['item_lista'] = Item_Lista.objects.filter(lista=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
         return context
 
 
@@ -242,3 +267,11 @@ class CreateItemLista(CreateView, LoginRequiredMixin):
 
     def get_success_url(self):
         return reverse_lazy('estoque:detalhes_lista', kwargs={'pk': self.kwargs['lista']})
+
+class DeleteItemLista(DeleteView, LoginRequiredMixin):
+    template_name = "delete.html"
+    model = Item_Lista
+
+    def get_success_url(self):
+        lista_pk = self.kwargs['lista']
+        return reverse('estoque:detalhes_lista', args=[lista_pk])
