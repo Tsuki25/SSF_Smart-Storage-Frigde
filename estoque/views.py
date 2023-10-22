@@ -74,12 +74,14 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
     def post(self, request, *args, **kwargs):
         item_id = request.POST.get('item_id')
         nova_quantidade = int(request.POST.get('quantidade' + item_id))
+        nova_validade = request.POST.get('validade' + item_id)
         if nova_quantidade < 0: nova_quantidade = 0
 
         if item_id and nova_quantidade >= 0:
             try:
                 item = Item_Geladeira.objects.get(id=item_id)
                 item.quantidade = nova_quantidade
+                item.validade = nova_validade
                 item.save()
             except Item_Geladeira.DoesNotExist:
                 pass

@@ -15,7 +15,9 @@
                     <input type="hidden" name="item_id" value="{{ item.id }}">
                     <label for="quantidade{{ item.id }}">Quantidade</label><br>
                     <input type="number" id="quantidade{{ item.id }}" name="quantidade{{ item.id }}" value="{{ item.quantidade }}" min="0"><br>
-
+                    <label for="validade{{ item.id }}">Validade</label><br>
+                    <input type="date" id="validade{{ item.id }}" name="validade{{ item.id }}" value="{{ item.validade|date:'Y-m-d' }}" readonly>
+                    <button type="button" id="btn_validade{{ item.id }}" onclick="document.getElementById('validade{{ item.id }}').readOnly = false; document.getElementById('btn_validade{{ item.id }}').style.display = 'none'">lapis_edicao</button>
                     <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button><!-- Não tá funfando ainda -->
                     <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
                     <button type="submit">Guardar</button>
