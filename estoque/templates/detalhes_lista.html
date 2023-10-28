@@ -6,10 +6,15 @@
         <a href="{% url 'estoque:excluir_lista' lista.geladeira.pk lista.pk %}"><button id="btn_excluir">Excluir</button></a>
         <p>Data de criação: {{ object.dt_criacao }}</p>
 
+
+        <a href="{% url 'estoque:produtos_lista' lista.pk %}">
+            <div style="background-color: lightseagreen; width: 100px; height: 100px;">
+                <h1 style="font-size: 50pt">+</h1>
+            </div>
+        </a>
         {% for item in item_lista %}
             <div style="background-color: lightseagreen">
                 <p>{{ item.produto.nome_produto }}</p>
-                <img src="/media/{{ item.produto.imagem_produto }}" width="100px" height="100px">
                 <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
                 <form method="post" action="{% url 'estoque:detalhes_lista' lista.pk %}">
                     {% csrf_token %}
@@ -25,7 +30,8 @@
                 <br>
             </div>
         {% endfor %}
+
+
     </div>
-    <a href="{% url 'estoque:produtos_lista' lista.pk %}"><button> Adicionar item </button></a>
     <a href="{% url 'estoque:listas' object.geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
 {% endblock %}

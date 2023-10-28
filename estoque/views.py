@@ -1,6 +1,7 @@
 from allauth.account.views import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -137,23 +138,30 @@ class Produtos(ListView):
     model = Produto
 
     def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO DE GELADEIRAS
-        try:
-            context = super().get_context_data(**kwargs)
-            context['produtos'] = Produto.objects.all()
-            pk = self.kwargs['pk']
+        context = super().get_context_data(**kwargs)
+        context['produtos'] = Produto.objects.all()
+        pk = self.kwargs['pk']
 
+        try:#Tenta encontrar uma geladeira com a pk passada pela url
             geladeira = Geladeira.objects.get(pk=pk)
             context['geladeira'] = geladeira
+        except Geladeira.DoesNotExist:
+            context['geladeira'] = None  # Define como None se não existir
 
+        try: #Tenta encontrar uma lista com a pk passada pela url
             lista = Lista.objects.get(pk=pk)
             context['lista'] = lista
-        except Geladeira.DoesNotExist:
-            pass
-
         except Lista.DoesNotExist:
-            pass
+            context['lista'] = None  # Define como None se não existir
+
+        #UTILIZADO PARA IMPLEMENTAR A BARRA DE PESQUISA NA PAGINA
+        termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
+        if termo_pesquisa:
+            # Use a consulta Q para pesquisar produtos por nome
+            context['produtos'] = Produto.objects.filter(nome_produto__icontains=termo_pesquisa)
 
         return context
+
 
 
 # =============================================================================
@@ -215,6 +223,7 @@ class DetalhesLista(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['item_lista'] = Item_Lista.objects.filter(lista=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+
         return context
 
 
@@ -253,6 +262,14 @@ class CreateItemGeladeira(CreateView, LoginRequiredMixin):
 
     def get_success_url(self):
         return reverse_lazy('estoque:detalhes_geladeira', kwargs={'pk': self.kwargs['geladeira']})
+
+class DeleteItemGeladeira(DeleteView, LoginRequiredMixin):
+    template_name = "delete.html"
+    model = Item_Geladeira
+
+    def get_success_url(self):
+        geladeira_pk = self.kwargs['geladeira']
+        return reverse('estoque:detalhes_geladeira', args=[geladeira_pk])
 
 
 class CreateItemLista(CreateView, LoginRequiredMixin):

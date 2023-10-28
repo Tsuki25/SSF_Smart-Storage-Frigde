@@ -30,6 +30,7 @@ urlpatterns = [
     path('geladeira/produtos_lista/<int:pk>', views.Produtos.as_view(), name="produtos_lista"),
 
     path('geladeira/<int:geladeira>/cadastrar_item_geladeira/<int:produto>', views.CreateItemGeladeira.as_view(), name="cadastrar_item_geladeira"),
+    path('geladeira/<int:geladeira>/excluir_item/<int:pk>', views.DeleteItemGeladeira.as_view(), name="excluir_item_geladeira"),
     path('geladeira/listas/<int:lista>/cadastrar_item_lista/<int:produto>', views.CreateItemLista.as_view(), name="cadastrar_item_lista"),
     path('geladeira/listas/<int:lista>/excluir_item/<int:pk>', views.DeleteItemLista.as_view(), name="excluir_item_lista"),
 ]

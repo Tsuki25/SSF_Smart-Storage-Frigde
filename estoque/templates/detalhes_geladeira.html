@@ -5,8 +5,14 @@
         <a href="{% url 'estoque:excluir_geladeira' geladeira.pk %}"><button id="btn_excluir">Excluir</button></a>
         <p>Data de criação: {{ object.dt_criacao }}</p>
 
+
+        <a href="{% url 'estoque:produtos_geladeira' object.pk %}">
+            <div style="background-color: lightseagreen; width: 100px; height: 100px;">
+                <h1 style="font-size: 50pt">+</h1>
+            </div>
+        </a>
         {% for item in item_geladeira %}
-            <div style="background-color: lightseagreen">
+            <div style="background-color: lightseagreen; width: 300px;">
                 <p>{{ item.produto.nome_produto }}</p>
                 <img src="/media/{{ item.produto.imagem_produto }}" width="100px" height="100px">
                 <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
@@ -22,17 +28,17 @@
                     <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
                     <button type="submit">Guardar</button>
                 </form>
+                <a href="{% url 'estoque:excluir_item_geladeira' geladeira.pk item.pk %}"><button id="btn_excluir">X</button></a>
                 <br>
             </div>
         {% endfor %}
 
         <!-- <a href=""><button>Adicionar item</button></a> -->
     </div>
-    <a href="{% url 'estoque:produtos_geladeira' object.pk %}"><button> Adicionar Item </button></a>
-
-    <a href="{% url 'estoque:geladeiras' %}"><button id="btn_voltar">Voltar</button></a>
     <a href="{% url 'estoque:criar_lista' object.pk %}"><button> Criar Lista </button></a>
     <a href="{% url 'estoque:listas' geladeira.pk %}"><button> Visualizar Listas de Compras </button></a>
+    <p></p>
+    <a href="{% url 'estoque:geladeiras' %}"><button id="btn_voltar">Voltar</button></a>
 
 {% endblock %}
 
