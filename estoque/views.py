@@ -1,14 +1,15 @@
+from datetime import datetime
+
 from allauth.account.views import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, UpdateView, DeleteView, CreateView, ListView, DetailView
 
 from estoque.forms import UpdateUsuarioForm, ProdutoForm, GeladeiraForm, ListaForm, ItemGeladeiraForm, ItemListaForm
-from estoque.models import Geladeira, Produto, Item_Geladeira, Lista, Item_Lista
+from estoque.models import Geladeira, Produto, Item_Geladeira, Lista, Item_Lista, Log_Itens_Geladeira
 
 
 class Homepage(TemplateView):
@@ -28,7 +29,7 @@ class Profile(LoginRequiredMixin, UpdateView):
         return self.object
 
 
-class DeleteAccount(DeleteView):
+class DeleteAccount(LoginRequiredMixin, DeleteView):
     template_name = "delete.html"
     model = User
     success_url = reverse_lazy('estoque:homepage')
@@ -44,7 +45,7 @@ class DeleteAccount(DeleteView):
 # =================================================================================
 # =========================== GELADEIRAS ==========================================
 
-class CreateGeladeira(CreateView, LoginRequiredMixin):
+class CreateGeladeira(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Geladeira
     form_class = GeladeiraForm
@@ -58,13 +59,18 @@ class CreateGeladeira(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class Geladeiras(ListView):
+class Geladeiras(LoginRequiredMixin, ListView):
     template_name = "home_geladeiras.html"
     model = Geladeira
 
     def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO DE GELADEIRAS
         context = super().get_context_data(**kwargs)
-        context['geladeiras'] = Geladeira.objects.all()  # PEGA TODOS OS OBJETOS GELADEIRA E ADICIONA A UMA LISTA
+        context['geladeiras'] = Geladeira.objects.all() # PEGA TODOS OS OBJETOS GELADEIRA E ADICIONA A UMA LISTA
+
+        termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
+        if termo_pesquisa:
+            # Use a consulta Q para pesquisar geladeiras por nome
+            context['geladeiras'] = Geladeira.objects.filter(nome_geladeira__icontains=termo_pesquisa)
         return context
 
 
@@ -81,6 +87,9 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
         if item_id and nova_quantidade >= 0:
             try:
                 item = Item_Geladeira.objects.get(id=item_id)
+                att_item_log = Log_Itens_Geladeira(item_geladeira=item, usuario=self.request.user,descricao=f"{item.produto.nome_produto} modificado por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}\n Modificação:{item.quantidade} -> {nova_quantidade}")
+                att_item_log.save()
+
                 item.quantidade = nova_quantidade
                 item.validade = nova_validade
                 item.save()
@@ -92,10 +101,15 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['item_geladeira'] = Item_Geladeira.objects.filter(geladeira=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+
+        termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
+        if termo_pesquisa:# Use a consulta Q para pesquisar geladeiras por nome
+            context['item_geladeira'] = Item_Geladeira.objects.filter(geladeira=self.object, produto__nome_produto__contains=termo_pesquisa)
+
         return context
 
 
-class UpdateGeladeira(UpdateView):  # TALVEZ SEJA REMOVIDO
+class UpdateGeladeira(LoginRequiredMixin, UpdateView):  # TALVEZ SEJA REMOVIDO
     template_name = "form_insert_update.html"
     model = Geladeira
     form_class = GeladeiraForm
@@ -104,7 +118,7 @@ class UpdateGeladeira(UpdateView):  # TALVEZ SEJA REMOVIDO
         return reverse('estoque:detalhes_geladeira', args=[self.object.pk])
 
 
-class DeleteGeladeira(DeleteView):  # TALVEZ SEJA REMOVIDO
+class DeleteGeladeira(LoginRequiredMixin, DeleteView):  # TALVEZ SEJA REMOVIDO
     template_name = "delete.html"
     model = Geladeira
     success_url = reverse_lazy('estoque:geladeiras')
@@ -113,27 +127,27 @@ class DeleteGeladeira(DeleteView):  # TALVEZ SEJA REMOVIDO
 # ===============================================================================
 # =========================== PRODUTOS ==========================================
 
-class CreateProduto(CreateView, LoginRequiredMixin):
+class CreateProduto(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Produto
     form_class = ProdutoForm
     success_url = reverse_lazy("estoque:geladeiras")
 
 
-class UpdateProduto(UpdateView, LoginRequiredMixin):
+class UpdateProduto(LoginRequiredMixin, UpdateView):
     template_name = "form_insert_update.html"
     model = Produto
     form_class = ProdutoForm
     success_url = reverse_lazy('estoque:geladeiras')
 
 
-class DeleteProduto(DeleteView):
+class DeleteProduto(LoginRequiredMixin, DeleteView):
     template_name = "delete.html"
     model = Produto
     success_url = reverse_lazy('estoque:geladeiras')
 
 
-class Produtos(ListView):
+class Produtos(LoginRequiredMixin, ListView):
     template_name = "produtos_existentes.html"
     model = Produto
 
@@ -142,19 +156,19 @@ class Produtos(ListView):
         context['produtos'] = Produto.objects.all()
         pk = self.kwargs['pk']
 
-        try:#Tenta encontrar uma geladeira com a pk passada pela url
+        try:  # Tenta encontrar uma geladeira com a pk passada pela url
             geladeira = Geladeira.objects.get(pk=pk)
             context['geladeira'] = geladeira
         except Geladeira.DoesNotExist:
             context['geladeira'] = None  # Define como None se não existir
 
-        try: #Tenta encontrar uma lista com a pk passada pela url
+        try:  # Tenta encontrar uma lista com a pk passada pela url
             lista = Lista.objects.get(pk=pk)
             context['lista'] = lista
         except Lista.DoesNotExist:
             context['lista'] = None  # Define como None se não existir
 
-        #UTILIZADO PARA IMPLEMENTAR A BARRA DE PESQUISA NA PAGINA
+        # UTILIZADO PARA IMPLEMENTAR A BARRA DE PESQUISA NA PAGINA
         termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
         if termo_pesquisa:
             # Use a consulta Q para pesquisar produtos por nome
@@ -162,12 +176,10 @@ class Produtos(ListView):
 
         return context
 
-
-
 # =============================================================================
 # =========================== LISTAS ==========================================
 
-class CreateLista(CreateView, LoginRequiredMixin):
+class CreateLista(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Lista
     form_class = ListaForm
@@ -189,7 +201,7 @@ class CreateLista(CreateView, LoginRequiredMixin):
         return reverse_lazy('estoque:listas', kwargs={'pk': self.kwargs['pk']})
 
 
-class Listas(ListView):
+class Listas(LoginRequiredMixin, ListView):
     template_name = "home_listas.html"
     model = Lista
 
@@ -220,14 +232,16 @@ class DetalhesLista(LoginRequiredMixin, DetailView):
                 pass
 
         return redirect('estoque:detalhes_lista', self.kwargs['pk'])
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['item_lista'] = Item_Lista.objects.filter(lista=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+        context['item_lista'] = Item_Lista.objects.filter(
+            lista=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
 
         return context
 
 
-class UpdateLista(UpdateView, LoginRequiredMixin):
+class UpdateLista(LoginRequiredMixin, UpdateView):
     template_name = "form_insert_update.html"
     model = Lista
     form_class = ListaForm
@@ -236,7 +250,7 @@ class UpdateLista(UpdateView, LoginRequiredMixin):
         return reverse('estoque:detalhes_lista', args=[self.object.pk])
 
 
-class DeleteLista(DeleteView, LoginRequiredMixin):
+class DeleteLista(LoginRequiredMixin, DeleteView):
     template_name = "delete.html"
     model = Lista
 
@@ -248,7 +262,7 @@ class DeleteLista(DeleteView, LoginRequiredMixin):
 # =====================================================================================
 # =========================== ITEM_GELADEIRA ==========================================
 
-class CreateItemGeladeira(CreateView, LoginRequiredMixin):
+class CreateItemGeladeira(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Item_Geladeira
     form_class = ItemGeladeiraForm
@@ -258,12 +272,17 @@ class CreateItemGeladeira(CreateView, LoginRequiredMixin):
         item_geladeira.geladeira_id = self.kwargs['geladeira']
         item_geladeira.produto_id = self.kwargs['produto']
         item_geladeira.save()
+        # REGISTRA O LOG DE INSERÇÃO DO ITEM NA GELADEIRA
+        att_item_log = Log_Itens_Geladeira(item_geladeira=item_geladeira, usuario=self.request.user,
+                                           descricao=f"{item_geladeira.produto.nome_produto} inserido por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}\n Quantidade:{item_geladeira.quantidade}")
+        att_item_log.save()
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('estoque:detalhes_geladeira', kwargs={'pk': self.kwargs['geladeira']})
 
-class DeleteItemGeladeira(DeleteView, LoginRequiredMixin):
+
+class DeleteItemGeladeira(LoginRequiredMixin, DeleteView):
     template_name = "delete.html"
     model = Item_Geladeira
 
@@ -272,7 +291,8 @@ class DeleteItemGeladeira(DeleteView, LoginRequiredMixin):
         return reverse('estoque:detalhes_geladeira', args=[geladeira_pk])
 
 
-class CreateItemLista(CreateView, LoginRequiredMixin):
+# ********************** CORRIGIR *************************
+class CreateItemLista(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Item_Lista
     form_class = ItemListaForm
@@ -281,13 +301,25 @@ class CreateItemLista(CreateView, LoginRequiredMixin):
         item_lista = form.save(commit=False)
         item_lista.lista_id = self.kwargs['lista']
         item_lista.produto_id = self.kwargs['produto']
-        item_lista.save()
-        return super().form_valid(form)
+
+        if Item_Lista.objects.get(lista_id=self.kwargs['lista'], produto_id=self.kwargs['produto']):
+            aux = Item_Lista.objects.get(lista_id=self.kwargs['lista'], produto_id=self.kwargs['produto'])
+            aux.quantidade += item_lista.quantidade
+            aux.save()
+
+            return reverse_lazy('estoque:detalhes_lista', kwargs={'pk': self.kwargs['lista']})
+        else:
+            item_lista.save()
+            return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return self.get_success_url()
 
     def get_success_url(self):
         return reverse_lazy('estoque:detalhes_lista', kwargs={'pk': self.kwargs['lista']})
 
-class DeleteItemLista(DeleteView, LoginRequiredMixin):
+
+class DeleteItemLista(LoginRequiredMixin, DeleteView):
     template_name = "delete.html"
     model = Item_Lista
 

@@ -1,18 +1,23 @@
 {% load static %}
 
 {% block content %}
-<div>
     <h1>PAGINA PRINCIPAL GELADEIRAS</h1>
-    {% for geladeira in object_list %}
-        {% if request.user in geladeira.usuarios_proprietarios.all %}
-            <section style="background-color: lightseagreen; margin: 10px;">
-               <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
-                {% for usuario in geladeira.usuarios_proprietarios.all %}<!-- CASO DESEJADO REMOVE A LISTA DE USUARIOS -->
-                    <p>{{ usuario }}</p>
-                {% endfor %}
-            </section>
-        {% endif %}
-    {% endfor %}
-    <a href="{% url 'estoque:criar_geladeira' %}"><button> + </button></a>
-</div>
+    <form method="get" action="{% url 'estoque:geladeiras' %}" id="geladeiraPesquisa">
+        <input type="text" name="q" placeholder="Pesquisar...">
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    <div>
+        {% for geladeira in geladeiras %}
+            {% if request.user in geladeira.usuarios_proprietarios.all %}
+                <section style="background-color: lightseagreen; margin: 10px;">
+                   <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
+                    {% for usuario in geladeira.usuarios_proprietarios.all %}<!-- CASO DESEJADO REMOVE A LISTA DE USUARIOS -->
+                        <p>{{ usuario }}</p>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endfor %}
+        <a href="{% url 'estoque:criar_geladeira' %}"><button> + </button></a>
+    </div>
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.auth.hashers import make_password, check_password
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.http import request
 
 TIPOS_PRODUTOS = (
     ('BEBIDAS', 'Bebidas'),
@@ -14,11 +16,11 @@ TIPOS_PRODUTOS = (
 )
 
 UNIDADES_MEDIDA = (
-    ('UNIDADE', 'un'),
-    ('GRAMA', 'g'),
-    ('KILOGRAMA', 'kg'),
-    ('MILILITRO', 'ml'),
-    ('LITRO', 'lt'),
+    ('UN', 'un'),
+    ('G', 'g'),
+    ('KG', 'kg'),
+    ('ML', 'ml'),
+    ('L', 'lt'),
 )
 
 class Geladeira(models.Model):
@@ -51,11 +53,21 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome_produto
 
+class Log_Itens_Geladeira(models.Model):
+    item_geladeira = models.ForeignKey('Item_Geladeira', on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    dt_modificacao = models.DateTimeField(auto_now=True, blank=False)
+    descricao = models.CharField(max_length=100, blank=False)
+
+    def __str__(self):
+        return f"{self.item_geladeira.produto.nome_produto} - {self.dt_modificacao.date()}"
+
 class Item_Geladeira(models.Model):
     geladeira = models.ForeignKey(Geladeira, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     validade = models.DateField(null=False, blank=False)
     quantidade = models.IntegerField(null=False, blank=False)
+    logs = models.ManyToManyField(Log_Itens_Geladeira, related_name='itens_geladeira', blank=True)
     def __str__(self):
         return f"{self.produto.nome_produto} - {self.geladeira.nome_geladeira}"
 
@@ -66,3 +78,4 @@ class Item_Lista(models.Model):
 
     def __str__(self):
         return f"{self.produto.nome_produto} - {self.lista.titulo_lista}"
+

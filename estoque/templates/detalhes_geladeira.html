@@ -1,4 +1,8 @@
 {% block content %}
+    <form method="get" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" id="geladeiraPesquisa">
+        <input type="text" name="q" placeholder="Pesquisar...">
+        <button type="submit">Pesquisar</button>
+    </form>
     <div>
         <h1 style="display: block">{{ object.nome_geladeira }}</h1>
         <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}"><button id="btn_edit">Editar</button></a>
