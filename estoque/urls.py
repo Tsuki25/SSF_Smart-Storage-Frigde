@@ -2,10 +2,12 @@ from django.conf import settings
 from django.urls import path
 import estoque.views as views
 from django.conf.urls.static import static
+from .views import CustomSignupView
 
 app_name = 'estoque'
 
 urlpatterns = [
+    path('signup/', CustomSignupView.as_view(), name='account_signup'),
     path('', views.Homepage.as_view(), name="homepage"),
     path('profile/', views.Profile.as_view(), name="profile"),
     path('excluir_conta/<int:pk>/', views.DeleteAccount.as_view(), name="excluir_conta"),

@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, UpdateView, DeleteView, CreateView, ListView, DetailView
+from allauth.account.views import SignupView
 
 from estoque.forms import UpdateUsuarioForm, ProdutoForm, GeladeiraForm, ListaForm, ItemGeladeiraForm, ItemListaForm
 from estoque.models import Geladeira, Produto, Item_Geladeira, Lista, Item_Lista
@@ -38,6 +39,17 @@ class DeleteAccount(DeleteView):
         user.delete()
 
         return HttpResponseRedirect(self.success_url)
+
+#teste
+class CustomSignupView(SignupView):
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        # Verificar as regras da senha
+        # Por exemplo, você pode usar a biblioteca "django-password-validators"
+        # para verificar a força da senha.
+        if not password_validators.password_changed(self.request.POST.get('password1')):
+            form.add_error('password1', 'A senha não atende aos requisitos.')
+        return response
 
 
 # =================================================================================

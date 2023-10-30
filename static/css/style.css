@@ -43,6 +43,13 @@ body {
 .imgDecrease {
     width: 92px; /* Defina a largura desejada */
     height: 92px; /* Defina a altura desejada */
+    margin-left: 27px; 
+
+}
+
+.imgDecrease2 {
+    width: 92px; /* Defina a largura desejada */
+    height: 92px; /* Defina a altura desejada */
     margin-left: 27px; /* Mova a imagem 20 pixels para a esquerda (ajuste conforme necessário) */
 
 }
@@ -66,6 +73,8 @@ body {
     background: #BFADD9;
     border: none; /* Remove a borda do campo de entrada */
     outline: none;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .rectanglesPass {
@@ -82,4 +91,113 @@ body {
     background: #BFADD9;
     border: none; /* Remove a borda do campo de entrada */
     outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.rectanglesSignup{
+    width: 700px;
+    height: 800px;
+    background-color: #F2F2F2;
+    border: 2px solid #F2F2F2;
+    margin: 0 auto;
+}
+
+.centered-text-signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.centerSignup{
+    display: flex;
+    flex-direction: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+    margin-left: 183px;
+}
+
+.ulul{
+    margin-left: -183px;
+}
+
+
+.rectanglesEmailSignup{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+    margin-left: flex;
+}
+
+#id_email{
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+.rectanglesNickNameSignup{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+    margin-left: flex;
+}
+
+#id_username{
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.rectanglesPassSignup{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+    margin-left: flex;
+}
+
+#id_password1{
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.rectanglesPass2Signup{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+    margin-left: flex;
+}
+
+#id_password2{
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
 }
