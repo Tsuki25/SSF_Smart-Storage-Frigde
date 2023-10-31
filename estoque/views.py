@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from allauth.account.views import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -87,7 +87,7 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
         if item_id and nova_quantidade >= 0:
             try:
                 item = Item_Geladeira.objects.get(id=item_id)
-                att_item_log = Log_Itens_Geladeira(item_geladeira=item, usuario=self.request.user,descricao=f"{item.produto.nome_produto} modificado por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}\n Modificação:{item.quantidade} -> {nova_quantidade}")
+                att_item_log = Log_Itens_Geladeira(item_geladeira=item, usuario=self.request.user, geladeira=Geladeira.objects.get(pk=self.kwargs['pk']),descricao=f"{item.produto.nome_produto} modificado por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}")
                 att_item_log.save()
 
                 item.quantidade = nova_quantidade
@@ -273,7 +273,7 @@ class CreateItemGeladeira(LoginRequiredMixin, CreateView):
         item_geladeira.produto_id = self.kwargs['produto']
         item_geladeira.save()
         # REGISTRA O LOG DE INSERÇÃO DO ITEM NA GELADEIRA
-        att_item_log = Log_Itens_Geladeira(item_geladeira=item_geladeira, usuario=self.request.user,
+        att_item_log = Log_Itens_Geladeira(item_geladeira=item_geladeira, usuario=self.request.user, geladeira=Geladeira.objects.get(pk=self.kwargs['geladeira']),
                                            descricao=f"{item_geladeira.produto.nome_produto} inserido por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}\n Quantidade:{item_geladeira.quantidade}")
         att_item_log.save()
         return super().form_valid(form)
@@ -291,7 +291,6 @@ class DeleteItemGeladeira(LoginRequiredMixin, DeleteView):
         return reverse('estoque:detalhes_geladeira', args=[geladeira_pk])
 
 
-# ********************** CORRIGIR *************************
 class CreateItemLista(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Item_Lista
@@ -302,12 +301,15 @@ class CreateItemLista(LoginRequiredMixin, CreateView):
         item_lista.lista_id = self.kwargs['lista']
         item_lista.produto_id = self.kwargs['produto']
 
+        # VERIFICA SE O PRODUTO SELECIONADO JÁ EXISTE NA LISTA
+        # Se sim -> modifica a quantidade do item já cadastrado
+        # Se nõa -> Adiciona um novo item a lista com os valores informados
         if Item_Lista.objects.get(lista_id=self.kwargs['lista'], produto_id=self.kwargs['produto']):
             aux = Item_Lista.objects.get(lista_id=self.kwargs['lista'], produto_id=self.kwargs['produto'])
             aux.quantidade += item_lista.quantidade
             aux.save()
 
-            return reverse_lazy('estoque:detalhes_lista', kwargs={'pk': self.kwargs['lista']})
+            return redirect(reverse_lazy('estoque:detalhes_lista', kwargs={'pk': self.kwargs['lista']}))
         else:
             item_lista.save()
             return super().form_valid(form)
@@ -326,3 +328,30 @@ class DeleteItemLista(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         lista_pk = self.kwargs['lista']
         return reverse('estoque:detalhes_lista', args=[lista_pk])
+
+# ======================================================================================
+# ============================== HISTORICO/LOG GELADEIRA ===============================
+class HistoricoGeladeira(LoginRequiredMixin, ListView):
+    template_name = "historico_movimentacoes_geladeira.html"
+    model = Log_Itens_Geladeira
+
+    def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO
+        context = super().get_context_data(**kwargs)
+
+        aux = 0
+        for aux in range(30): #Pega apenas os dias que possuam historico para carregar
+            if Log_Itens_Geladeira.objects.filter(dt_modificacao=datetime.now().date() - timedelta(days=aux)):
+                continue
+            else:
+                break
+
+        dias_carregados = datetime.now().date() - timedelta(days=aux)  # Pega a data correspondente a 10 dias atrás
+        # Captura os logs referentes a itens de uma data maior ou igual a 30 dias atrás
+        # e menor ou igual a hoje
+        context['historico'] = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados, dt_modificacao__lte=datetime.now().date())
+        context['item_geladeira'] = Item_Geladeira.objects.all()
+        context['geladeira'] = Geladeira.objects.get(pk=self.kwargs['pk'])
+        datas = [datetime.now().date() - timedelta(days=i) for i in range(aux)]#PEGA A DATA DOS ULTIMOS 30 DIAS e ADICIONA EM UMA LISTA
+        context['datas'] = datas
+
+        return context

@@ -41,6 +41,7 @@
     </div>
     <a href="{% url 'estoque:criar_lista' object.pk %}"><button> Criar Lista </button></a>
     <a href="{% url 'estoque:listas' geladeira.pk %}"><button> Visualizar Listas de Compras </button></a>
+    <a href="{% url 'estoque:historico_geladeira' geladeira.pk %}"><button> Histórico </button></a>
     <p></p>
     <a href="{% url 'estoque:geladeiras' %}"><button id="btn_voltar">Voltar</button></a>
 

@@ -56,11 +56,12 @@ class Produto(models.Model):
 class Log_Itens_Geladeira(models.Model):
     item_geladeira = models.ForeignKey('Item_Geladeira', on_delete=models.CASCADE)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    dt_modificacao = models.DateTimeField(auto_now=True, blank=False)
+    geladeira = models.ForeignKey(Geladeira, on_delete=models.CASCADE)
+    dt_modificacao = models.DateField(auto_now=True, blank=False)
     descricao = models.CharField(max_length=100, blank=False)
 
     def __str__(self):
-        return f"{self.item_geladeira.produto.nome_produto} - {self.dt_modificacao.date()}"
+        return f"{self.item_geladeira.produto.nome_produto} - {self.dt_modificacao}"
 
 class Item_Geladeira(models.Model):
     geladeira = models.ForeignKey(Geladeira, on_delete=models.CASCADE)

@@ -1,0 +1,17 @@
+{% load static %}
+
+{% block content %}
+    <h1>Histórico de movimentações - Geladeira: {{ geladeira.pk }}</h1>
+
+    <div>
+        {% for data in datas %}
+            <h3>{{ data }}</h3>
+            {% for log in historico %}
+                {% if log.dt_modificacao == data %}
+                        <p>Item:{{ log.item_geladeira.id }} - Descrição:{{ log.descricao }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
+    </div>
+{% endblock %}
