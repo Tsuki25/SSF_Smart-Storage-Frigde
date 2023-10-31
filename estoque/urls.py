@@ -35,4 +35,5 @@ urlpatterns = [
     path('geladeira/listas/<int:lista>/excluir_item/<int:pk>', views.DeleteItemLista.as_view(), name="excluir_item_lista"),
 
     path('geladeiras/geladeira/historico/<int:pk>', views.HistoricoGeladeira.as_view(), name="historico_geladeira"),
+    path('geladeiras/geladeira/compartilhar_geladeira/<int:pk>', views.CompartilharGeladeira.as_view(), name="compartilhar_geladeira"),
 ]

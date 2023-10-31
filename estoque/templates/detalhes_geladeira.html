@@ -28,7 +28,7 @@
                     <label for="validade{{ item.id }}">Validade</label><br>
                     <input type="date" id="validade{{ item.id }}" name="validade{{ item.id }}" value="{{ item.validade|date:'Y-m-d' }}" readonly>
                     <button type="button" id="btn_validade{{ item.id }}" onclick="document.getElementById('validade{{ item.id }}').readOnly = false; document.getElementById('btn_validade{{ item.id }}').style.display = 'none'">lapis_edicao</button>
-                    <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button><!-- Não tá funfando ainda -->
+                    <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button>
                     <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
                     <button type="submit">Guardar</button>
                 </form>
@@ -37,13 +37,29 @@
             </div>
         {% endfor %}
 
-        <!-- <a href=""><button>Adicionar item</button></a> -->
     </div>
     <a href="{% url 'estoque:criar_lista' object.pk %}"><button> Criar Lista </button></a>
     <a href="{% url 'estoque:listas' geladeira.pk %}"><button> Visualizar Listas de Compras </button></a>
     <a href="{% url 'estoque:historico_geladeira' geladeira.pk %}"><button> Histórico </button></a>
     <p></p>
+    <button id="compartilhar_geladeira">Compartilhar Geladeira</button>
+    <p id="link_compartilhamento" style="display: none;">
+        <a href="{% url 'estoque:compartilhar_geladeira' geladeira.pk %}">Convite:Geladeira {{ geladeira.nome_geladeira }}</a>
+    </p>
     <a href="{% url 'estoque:geladeiras' %}"><button id="btn_voltar">Voltar</button></a>
 
 {% endblock %}
 
+<script>
+    let botao_compartilhar = document.getElementById("compartilhar_geladeira");
+    let link_compartilhamento = document.getElementById("link_compartilhamento");
+
+    botao_compartilhar.addEventListener("click", function() {
+        if (link_compartilhamento.style.display === "block"){
+            link_compartilhamento.style.display = "none"
+            link_compartilhamento.style.zIndex = "3"
+        }else{
+            link_compartilhamento.style.display = "block"
+        }
+    });
+</script>

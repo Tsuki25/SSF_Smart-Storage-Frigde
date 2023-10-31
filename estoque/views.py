@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView, UpdateView, DeleteView, CreateView, ListView, DetailView
 
 from estoque.forms import UpdateUsuarioForm, ProdutoForm, GeladeiraForm, ListaForm, ItemGeladeiraForm, ItemListaForm
@@ -65,7 +66,7 @@ class Geladeiras(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO DE GELADEIRAS
         context = super().get_context_data(**kwargs)
-        context['geladeiras'] = Geladeira.objects.all() # PEGA TODOS OS OBJETOS GELADEIRA E ADICIONA A UMA LISTA
+        context['geladeiras'] = Geladeira.objects.all()  # PEGA TODOS OS OBJETOS GELADEIRA E ADICIONA A UMA LISTA
 
         termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
         if termo_pesquisa:
@@ -87,7 +88,9 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
         if item_id and nova_quantidade >= 0:
             try:
                 item = Item_Geladeira.objects.get(id=item_id)
-                att_item_log = Log_Itens_Geladeira(item_geladeira=item, usuario=self.request.user, geladeira=Geladeira.objects.get(pk=self.kwargs['pk']),descricao=f"{item.produto.nome_produto} modificado por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+                att_item_log = Log_Itens_Geladeira(item_geladeira=item, usuario=self.request.user,
+                                                   geladeira=Geladeira.objects.get(pk=self.kwargs['pk']),
+                                                   descricao=f"{item.produto.nome_produto} modificado por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}")
                 att_item_log.save()
 
                 item.quantidade = nova_quantidade
@@ -100,11 +103,13 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['item_geladeira'] = Item_Geladeira.objects.filter(geladeira=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+        context['item_geladeira'] = Item_Geladeira.objects.filter(
+            geladeira=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
 
         termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
-        if termo_pesquisa:# Use a consulta Q para pesquisar geladeiras por nome
-            context['item_geladeira'] = Item_Geladeira.objects.filter(geladeira=self.object, produto__nome_produto__contains=termo_pesquisa)
+        if termo_pesquisa:  # Use a consulta Q para pesquisar geladeiras por nome
+            context['item_geladeira'] = Item_Geladeira.objects.filter(geladeira=self.object,
+                                                                      produto__nome_produto__contains=termo_pesquisa)
 
         return context
 
@@ -175,6 +180,7 @@ class Produtos(LoginRequiredMixin, ListView):
             context['produtos'] = Produto.objects.filter(nome_produto__icontains=termo_pesquisa)
 
         return context
+
 
 # =============================================================================
 # =========================== LISTAS ==========================================
@@ -273,7 +279,8 @@ class CreateItemGeladeira(LoginRequiredMixin, CreateView):
         item_geladeira.produto_id = self.kwargs['produto']
         item_geladeira.save()
         # REGISTRA O LOG DE INSERÇÃO DO ITEM NA GELADEIRA
-        att_item_log = Log_Itens_Geladeira(item_geladeira=item_geladeira, usuario=self.request.user, geladeira=Geladeira.objects.get(pk=self.kwargs['geladeira']),
+        att_item_log = Log_Itens_Geladeira(item_geladeira=item_geladeira, usuario=self.request.user,
+                                           geladeira=Geladeira.objects.get(pk=self.kwargs['geladeira']),
                                            descricao=f"{item_geladeira.produto.nome_produto} inserido por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}\n Quantidade:{item_geladeira.quantidade}")
         att_item_log.save()
         return super().form_valid(form)
@@ -329,6 +336,7 @@ class DeleteItemLista(LoginRequiredMixin, DeleteView):
         lista_pk = self.kwargs['lista']
         return reverse('estoque:detalhes_lista', args=[lista_pk])
 
+
 # ======================================================================================
 # ============================== HISTORICO/LOG GELADEIRA ===============================
 class HistoricoGeladeira(LoginRequiredMixin, ListView):
@@ -339,7 +347,7 @@ class HistoricoGeladeira(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
 
         aux = 0
-        for aux in range(30): #Pega apenas os dias que possuam historico para carregar
+        for aux in range(30):  # Pega apenas os dias que possuam historico para carregar
             if Log_Itens_Geladeira.objects.filter(dt_modificacao=datetime.now().date() - timedelta(days=aux)):
                 continue
             else:
@@ -348,10 +356,24 @@ class HistoricoGeladeira(LoginRequiredMixin, ListView):
         dias_carregados = datetime.now().date() - timedelta(days=aux)  # Pega a data correspondente a 10 dias atrás
         # Captura os logs referentes a itens de uma data maior ou igual a 30 dias atrás
         # e menor ou igual a hoje
-        context['historico'] = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados, dt_modificacao__lte=datetime.now().date())
+        context['historico'] = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados,
+                                                                  dt_modificacao__lte=datetime.now().date())
         context['item_geladeira'] = Item_Geladeira.objects.all()
         context['geladeira'] = Geladeira.objects.get(pk=self.kwargs['pk'])
-        datas = [datetime.now().date() - timedelta(days=i) for i in range(aux)]#PEGA A DATA DOS ULTIMOS 30 DIAS e ADICIONA EM UMA LISTA
+        datas = [datetime.now().date() - timedelta(days=i) for i in
+                 range(aux)]  # PEGA A DATA DOS ULTIMOS 30 DIAS e ADICIONA EM UMA LISTA
         context['datas'] = datas
 
         return context
+
+
+class CompartilharGeladeira(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        geladeira = get_object_or_404(Geladeira, pk=pk)
+
+        if request.user not in geladeira.usuarios_proprietarios.all():
+            geladeira.usuarios_proprietarios.add(request.user)
+        else:
+            redirect('estoque:homepage')
+
+        return redirect('estoque:detalhes_geladeira', pk)
