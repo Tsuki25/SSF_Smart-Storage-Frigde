@@ -16,10 +16,13 @@
   <div class="centerSignup">
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
+
       <p class="rectanglesEmailSignup">
         <label for="id_email"></label>
         <input type="email" name="email" placeholder="E-mail" autocomplete="email" maxlength="320" required="" id="id_email">
       </p>
+
+
 
       <p class="rectanglesNickNameSignup">
         <label for="id_username"></label>
@@ -30,31 +33,17 @@
         <label for="id_password1"></label>
         <input type="password" name="password1" placeholder="Senha" autocomplete="new-password" required id="id_password1">
         <span class="helptext"></span>
-        {% if form.password1.errors %}
-            <ul class="errorlist">
-                {% for error in form.password1.errors %}
-                    <li>{{ error|escape }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
       </p>
+
 
       <p class="rectanglesPass2Signup">
         <label for="id_password2"></label>
         <input type="password" name="password2" placeholder="Confirmar senha" autocomplete="new-password" required="" id="id_password2">
       </p>
 
-      <ul class="ulul">
-        <li>Sua senha não pode ser muito parecida com o resto das suas informações pessoais.</li>
-        <li>Sua senha precisa conter pelo menos 8 caracteres.</li>
-        <li>Sua senha não pode ser uma senha comumente utilizada.</li>
-        <li>Sua senha não pode ser inteiramente numérica.</li>
-      </ul>
-
-      <p></p>
 
 
-     
+
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
@@ -63,8 +52,18 @@
             <img src="../../static/img/image.png" class="imgDecrease2">
         </button>
       </div>
+    </div>
+
+    {% if form.password1.errors %}
+    <ul class="error-message">
+        {% for error in form.password1.errors %}
+            <li>{{ error|escape }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     </form>
-  </div>
+
 </div> 
 
 {% endblock content %}

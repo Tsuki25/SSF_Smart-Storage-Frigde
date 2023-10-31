@@ -40,7 +40,6 @@ class DeleteAccount(DeleteView):
 
         return HttpResponseRedirect(self.success_url)
 
-#teste
 class CustomSignupView(SignupView):
     def form_invalid(self, form):
         response = super().form_invalid(form)

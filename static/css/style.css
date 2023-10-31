@@ -117,13 +117,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 30%;
-    margin-left: 183px;
 }
-
-.ulul{
-    margin-left: -183px;
-}
-
 
 .rectanglesEmailSignup{
     padding: 10px; /* Adicione algum espaço interno para melhor aparência */
@@ -132,7 +126,6 @@ body {
     display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
     width: 280px; /* Largura de 200 pixels */
     height: 28px; /* Altura de 150 pixels */
-    margin-left: flex;
 }
 
 #id_email{
@@ -152,7 +145,6 @@ body {
     display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
     width: 280px; /* Largura de 200 pixels */
     height: 28px; /* Altura de 150 pixels */
-    margin-left: flex;
 }
 
 #id_username{
@@ -171,7 +163,6 @@ body {
     display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
     width: 280px; /* Largura de 200 pixels */
     height: 28px; /* Altura de 150 pixels */
-    margin-left: flex;
 }
 
 #id_password1{
@@ -183,6 +174,7 @@ body {
     width: 100%;
 }
 
+
 .rectanglesPass2Signup{
     padding: 10px; /* Adicione algum espaço interno para melhor aparência */
     border-radius: 30px; /* Adicione bordas arredondadas de 10px */
@@ -190,7 +182,6 @@ body {
     display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
     width: 280px; /* Largura de 200 pixels */
     height: 28px; /* Altura de 150 pixels */
-    margin-left: flex;
 }
 
 #id_password2{
@@ -200,4 +191,13 @@ body {
     outline: none;
     box-sizing: border-box;
     width: 100%;
+}
+
+.error-message {
+    text-align: center; /* Centraliza o conteúdo da lista de erros */
+    margin-top: 80px; /* Adiciona um espaço entre o botão e a lista de erros */
+}
+
+.error-message li {
+    list-style-type: none; /* Remove os marcadores (bolinhas) dos elementos <li> */
 }
