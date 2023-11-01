@@ -51,7 +51,6 @@ body {
     width: 92px; /* Defina a largura desejada */
     height: 92px; /* Defina a altura desejada */
     margin-left: 27px; /* Mova a imagem 20 pixels para a esquerda (ajuste conforme necessário) */
-
 }
 
 .buttonRight{
@@ -200,4 +199,12 @@ body {
 
 .error-message li {
     list-style-type: none; /* Remove os marcadores (bolinhas) dos elementos <li> */
+}
+
+.rectanglesResPass{
+    width: 700px;
+    height: 800px;
+    background-color: #F2F2F2;
+    border: 2px solid #F2F2F2;
+    margin: 0 auto;
 }
