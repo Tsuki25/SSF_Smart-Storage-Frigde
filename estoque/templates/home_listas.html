@@ -3,8 +3,7 @@
 {% block content %}
 <div>
     <h1>PAGINA LISTAS - GELADEIRA: {{ geladeira.nome_geladeira }}</h1>
-    {% for lista in object_list %}
-        {% if geladeira.pk == lista.geladeira.pk %}
+    {% for lista in listas %}
             <section style="background-color: lightseagreen; margin: 10px;">
                 <a href="{% url 'estoque:detalhes_lista' lista.pk %}"><p>{{ lista.titulo_lista }}</p></a>
                 <h3>Descrição:</h3>
@@ -12,7 +11,6 @@
                 <h3>Data de criação:</h3>
                 <p>{{ lista.dt_criacao }}</p>
             </section>
-        {% endif %}
     {% endfor %}
     <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
 </div>

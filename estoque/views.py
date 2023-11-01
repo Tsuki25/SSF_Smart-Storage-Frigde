@@ -33,7 +33,9 @@ class Profile(LoginRequiredMixin, UpdateView):
 class DeleteAccount(LoginRequiredMixin, DeleteView):
     template_name = "delete.html"
     model = User
-    success_url = reverse_lazy('estoque:homepage')
+
+    def get_success_url(self):
+        return reverse('estoque:homepage')
 
     def delete(self, request, *args, **kwargs):
         user = self.request.user
@@ -50,7 +52,9 @@ class CreateGeladeira(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Geladeira
     form_class = GeladeiraForm
-    success_url = reverse_lazy('estoque:geladeiras')
+
+    def get_success_url(self):
+        return reverse('estoque:geladeiras')
 
     def form_valid(self, form):
         geladeira = form.save(commit=False)
@@ -70,7 +74,6 @@ class Geladeiras(LoginRequiredMixin, ListView):
 
         termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
         if termo_pesquisa:
-            # Use a consulta Q para pesquisar geladeiras por nome
             context['geladeiras'] = Geladeira.objects.filter(nome_geladeira__icontains=termo_pesquisa)
         return context
 
@@ -80,19 +83,22 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
     model = Geladeira
 
     def post(self, request, *args, **kwargs):
+        # Utilizado para atualizar de forma mais direta cada item exibido e que pertencee a essa geladeira
         item_id = request.POST.get('item_id')
         nova_quantidade = int(request.POST.get('quantidade' + item_id))
         nova_validade = request.POST.get('validade' + item_id)
-        if nova_quantidade < 0: nova_quantidade = 0
+        if nova_quantidade < 0: nova_quantidade = 0 # Garante que a quantidade minima será 0
 
-        if item_id and nova_quantidade >= 0:
+        if item_id: #Se o item informado existir
             try:
-                item = Item_Geladeira.objects.get(id=item_id)
+                item = Item_Geladeira.objects.get(id=item_id) #Pega a instancia do item
+                # Cria um histórico de modificação
                 att_item_log = Log_Itens_Geladeira(item_geladeira=item, usuario=self.request.user,
                                                    geladeira=Geladeira.objects.get(pk=self.kwargs['pk']),
                                                    descricao=f"{item.produto.nome_produto} modificado por {self.request.user.username} em {datetime.now().strftime('%d/%m/%Y %H:%M')}")
                 att_item_log.save()
 
+                # Modifica os dados do item de acordo com os novos informados
                 item.quantidade = nova_quantidade
                 item.validade = nova_validade
                 item.save()
@@ -104,7 +110,7 @@ class DetalhesGeladeira(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['item_geladeira'] = Item_Geladeira.objects.filter(
-            geladeira=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+            geladeira=self.object)  # Pega os itens da tabela intemediaria Item_Geladeira
 
         termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
         if termo_pesquisa:  # Use a consulta Q para pesquisar geladeiras por nome
@@ -126,7 +132,8 @@ class UpdateGeladeira(LoginRequiredMixin, UpdateView):  # TALVEZ SEJA REMOVIDO
 class DeleteGeladeira(LoginRequiredMixin, DeleteView):  # TALVEZ SEJA REMOVIDO
     template_name = "delete.html"
     model = Geladeira
-    success_url = reverse_lazy('estoque:geladeiras')
+    def get_success_url(self):
+        return reverse('estoque:geladeiras')
 
 
 # ===============================================================================
@@ -136,29 +143,35 @@ class CreateProduto(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Produto
     form_class = ProdutoForm
-    success_url = reverse_lazy("estoque:geladeiras")
+
+    def get_success_url(self):
+        return reverse('estoque:geladeiras')
 
 
 class UpdateProduto(LoginRequiredMixin, UpdateView):
     template_name = "form_insert_update.html"
     model = Produto
     form_class = ProdutoForm
-    success_url = reverse_lazy('estoque:geladeiras')
+
+    def get_success_url(self):
+        return reverse('estoque:geladeiras')
 
 
 class DeleteProduto(LoginRequiredMixin, DeleteView):
     template_name = "delete.html"
     model = Produto
-    success_url = reverse_lazy('estoque:geladeiras')
+
+    def get_success_url(self):
+        return reverse('estoque:geladeiras')
 
 
 class Produtos(LoginRequiredMixin, ListView):
     template_name = "produtos_existentes.html"
     model = Produto
 
-    def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO DE GELADEIRAS
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['produtos'] = Produto.objects.all()
+        context['produtos'] = Produto.objects.all() # Pega todos os dados da tabela Produto
         pk = self.kwargs['pk']
 
         try:  # Tenta encontrar uma geladeira com a pk passada pela url
@@ -176,7 +189,6 @@ class Produtos(LoginRequiredMixin, ListView):
         # UTILIZADO PARA IMPLEMENTAR A BARRA DE PESQUISA NA PAGINA
         termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
         if termo_pesquisa:
-            # Use a consulta Q para pesquisar produtos por nome
             context['produtos'] = Produto.objects.filter(nome_produto__icontains=termo_pesquisa)
 
         return context
@@ -189,13 +201,6 @@ class CreateLista(LoginRequiredMixin, CreateView):
     template_name = "form_insert_update.html"
     model = Lista
     form_class = ListaForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        pk = self.kwargs['pk']
-        geladeira = Geladeira.objects.get(pk=pk)
-        context['geladeira'] = geladeira  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
-        return context
 
     def form_valid(self, form):
         lista = form.save(commit=False)
@@ -213,10 +218,9 @@ class Listas(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO DE GELADEIRAS
         context = super().get_context_data(**kwargs)
-        pk = self.kwargs['pk']
-        geladeira = Geladeira.objects.get(pk=pk)
-        context['geladeira'] = geladeira
-        context['listas'] = Lista.objects.all()
+        geladeira = Geladeira.objects.get(pk=self.kwargs['pk']) # Instancia um objeto geladeira baseado nessa pk
+        context['geladeira'] = geladeira # Passa a instancia como um contexto para o template
+        context['listas'] = Lista.objects.filter(geladeira=geladeira) # Passa todas as listas para o template
         return context
 
 
@@ -225,12 +229,13 @@ class DetalhesLista(LoginRequiredMixin, DetailView):
     model = Lista
 
     def post(self, request, *args, **kwargs):
+        # Utilizado para atualizar de forma mais direta cada item exibido e que pertence a essa lista
         item_id = request.POST.get('item_id')
         nova_quantidade = int(request.POST.get('quantidade' + item_id))
-        if nova_quantidade < 0: nova_quantidade = 0
+        if nova_quantidade < 0: nova_quantidade = 0 # Garante que a quantidade minima é 0
 
-        if item_id and nova_quantidade >= 0:
-            try:
+        if item_id: # Se o item foi informado corretamente
+            try: # Tenta buscar e atualizar o objeto item de Item_Lista no banco com os novos dados inseridos
                 item = Item_Lista.objects.get(id=item_id)
                 item.quantidade = nova_quantidade
                 item.save()
@@ -242,7 +247,7 @@ class DetalhesLista(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['item_lista'] = Item_Lista.objects.filter(
-            lista=self.object)  # PEGA CADA ITEM DA GELADEIRA DE ACORDO COM A TABELA INTERMEDIARIA
+            lista=self.object)  # Pega cada item na tabela intermediaria Item_Lista que pertença a lista atual
 
         return context
 
@@ -273,7 +278,7 @@ class CreateItemGeladeira(LoginRequiredMixin, CreateView):
     model = Item_Geladeira
     form_class = ItemGeladeiraForm
 
-    def form_valid(self, form):
+    def form_valid(self, form): #Pega os valores do formulario e salva no banco de dados
         item_geladeira = form.save(commit=False)
         item_geladeira.geladeira_id = self.kwargs['geladeira']
         item_geladeira.produto_id = self.kwargs['produto']
@@ -303,21 +308,20 @@ class CreateItemLista(LoginRequiredMixin, CreateView):
     model = Item_Lista
     form_class = ItemListaForm
 
-    def form_valid(self, form):
+    def form_valid(self, form): #Pega os valores do formulario e salva no banco de dados
         item_lista = form.save(commit=False)
         item_lista.lista_id = self.kwargs['lista']
         item_lista.produto_id = self.kwargs['produto']
 
         # VERIFICA SE O PRODUTO SELECIONADO JÁ EXISTE NA LISTA
-        # Se sim -> modifica a quantidade do item já cadastrado
-        # Se nõa -> Adiciona um novo item a lista com os valores informados
-        if Item_Lista.objects.get(lista_id=self.kwargs['lista'], produto_id=self.kwargs['produto']):
+        try: # Tenta adicionar a nova quantidade informada ao item existente
             aux = Item_Lista.objects.get(lista_id=self.kwargs['lista'], produto_id=self.kwargs['produto'])
             aux.quantidade += item_lista.quantidade
             aux.save()
 
             return redirect(reverse_lazy('estoque:detalhes_lista', kwargs={'pk': self.kwargs['lista']}))
-        else:
+
+        except Item_Lista.DoesNotExist: # Se o item não existir, cria um novo item conforme solicitado pelo usuario
             item_lista.save()
             return super().form_valid(form)
 
@@ -339,29 +343,21 @@ class DeleteItemLista(LoginRequiredMixin, DeleteView):
 
 # ======================================================================================
 # ============================== HISTORICO/LOG GELADEIRA ===============================
-class HistoricoGeladeira(LoginRequiredMixin, ListView):
+class HistoricoGeladeira(LoginRequiredMixin, ListView): #View para exibir o histórico de alterações de uma geladeira
     template_name = "historico_movimentacoes_geladeira.html"
     model = Log_Itens_Geladeira
 
     def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO
         context = super().get_context_data(**kwargs)
 
-        aux = 0
-        for aux in range(30):  # Pega apenas os dias que possuam historico para carregar
-            if Log_Itens_Geladeira.objects.filter(dt_modificacao=datetime.now().date() - timedelta(days=aux)):
-                continue
-            else:
-                break
-
-        dias_carregados = datetime.now().date() - timedelta(days=aux)  # Pega a data correspondente a 10 dias atrás
-        # Captura os logs referentes a itens de uma data maior ou igual a 30 dias atrás
-        # e menor ou igual a hoje
-        context['historico'] = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados,
-                                                                  dt_modificacao__lte=datetime.now().date())
-        context['item_geladeira'] = Item_Geladeira.objects.all()
-        context['geladeira'] = Geladeira.objects.get(pk=self.kwargs['pk'])
-        datas = [datetime.now().date() - timedelta(days=i) for i in
-                 range(aux)]  # PEGA A DATA DOS ULTIMOS 30 DIAS e ADICIONA EM UMA LISTA
+        dias_carregados = datetime.now().date() - timedelta(days=30)  # Pega a data correspondente a 30 dias atrás
+        # Pega o histórico de dias maiores ou iguais a 30 dias atrás
+        context['historico'] = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados)
+        geladeira = Geladeira.objects.get(pk=self.kwargs['pk']) #Instancia um objeto de identificação da geladeira
+        context['item_geladeira'] = Item_Geladeira.objects.filter(geladeira=geladeira) # Pega todos os objetos de item_geladeira que pertençam a geladeira do histórico
+        context['geladeira'] = geladeira
+        datas = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados).values_list('dt_modificacao', flat=True).distinct().order_by('-dt_modificacao')
+        # Salva todas as datas para as quais existam logs e que estejam dentro dos 30 dias de histórico
         context['datas'] = datas
 
         return context

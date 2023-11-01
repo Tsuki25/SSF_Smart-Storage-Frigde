@@ -1,14 +1,14 @@
 {% block content %}
     <h1>Produtos</h1>
     {% if geladeira %}
-    <form method="get" action="{% url 'estoque:produtos_geladeira' geladeira.pk %}" id="geladeiraPesquisa">
+    <form method="get" action="{% url 'estoque:produtos_geladeira' geladeira.pk %}" id="geladeiraPesquisa" style="display: none">>
         <input type="text" name="q" placeholder="Pesquisar...">
         <button type="submit">Pesquisar</button>
     </form>
     {% endif %}
 
     {% if lista %}
-    <form method="get" action="{% url 'estoque:produtos_lista' lista.pk %}" id="listaPesquisa">
+    <form method="get" action="{% url 'estoque:produtos_lista' lista.pk %}" id="listaPesquisa" style="display: none">
         <input type="text" name="q" placeholder="Pesquisar...">
         <button type="submit">Pesquisar</button>
     </form>
