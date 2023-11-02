@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 app_name = 'estoque'
 
 urlpatterns = [
-    path('', views.Homepage.as_view(), name="homepage"),
+    path('', views.Geladeiras.as_view(), name="main_page_geladeiras"),
     path('profile/', views.Profile.as_view(), name="profile"),
     path('excluir_conta/<int:pk>/', views.DeleteAccount.as_view(), name="excluir_conta"),
 

@@ -1,20 +1,23 @@
 {% block content %}
+    <!-- Barra de Pesquisa -->
     <form method="get" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" id="geladeiraPesquisa">
         <input type="text" name="q" placeholder="Pesquisar...">
         <button type="submit">Pesquisar</button>
     </form>
+
     <div>
-        <h1 style="display: block">{{ object.nome_geladeira }}</h1>
+        <h1 style="display: block">{{ geladeira.nome_geladeira }}</h1>
         <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}"><button id="btn_edit">Editar</button></a>
         <a href="{% url 'estoque:excluir_geladeira' geladeira.pk %}"><button id="btn_excluir">Excluir</button></a>
-        <p>Data de criação: {{ object.dt_criacao }}</p>
+        <p>Data de criação: {{ geladeira.dt_criacao }}</p>
 
-
-        <a href="{% url 'estoque:produtos_geladeira' object.pk %}">
+        <!-- Botão para adicionar um novo produto a geladeira -->
+        <a href="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
             <div style="background-color: lightseagreen; width: 100px; height: 100px;">
                 <h1 style="font-size: 50pt">+</h1>
             </div>
         </a>
+
         {% for item in item_geladeira %}
             <div style="background-color: lightseagreen; width: 300px;">
                 <p>{{ item.produto.nome_produto }}</p>
@@ -57,7 +60,7 @@
     botao_compartilhar.addEventListener("click", function() {
         if (link_compartilhamento.style.display === "block"){
             link_compartilhamento.style.display = "none"
-            link_compartilhamento.style.zIndex = "3"
+            link_compartilhamento.style.zIndex = "10"
         }else{
             link_compartilhamento.style.display = "block"
         }

@@ -23,7 +23,7 @@ class Profile(LoginRequiredMixin, UpdateView):
     form_class = UpdateUsuarioForm
 
     def get_success_url(self):
-        return reverse('estoque:homepage')
+        return reverse('estoque:geladeiras')
 
     def get_object(self, queryset=None):
         self.object = get_object_or_404(User, username=self.request.user)
@@ -35,7 +35,7 @@ class DeleteAccount(LoginRequiredMixin, DeleteView):
     model = User
 
     def get_success_url(self):
-        return reverse('estoque:homepage')
+        return reverse('estoque:geladeiras')
 
     def delete(self, request, *args, **kwargs):
         user = self.request.user
@@ -370,6 +370,6 @@ class CompartilharGeladeira(LoginRequiredMixin, View):
         if request.user not in geladeira.usuarios_proprietarios.all():
             geladeira.usuarios_proprietarios.add(request.user)
         else:
-            redirect('estoque:homepage')
+            redirect('estoque:geladeiras')
 
         return redirect('estoque:detalhes_geladeira', pk)

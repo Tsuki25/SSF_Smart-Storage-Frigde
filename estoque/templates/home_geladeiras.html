@@ -12,7 +12,7 @@
             {% if request.user in geladeira.usuarios_proprietarios.all %}
                 <section style="background-color: lightseagreen; margin: 10px;">
                    <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
-                    {% for usuario in geladeira.usuarios_proprietarios.all %}<!-- CASO DESEJADO REMOVE A LISTA DE USUARIOS -->
+                    {% for usuario in geladeira.usuarios_proprietarios.all %}
                         <p>{{ usuario }}</p>
                     {% endfor %}
                 </section>

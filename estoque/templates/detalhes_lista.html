@@ -1,17 +1,19 @@
 {% block content %}
     <div>
-        <h1 style="display: block">{{ object.titulo_lista }}</h1>
-        <p style="display: block">{{ object.descricao }}</p>
+        <!-- Barra de Pesquisa -->
+        <h1 style="display: block">{{ lista.titulo_lista }}</h1>
+        <p style="display: block">{{ lista.descricao }}</p>
         <a href="{% url 'estoque:editar_lista' lista.pk %}"><button id="btn_edit">Editar</button></a>
         <a href="{% url 'estoque:excluir_lista' lista.geladeira.pk lista.pk %}"><button id="btn_excluir">Excluir</button></a>
-        <p>Data de criação: {{ object.dt_criacao }}</p>
+        <p>Data de criação: {{ lista.dt_criacao }}</p>
 
-
+        <!-- Botão para adicionar um novo produto a geladeira -->
         <a href="{% url 'estoque:produtos_lista' lista.pk %}">
             <div style="background-color: lightseagreen; width: 100px; height: 100px;">
                 <h1 style="font-size: 50pt">+</h1>
             </div>
         </a>
+
         {% for item in item_lista %}
             <div style="background-color: lightseagreen">
                 <p>{{ item.produto.nome_produto }}</p>
@@ -22,7 +24,7 @@
                     <label for="quantidade{{ item.id }}">Quantidade</label><br>
                     <input type="number" id="quantidade{{ item.id }}" name="quantidade{{ item.id }}" value="{{ item.quantidade }}" min="0"><br>
 
-                    <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button><!-- Não tá funfando ainda -->
+                    <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button>
                     <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
                     <button type="submit">Guardar</button>
                 </form>
@@ -33,5 +35,5 @@
 
 
     </div>
-    <a href="{% url 'estoque:listas' object.geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
+    <a href="{% url 'estoque:listas' lista.geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
 {% endblock %}
