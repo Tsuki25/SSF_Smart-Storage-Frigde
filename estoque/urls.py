@@ -2,11 +2,13 @@ from django.conf import settings
 from django.urls import path
 import estoque.views as views
 from django.conf.urls.static import static
+from .views import CustomSignupView
 
 app_name = 'estoque'
 
 urlpatterns = [
     path('', views.Geladeiras.as_view(), name="main_page_geladeiras"),
+    path('signup/', CustomSignupView.as_view(), name='account_signup'),
     path('profile/', views.Profile.as_view(), name="profile"),
     path('excluir_conta/<int:pk>/', views.DeleteAccount.as_view(), name="excluir_conta"),
 

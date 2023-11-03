@@ -1,0 +1,203 @@
+body {
+    font-family: Montserrat;
+    background-image: url(../img/Untitled_page-0001.jpg);
+    color: black; /* Define a cor do texto como branco para melhor legibilidade no fundo preto */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.centered-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.rectangles {
+    width: 700px;
+    height: 800px;
+    background-color: #F2F2F2;
+    border: 2px solid #F2F2F2;
+    margin: 0 auto;
+}
+
+.centerLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+}
+
+.singupDown{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+}
+
+.imgDecrease {
+    width: 92px; /* Defina a largura desejada */
+    height: 92px; /* Defina a altura desejada */
+    margin-left: 27px; 
+
+}
+
+.imgDecrease2 {
+    width: 92px; /* Defina a largura desejada */
+    height: 92px; /* Defina a altura desejada */
+    margin-left: 27px; /* Mova a imagem 20 pixels para a esquerda (ajuste conforme necessário) */
+
+}
+
+.buttonRight{
+    margin-left: 70px;
+    border: none;
+}
+
+.rectanglesEmail {
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+}
+
+#id_login {
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.rectanglesPass {
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+}
+
+#id_password {
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.rectanglesSignup{
+    width: 700px;
+    height: 800px;
+    background-color: #F2F2F2;
+    border: 2px solid #F2F2F2;
+    margin: 0 auto;
+}
+
+.centered-text-signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.centerSignup{
+    display: flex;
+    flex-direction: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+}
+
+.rectanglesEmailSignup{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+}
+
+#id_email{
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+.rectanglesNickNameSignup{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+}
+
+#id_username{
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.rectanglesPassSignup{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+}
+
+#id_password1{
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+.rectanglesPass2Signup{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+}
+
+#id_password2{
+    font-family: Montserrat;
+    background: #BFADD9;
+    border: none; /* Remove a borda do campo de entrada */
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.error-message {
+    text-align: center; /* Centraliza o conteúdo da lista de erros */
+    margin-top: 80px; /* Adiciona um espaço entre o botão e a lista de erros */
+}
+
+.error-message li {
+    list-style-type: none; /* Remove os marcadores (bolinhas) dos elementos <li> */
+}

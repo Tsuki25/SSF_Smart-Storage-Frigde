@@ -2,20 +2,68 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock head_title %}
+{% block head_title %}{% trans "Registrar-se" %}{% endblock head_title %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+<div class="rectanglesSignup">
+  <div class="centered-text-signup">
+      <div class="logo">
+        <img src="../../static/img/logo.png">
+      </div>
+      <h1>{% trans "Registrar-se" %}</h1> 
+  </div>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+  <div class="centerSignup">
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+      <p class="rectanglesEmailSignup">
+        <label for="id_email"></label>
+        <input type="email" name="email" placeholder="E-mail" autocomplete="email" maxlength="320" required="" id="id_email">
+      </p>
+
+
+
+      <p class="rectanglesNickNameSignup">
+        <label for="id_username"></label>
+        <input type="text" name="username" placeholder="Nome de usuário" autocomplete="username" minlength="1" maxlength="150" required="" id="id_username">
+      </p>
+     	
+      <p class="rectanglesPassSignup">
+        <label for="id_password1"></label>
+        <input type="password" name="password1" placeholder="Senha" autocomplete="new-password" required id="id_password1">
+        <span class="helptext"></span>
+      </p>
+
+
+      <p class="rectanglesPass2Signup">
+        <label for="id_password2"></label>
+        <input type="password" name="password2" placeholder="Confirmar senha" autocomplete="new-password" required="" id="id_password2">
+      </p>
+
+
+
+
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class="imgSize">
+        <button class="primaryAction buttonRight" type="submit">
+            <img src="../../static/img/image.png" class="imgDecrease2">
+        </button>
+      </div>
+    </div>
+
+    {% if form.password1.errors %}
+    <ul class="error-message">
+        {% for error in form.password1.errors %}
+            <li>{{ error|escape }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    </form>
+
+</div> 
 
 {% endblock content %}

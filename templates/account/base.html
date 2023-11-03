@@ -1,3 +1,5 @@
+{%  load static %}
+
 {% load i18n %}
 <!DOCTYPE html>
 <html>
@@ -7,6 +9,9 @@
     <title>{% block head_title %}{% endblock head_title %}</title>
     {% block extra_head %}
     {% endblock extra_head %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
   </head>
   <body>
     {% block body %}
