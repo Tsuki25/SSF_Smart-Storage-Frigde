@@ -1,11 +1,16 @@
 {% load static %}
 
 {% block content %}
-<div>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/styleG.css' %}">
+</head>
+<body>
     <h1>PAGINA PRINCIPAL GELADEIRAS</h1>
     {% for geladeira in object_list %}
         {% if request.user in geladeira.usuarios_proprietarios.all %}
-            <section style="background-color: lightseagreen; margin: 10px;">
+            <section style="margin: 10px;">
                <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
                 {% for usuario in geladeira.usuarios_proprietarios.all %}<!-- CASO DESEJADO REMOVE A LISTA DE USUARIOS -->
                     <p>{{ usuario }}</p>
@@ -14,5 +19,6 @@
         {% endif %}
     {% endfor %}
     <a href="{% url 'estoque:criar_geladeira' %}"><button> + </button></a>
-</div>
+</body>
+</html>
 {% endblock %}
