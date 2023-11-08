@@ -11,6 +11,7 @@ from estoque.forms import UpdateUsuarioForm, ProdutoForm, GeladeiraForm, ListaFo
 from estoque.models import Geladeira, Produto, Item_Geladeira, Lista, Item_Lista
 
 
+
 class Homepage(TemplateView):
     template_name = "homepage.html"
 

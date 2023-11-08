@@ -1,4 +1,27 @@
-{% load crispy_forms_filters %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styleGN.css' %}">
+    </head>
+
+
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrfmiddlewaretoken" value="nQV0YVzsbyHn8QDb0yM1cJCwlVzmS8KL44AwehsJdZ47zUX5ZJJRm4xNPHdS8Efj">
+            <p>
+                <label for="id_nome_geladeira">Nome geladeira:</label>
+                <input type="text" name="nome_geladeira" maxlength="75" required="" id="id_nome_geladeira">
+            </p> <br>
+            <input type="submit" value="Save">
+        </form>
+</body>
+</html>
+
+
+
+<!-- {% load crispy_forms_filters %}
 {% block main %}
 {%  load crispy_forms_tags %}
 
@@ -6,6 +29,5 @@
         {% csrf_token %}
         {{ form.as_p }} <br>
         <input type="submit" value="Save">
-
     </form>
-{% endblock %}
+{% endblock %} VERSAO DO CAUE -->

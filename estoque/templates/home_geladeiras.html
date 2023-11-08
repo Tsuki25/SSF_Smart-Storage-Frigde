@@ -7,18 +7,55 @@
     <link rel="stylesheet" href="{% static 'css/styleG.css' %}">
 </head>
 <body>
-    <h1>PAGINA PRINCIPAL GELADEIRAS</h1>
-    {% for geladeira in object_list %}
-        {% if request.user in geladeira.usuarios_proprietarios.all %}
-            <section style="margin: 10px;">
-               <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
-                {% for usuario in geladeira.usuarios_proprietarios.all %}<!-- CASO DESEJADO REMOVE A LISTA DE USUARIOS -->
-                    <p>{{ usuario }}</p>
-                {% endfor %}
-            </section>
-        {% endif %}
-    {% endfor %}
-    <a href="{% url 'estoque:criar_geladeira' %}"><button> + </button></a>
+    <header>
+        <nav class="top-nav">
+            <div class="centered-text">
+                <div class="logo">
+                    <img src="/static/img/logo.png">
+                </div>
+            </div>
+            <a>Geladeiras</a>
+        </nav>
+
+    </header>
+    <div class="rectangleFree">
+        {% for geladeira in object_list %}
+            {% if request.user in geladeira.usuarios_proprietarios.all %}
+                <section style="margin: 200px 0 0 0;">
+                    <div class="borderFree">
+                        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
+                    </div>
+                    {% for usuario in geladeira.usuarios_proprietarios.all %}
+                        <p>{{ usuario }}</p>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    
+    <div class="buttonCenter">
+        <a href="{% url 'estoque:criar_geladeira' %}">
+            <button class="borderButton"> 
+                <img src="/static/img/plus.png">
+            </button>
+        </a>
+    </div>
+
+
+    <foooter>
+        <nav class="bottom-nav">
+            <img src="/static/img/geladeira.png" class="imgCenter">
+            <div class="vertical-bar"></div>
+            <img src="/static/img/listas.png" class="imgCenter">
+            <div class="vertical-bar"></div>
+            <img src="/static/img/perfil.png" class="imgCenterPerfil">
+        </nav>
+    </footer>
+
+
+
+
 </body>
 </html>
 {% endblock %}
