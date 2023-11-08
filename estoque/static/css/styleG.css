@@ -89,10 +89,10 @@ body{
 }
 
 .buttonCenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20vh;        /* Defina a altura da div para ocupar toda a altura da tela */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .borderButton{
@@ -108,9 +108,10 @@ body{
     left: 40px;
 }
 
+
 .rectangleFree{
     width: 387px;
-    height: 259px;
+    height: 120px;
     background: rgba(191, 173, 217, 0.50); 
     border-radius: 32px;
     text-align: center;
@@ -119,7 +120,6 @@ body{
 
 .borderFree{
     width: 386px;
-    height: 82px; 
     background: #8B65BF; 
     border-radius: 32px;
     margin-right: 20px;
@@ -129,4 +129,3 @@ a {
     color: white; /* Substitua #000 pela cor desejada em formato hexadecimal, nome da cor ou RGB */
     text-decoration: none; /* Para remover o sublinhado (opcional) */
 }
-

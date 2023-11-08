@@ -18,22 +18,24 @@
         </nav>
 
     </header>
-    <div class="rectangleFree">
-        {% for geladeira in object_list %}
-            {% if request.user in geladeira.usuarios_proprietarios.all %}
-                <section style="margin: 200px 0 0 0;">
-                    <div class="borderFree">
-                        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
-                    </div>
-                    {% for usuario in geladeira.usuarios_proprietarios.all %}
-                        <p>{{ usuario }}</p>
-                    {% endfor %}
-                </section>
-            {% endif %}
-        {% endfor %}
-    </div>
+     {% if object_list %}
+        <div class="rectangleFree">
+            {% for geladeira in object_list %}
+                {% if request.user in geladeira.usuarios_proprietarios.all %}
+                    <section style="margin: 200px 0 0 0;">
+                        <div class="borderFree">
+                            <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
+                        </div>
+                        {% for usuario in geladeira.usuarios_proprietarios.all %}
+                            <p>{{ usuario }}</p>
+                        {% endfor %}
+                    </section>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
 
-    
+
     <div class="buttonCenter">
         <a href="{% url 'estoque:criar_geladeira' %}">
             <button class="borderButton"> 
@@ -41,18 +43,24 @@
             </button>
         </a>
     </div>
+    
 
 
     <foooter>
         <nav class="bottom-nav">
-            <img src="/static/img/geladeira.png" class="imgCenter">
+            <a href="{% url 'estoque:geladeiras' %}">
+                <img src="/static/img/geladeira.png" class="imgCenter">
+            </a>
             <div class="vertical-bar"></div>
-            <img src="/static/img/listas.png" class="imgCenter">
+            <a href="{% url 'estoque:geladeiras' %}">
+                <img src="/static/img/listas.png" class="imgCenter">
+            </a>
             <div class="vertical-bar"></div>
-            <img src="/static/img/perfil.png" class="imgCenterPerfil">
+            <a href="{% url 'estoque:geladeiras' %}">
+                <img src="/static/img/perfil.png" class="imgCenterPerfil">
+            </a>
         </nav>
     </footer>
-
 
 
 

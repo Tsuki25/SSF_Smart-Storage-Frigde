@@ -1,3 +1,17 @@
 body{
     background-color: aqua;
 }
+
+form{
+
+}
+
+input{
+    font-size: 12;
+    color: purple;
+}
+
+label{
+    font-size: 12;
+    color: purple;
+}
