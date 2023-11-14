@@ -75,41 +75,46 @@
 
 
     <foooter>
-        <nav class="bottom-nav">
-            
-            <a href="{% url 'estoque:geladeiras' %}">
-                <button id="btn_voltar" class="btn-icon">
-                    <img src="/static/img/voltar.png" alt="Voltar"> 
+        <nav>
+            <div class="bottom-left">
+                <a href="{% url 'estoque:geladeiras' %}">
+                    <button id="btn_voltar" class="btn-icon">
+                        <img src="/static/img/voltar.png" alt="Voltar"> 
+                    </button>
+                </a>
+            </div>
+            <div class="bottom-nav">
+                <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}">
+                    <button id="btn_edit" class="btn-icon">
+                        <img src="/static/img/editar.png" alt="Editar"> 
+                    </button>
+                </a>
+    
+                <a href="{% url 'estoque:excluir_geladeira' geladeira.pk %}">
+                    <button id="btn_excluir" class="btn-icon">
+                        <img src="/static/img/excluir.png" alt="Excluir"> 
+                    </button>
+                </a>
+    
+                <button id="compartilhar_geladeira" >
+                    <img src="/static/img/compart.png" alt="Compartilhar"> 
                 </button>
-            </a>
-            
-            <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}">
-                <button id="btn_edit" class="btn-icon">
-                    <img src="/static/img/editar.png" alt="Editar"> 
-                </button>
-            </a>
+    
+                <a href="{% url 'estoque:criar_lista' object.pk %}">
+                    <button id="btn_clista" class="btn-icon"> 
+                        <img src="/static/img/lista.jpeg" alt="Lista">
+                    </button>
+                </a>
+    
+                <a href="{% url 'estoque:historico_geladeira' geladeira.pk %}">
+                    <button> Histórico </button>
+                </a>
+    
+                <a href="{% url 'estoque:listas' geladeira.pk %}">
+                    <button> Visualizar Listas de Compras </button>
+                </a>
+            </div>
 
-            <a href="{% url 'estoque:excluir_geladeira' geladeira.pk %}">
-                <button id="btn_excluir" class="btn-icon">
-                    <img src="/static/img/excluir.png" alt="Excluir"> 
-                </button>
-            </a>
-
-            <button id="compartilhar_geladeira" >
-                <img src="/static/img/compart.png" alt="Compartilhar"> 
-            </button>
-
-            <a href="{% url 'estoque:criar_lista' object.pk %}">
-                <button> Criar Lista </button>
-            </a>
-
-            <a href="{% url 'estoque:historico_geladeira' geladeira.pk %}">
-                <button> Histórico </button>
-            </a>
-
-            <a href="{% url 'estoque:listas' geladeira.pk %}">
-                <button> Visualizar Listas de Compras </button>
-            </a>
         </nav>
 
     </footer>
