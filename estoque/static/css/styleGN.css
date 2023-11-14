@@ -1,17 +1,65 @@
-body{
-    background-color: aqua;
-}
-
 form{
-
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 300x; /* Largura de 200 pixels */
+    height: 50px; /* Altura de 150 pixels */
 }
 
-input{
-    font-size: 12;
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Montserrat;
+    height: 100vh; /* Define a altura do corpo para ocupar toda a altura da tela */
+}
+
+input {
+    font-size: 12px;
+    color: black;
+    border: none;
+    background: #BFADD9
+}
+
+
+label {
+    font-size: 12px;
     color: purple;
 }
 
-label{
-    font-size: 12;
-    color: purple;
+.top-nav {
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    left: 0;
+    height: 10px;
 }
+
+.centered-text {
+    display: flex;
+    align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
+    height: 100%; /* Aumente a altura para ocupar toda a altura do elemento pai */
+}
+
+.logo {
+    margin-right: 10px; 
+}
+
+.top-nav a {
+    font-size: 45px; /* Ajuste o valor do tamanho da fonte conforme necessÃ¡rio */
+    font-style: italic;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: start; 
+    align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
+}
+

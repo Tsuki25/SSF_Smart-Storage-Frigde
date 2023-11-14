@@ -1,15 +1,39 @@
 {% load static %}
-
-{% load crispy_forms_filters %}
-{% block main %}
-{%  load crispy_forms_tags %}
     <head>
         <link rel="stylesheet" href="{% static 'css/styleGN.css' %}">
     </head>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }} <br>
-        <input type="submit" value="Save">
-    </form>
 
-{% endblock %} 
+    <body>
+        <header>
+            <nav class="top-nav">
+                <div class="centered-text">
+                    <div class="logo">
+                        <img src="/static/img/logo.png">
+                    </div>
+                </div>
+                <a>Geladeiras</a>
+            </nav>
+        </header>
+
+        {% load crispy_forms_filters %}
+        {% block main %}
+        {%  load crispy_forms_tags %}
+        
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }} <br>
+                <input type="submit" id="inputSave" value="+">
+            </form>
+        
+        {% endblock %} 
+
+        <foooter>
+            <nav class="bottom-nav">
+
+            </nav>
+        </footer>
+    </body>
+
+
+
