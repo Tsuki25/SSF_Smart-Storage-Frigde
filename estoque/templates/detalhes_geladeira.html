@@ -31,7 +31,7 @@
 
 
         <div class="buttonCenter">
-            <p>Data de criação: {{ geladeira.dt_criacao }}</p>
+
             <a href="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
                 <button class="borderButton"> 
                     <img src="/static/img/plus.png">
@@ -102,21 +102,18 @@
     
                 <a href="{% url 'estoque:criar_lista' object.pk %}">
                     <button id="btn_clista" class="btn-icon"> 
-                        <img src="/static/img/lista.jpeg" alt="Lista">
+                        <img src="/static/img/lista.png" alt="Lista">
                     </button>
                 </a>
     
                 <a href="{% url 'estoque:historico_geladeira' geladeira.pk %}">
-                    <button> Histórico </button>
-                </a>
-    
-                <a href="{% url 'estoque:listas' geladeira.pk %}">
-                    <button> Visualizar Listas de Compras </button>
+                    <button id="btn_historico" class="btn-icon"> 
+                        <img src="/static/img/historico.png" alt="Historico">
+                    </button>
                 </a>
             </div>
 
         </nav>
-
     </footer>
     
     <script>

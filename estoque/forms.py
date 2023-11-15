@@ -2,7 +2,8 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm, ClearableFileInput, ImageField
 
 from estoque.models import Geladeira, Produto, Lista, Item_Geladeira, Item_Lista
-
+from django import forms
+from django.forms import ModelForm
 
 class UpdateUsuarioForm(ModelForm):
     class Meta:
@@ -15,6 +16,10 @@ class GeladeiraForm(ModelForm):
         model = Geladeira
         fields = ['nome_geladeira']
 
+    nome_geladeira = forms.CharField(
+        label='',  # Edite aqui para a label desejada
+        widget=forms.TextInput(attrs={'placeholder': 'Nome da Geladeira'})
+    )
 
 class ProdutoForm(ModelForm):
     class Meta:

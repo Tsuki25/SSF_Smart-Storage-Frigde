@@ -23,17 +23,20 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }} <br>
-                <input type="submit" id="inputSave" value="+">
+
             </form>
         
         {% endblock %} 
 
         <foooter>
-            <nav class="bottom-nav">
-
+            <nav class="navbarbar">
+                <a href="{% url 'estoque:geladeiras' %}">
+                    <button id="btn_voltar" class="btn-icon">
+                        <img src="/static/img/voltar.png" alt="Voltar"> 
+                    </button>
+                </a>
+                <input type="submit" id="inputSave" value="">
             </nav>
         </footer>
     </body>
-
-
 

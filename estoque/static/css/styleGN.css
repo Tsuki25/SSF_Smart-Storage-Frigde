@@ -1,10 +1,12 @@
 form{
     padding: 10px; /* Adicione algum espaço interno para melhor aparência */
-    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    border-radius: 50px; /* Adicione bordas arredondadas de 10px */
     background: #BFADD9;
     display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
-    width: 300x; /* Largura de 200 pixels */
-    height: 50px; /* Altura de 150 pixels */
+    width: 408px;
+    height: 63px;
+    justify-content: center;
+    margin: auto;
 }
 
 body {
@@ -17,10 +19,19 @@ body {
 }
 
 input {
-    font-size: 12px;
+    font-size: 22px;
     color: black;
     border: none;
-    background: #BFADD9
+    background: #BFADD9;
+}
+
+input#inputSave{
+    background: url('/static/img/salvar.png') center center no-repeat; /* Substitua 'caminho/para/sua/imagem.png' pelo caminho real da sua imagem */
+    background-size: cover; /* Ajusta o tamanho da imagem para cobrir completamente o botão */
+    width: 72px; /* Largura do botão, ajuste conforme necessário */
+    height: 72px; /* Altura do botão, ajuste conforme necessário */
+    border: none;
+    cursor: pointer;
 }
 
 
@@ -63,3 +74,29 @@ label {
     align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
 }
 
+.navbarbar{
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+
+#btn_voltar {
+    background: none;
+    border: none;
+
+}
+
+#btn_voltar img {
+    width: 72px;
+    height: 72px;
+}
