@@ -23,7 +23,7 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }} <br>
-
+                <input type="submit" id="inputSave" value="">
             </form>
         
         {% endblock %} 
@@ -35,7 +35,7 @@
                         <img src="/static/img/voltar.png" alt="Voltar"> 
                     </button>
                 </a>
-                <input type="submit" id="inputSave" value="">
+
             </nav>
         </footer>
     </body>

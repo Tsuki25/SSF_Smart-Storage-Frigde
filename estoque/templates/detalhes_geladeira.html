@@ -76,14 +76,12 @@
 
     <foooter>
         <nav>
-            <div class="bottom-left">
+            <div class="bottom-nav">
                 <a href="{% url 'estoque:geladeiras' %}">
-                    <button id="btn_voltar" class="btn-icon">
+                    <button id="btn_voltar" class="btn-icon btn-voltar">
                         <img src="/static/img/voltar.png" alt="Voltar"> 
                     </button>
                 </a>
-            </div>
-            <div class="bottom-nav">
                 <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}">
                     <button id="btn_edit" class="btn-icon">
                         <img src="/static/img/editar.png" alt="Editar"> 
