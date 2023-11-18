@@ -1,18 +1,8 @@
+{% load static %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
     <h1>Produtos</h1>
-    {% if geladeira %}
-    <form method="get" action="{% url 'estoque:produtos_geladeira' geladeira.pk %}" id="geladeiraPesquisa" style="display: none">>
-        <input type="text" name="q" placeholder="Pesquisar...">
-        <button type="submit">Pesquisar</button>
-    </form>
-    {% endif %}
-
-    {% if lista %}
-    <form method="get" action="{% url 'estoque:produtos_lista' lista.pk %}" id="listaPesquisa" style="display: none">
-        <input type="text" name="q" placeholder="Pesquisar...">
-        <button type="submit">Pesquisar</button>
-    </form>
-    {% endif %}
+    {% include 'pesquisa.html' %}
 
     <div>
         <a href="{% url 'estoque:cadastrar_produto' %}">

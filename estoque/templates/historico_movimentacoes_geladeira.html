@@ -1,7 +1,19 @@
 {% load static %}
 
 {% block content %}
-    <h1>Histórico de movimentações - Geladeira: {{ geladeira.pk }}</h1>
+    <link rel="stylesheet" href="{% static 'css/styleHistorico.css' %}">
+
+    <header>
+            <nav class="top-nav">
+                <div class="centered-text">
+                    <div class="logo">
+                        <img src="/static/img/logo.png">
+                    </div>
+                </div>
+                <a>Histórico de movimentações  -  </a><a> {{ geladeira.nome_geladeira }}</a>
+            </nav>
+
+        </header>
 
     <div>
         {% for data in datas %}
@@ -12,6 +24,17 @@
                 {% endif %}
             {% endfor %}
         {% endfor %}
-        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
     </div>
 {% endblock %}
+
+<footer>
+    <nav>
+        <div class="bottom-nav">
+            <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
+                <button id="btn_voltar" class="btn-icon btn-voltar">
+                    <img src="/static/img/voltar.png" alt="Voltar">
+                </button>
+            </a>
+        </div>
+    </nav>
+</footer>

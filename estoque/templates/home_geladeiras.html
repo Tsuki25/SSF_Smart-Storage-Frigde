@@ -1,8 +1,6 @@
 {% load static %}
-
-
-
     <head>
+        <link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
         <link rel="stylesheet" href="{% static 'css/styleG.css' %}">
     </head>
 
@@ -15,10 +13,7 @@
                     </div>
                 </div>
                 <a>Geladeiras</a>
-                <form method="get" action="{% url 'estoque:geladeiras' %}" id="geladeiraPesquisa">
-                    <input type="text" name="q" placeholder="Pesquisar...">
-                    <button type="submit">Pesquisar</button>
-                </form>
+                {% include 'pesquisa.html' %}
             </nav>
     
         </header>
@@ -28,10 +23,8 @@
         <div class="rectangleFree">
             {% for geladeira in geladeiras %}
                 {% if request.user in geladeira.usuarios_proprietarios.all %}
-                    <section  style="margin: 200px 0 0 0;">
-                        <div class="borderFree">
-                            <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
-                        </div>
+                    <section class="borderFree">
+                        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" class="title-geladeira"><p class="title-geladeira">{{ geladeira.nome_geladeira }}</p></a>
                         {% for usuario in geladeira.usuarios_proprietarios.all %}
                             <p>{{ usuario }}</p>
                         {% endfor %}
@@ -43,17 +36,17 @@
 
 
 
-    <div class="buttonCenter">
-        <a href="{% url 'estoque:criar_geladeira' %}">
-            <button class="borderButton"> 
-                <img src="/static/img/plus.png">
-            </button>
-        </a>
-    </div>
+        <div class="buttonCenter">
+            <a href="{% url 'estoque:criar_geladeira' %}">
+                <button class="borderButton">
+                    <img src="/static/img/plus.png">
+                </button>
+            </a>
+        </div>
     
 
 
-        <foooter>
+        <footer>
             <nav class="bottom-nav">
                 <a href="{% url 'estoque:geladeiras' %}">
                     <img src="/static/img/geladeira.png" class="imgCenter">
@@ -68,7 +61,4 @@
                 </a>
             </nav>
         </footer>
-
-
-
     </body>

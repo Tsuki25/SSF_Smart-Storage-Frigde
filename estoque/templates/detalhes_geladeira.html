@@ -2,6 +2,7 @@
 
 <head>
     <link rel="stylesheet" href="{% static 'css/styleGItens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
 </head>
 
 
@@ -15,13 +16,7 @@
                 </div>
             </div>
             <a>{{ geladeira.nome_geladeira }}</a>
-        
-            <!-- Barra de Pesquisa -->
-            <form method="get" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" id="geladeiraPesquisa">
-                <input type="text" name="q" placeholder="Pesquisar...">
-                <button type="submit">Pesquisar</button>
-            </form>
-
+            {% include 'pesquisa.html' %}
         </nav>
 
     </header>
@@ -63,18 +58,11 @@
                 <br>
             </div>
         {% endfor %}
-
     </div>
-
-
-
-    <p></p>
-
-
     {% endblock %}
 
 
-    <foooter>
+    <footer>
         <nav>
             <div class="bottom-nav">
                 <a href="{% url 'estoque:geladeiras' %}">
@@ -98,8 +86,14 @@
                     <img src="/static/img/compart.png" alt="Compartilhar"> 
                 </button>
     
-                <a href="{% url 'estoque:criar_lista' object.pk %}">
+                <a href="{% url 'estoque:criar_lista' geladeira.pk %}">
                     <button id="btn_clista" class="btn-icon"> 
+                        <img src="/static/img/lista.png" alt="Lista">
+                    </button>
+                </a>
+
+                <a href="{% url 'estoque:listas' geladeira.pk %}">
+                    <button id="btn_clista" class="btn-icon">
                         <img src="/static/img/lista.png" alt="Lista">
                     </button>
                 </a>

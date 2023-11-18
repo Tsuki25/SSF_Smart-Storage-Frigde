@@ -1,16 +1,3 @@
-.top-nav {
-    background-color: #8B65BF;
-    color: #fff;
-    padding: 70px;
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    display: flex;
-    left: 0;
-    height: 10px;
-}
-
 .centered-text {
     display: flex;
     align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
@@ -18,7 +5,7 @@
 }
 
 .logo {
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .top-nav a {
@@ -28,7 +15,7 @@
 
 .top-nav {
     display: flex;
-    justify-content: start; 
+    justify-content: start;
     align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
 }
 
