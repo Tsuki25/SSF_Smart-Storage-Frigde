@@ -1,3 +1,11 @@
+body{
+	height: 1920px;
+	font-family: Montserrat, sans-serif;
+	margin: 0;
+	background-color: white;
+	margin-top: 10%;
+}
+
 .centered-text {
     display: flex;
     align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
@@ -22,16 +30,49 @@
 .bottom-nav{
     background-color: #8B65BF;
     color: #fff;
-    padding: 70px;
     text-align: center;
     width: 100%;
     position: fixed;
     bottom: 0;
-    left: -150;
-    height: 10px;
+    height: 15%;
     display: flex;
+    align-content: space-between;
+}
+
+.footer-right {
+    display: flex;
+    justify-content: right;
     align-items: center;
-    justify-content: flex-end; 
+    width: 80%;
+    margin-right: 3%;
+}
+
+.footer-right button {
+    background: none;
+    border: none;
+}
+
+.footer-right button img {
+    width: 72px;
+    height: 72px;
+}
+
+.footer-left{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 20%;
+    margin-left: 1%;
+}
+
+.footer-left button {
+    background: none;
+    border: none;
+}
+
+.footer-left button img {
+    width: 72px;
+    height: 72px;
 }
 
 .bottom-left{
@@ -47,69 +88,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start; 
-}
-
-
-
-#btn_historico{
-    background: none;
-    border: none;
-}
-
-#btn_historico img {
-    width: 72px;
-    height: 72px;
-}
-
-#btn_voltar {
-    background: none;
-    border: none;
-    margin-right: 1050px;
-}
-
-#btn_voltar img {
-    width: 72px;
-    height: 72px;
-}
-
-#btn_edit{
-    background: none;
-    border: none;
-}
-
-#btn_edit img {
-    width: 72px;
-    height: 72px;
-}
-
-#btn_excluir{
-    background: none;
-    border: none;
-}
-
-#btn_excluir img {
-    width: 72px;
-    height: 72px;
-}
-
-#compartilhar_geladeira{
-    background: none;
-    border: none;
-}
-
-#compartilhar_geladeira img {
-    width: 72px;
-    height: 72px;
-}
-
-#btn_clista{
-    background: none;
-    border: none;
-}
-
-#btn_clista img {
-    width: 72px;
-    height: 72px;
 }
 
 .buttonCenter {

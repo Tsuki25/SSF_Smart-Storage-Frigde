@@ -13,5 +13,9 @@
             </section>
     {% endfor %}
     <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
+
+    <a href="{% url 'estoque:criar_lista' geladeira.pk %}">
+        <button id="btn_clista" class="btn-icon"><img src="/static/img/lista.png" alt="Lista"></button>
+    </a>
 </div>
 {% endblock %}

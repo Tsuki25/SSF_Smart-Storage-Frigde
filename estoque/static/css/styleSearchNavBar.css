@@ -1,8 +1,3 @@
-body{
-    background-color: white ;
-    font-family: Montserrat;
-}
-
 .top-nav {
     background-color: #8B65BF;
     color: #fff;
@@ -18,36 +13,6 @@ body{
     align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
 }
 
-.bottom-nav{
-    background-color: #8B65BF;
-    color: #fff;
-    padding: 70px;
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 10px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-
-.vertical-bar {
-    width: 3px; /* Largura das barras */
-    height: 150px; /* Altura das barras */
-    background-color: black; /* Cor das barras */
-    transform-origin: bottom; /* Define a origem da transformaÃ§Ã£o na parte inferior */
-    transform: rotate(deg);
-    margin-right: 157px; /* EspaÃ§amento entre as barras */
-    margin-top: -70px; /* EspaÃ§o entre as barras e a parte superior da nav */
-}
-
-.vertical-bar + .vertical-bar {
-    background-color: black; /* Cor da segunda barra */
-}
-
-
 .imgCenter {
     width: 100px; /* Largura das barras */
     height: 100px; /* Altura das barras */
@@ -57,8 +22,6 @@ body{
     margin-top: -45px; /* EspaÃ§o entre as barras e a parte superior da nav */
 }
 
-
-
 .imgCenterPerfil {
     width: 120px; /* Largura das barras */
     height: 120px; /* Altura das barras */
@@ -67,7 +30,6 @@ body{
     margin-right: 157px; /* EspaÃ§amento entre as barras */
     margin-top: -45px; /* EspaÃ§o entre as barras e a parte superior da nav */
 }
-
 
 .centered-text {
     display: flex;
@@ -95,13 +57,4 @@ body{
 
 .borderButton{
     border: none;
-}
-
-
-.vertical-line {
-    border-left: 1px solid #000; /* Largura e cor da linha vertical */
-    height: 15.8%; /* A altura da linha vertical deve corresponder Ã  altura da navegaÃ§Ã£o */
-    position: absolute;
-    bottom: 0;
-    left: 40px;
 }
