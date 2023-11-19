@@ -18,21 +18,22 @@
         </header>
 
 {% block content %}
-    {% for lista in listas %}
-        <a href="{% url 'estoque:detalhes_lista' lista.pk %}">
-            <section class="card">
-                <div class="title">
-                     <h2> {{ lista.titulo_lista }} </h2>
-                </div>
-                <div class="desc">
-                     <sub><p>Data de criação: {{ lista.dt_criacao }}</p></sub>
-                    <p><span>Descrição: <br></span>{{ lista.descricao }}</p>
+    <section class="content-container">
+        {% for lista in listas %}
+            <a href="{% url 'estoque:detalhes_lista' lista.pk %}">
+                <section class="card">
+                    <div class="title">
+                         <h2> {{ lista.titulo_lista }} </h2>
+                    </div>
+                    <div class="desc">
+                         <sub><p>Data de criação: {{ lista.dt_criacao }}</p></sub>
+                        <p><span>Descrição: <br></span>{{ lista.descricao }}</p>
 
-                </div>
-            </section>
-        </a>
-    {% endfor %}
-
+                    </div>
+                </section>
+            </a>
+        {% endfor %}
+    </section>
      <footer>
         <nav>
             <div class="bottom-nav">
