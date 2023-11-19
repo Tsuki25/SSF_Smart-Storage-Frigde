@@ -1,7 +1,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/stylePesquisa.css' %}">
 
-{% if '/geladeiras/' == request.path %}
+{% if '/geladeiras/' in request.path %}
     <body>
       <form class="search-container" method="get" action="{% url 'estoque:geladeiras' %}" id="geladeiraPesquisa">
         <input type="text" id="search-bar" name="q" placeholder="Pesquisar...">

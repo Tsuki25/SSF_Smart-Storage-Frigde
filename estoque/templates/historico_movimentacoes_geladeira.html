@@ -15,16 +15,18 @@
 
         </header>
 
-    <div>
         {% for data in datas %}
-            <h3>{{ data }}</h3>
-            {% for log in historico %}
-                {% if log.dt_modificacao == data %}
-                        <p>Item:{{ log.item_geladeira.id }} - Descrição:{{ log.descricao }}</p>
-                {% endif %}
-            {% endfor %}
+            <ol style="--length: 5" role="list" class="list-log">
+                <li class="logs">
+                    <h3>{{ data }}</h3>
+                    {% for log in historico %}
+                        {% if log.dt_modificacao == data %}
+                            <p>{{ log.descricao }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+            </ol>
         {% endfor %}
-    </div>
 {% endblock %}
 
 <footer>
