@@ -135,18 +135,3 @@ h3 {
 	width: 100%;
 }
 
-
-/* FOOTER */
-#btn_voltar {
-    background: none;
-    border: none;
-    position: fixed;
-    bottom: 20px; /* Ajuste conforme necessário para a posição vertical desejada */
-    left: 20px; /* Ajuste conforme necessário para a posição horizontal desejada */
-    z-index: 2; /* Certifica-se de que o botão esteja acima de outros elementos fixos */
-}
-
-#btn_voltar img {
-    width: 72px;
-    height: 72px;
-}

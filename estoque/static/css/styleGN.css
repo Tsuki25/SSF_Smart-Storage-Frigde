@@ -1,3 +1,7 @@
+button:hover {
+    cursor: pointer;
+}
+
 form{
     padding: 10px; /* Adicione algum espaço interno para melhor aparência */
     border-radius: 50px; /* Adicione bordas arredondadas de 10px */
@@ -60,7 +64,7 @@ label {
 }
 
 .logo {
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .top-nav a {
@@ -70,7 +74,7 @@ label {
 
 .top-nav {
     display: flex;
-    justify-content: start; 
+    justify-content: start;
     align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
 }
 
@@ -86,7 +90,7 @@ label {
     height: 10px;
     display: flex;
     align-items: center;
-    justify-content: flex-start; 
+    justify-content: flex-start;
 }
 
 #btn_voltar {

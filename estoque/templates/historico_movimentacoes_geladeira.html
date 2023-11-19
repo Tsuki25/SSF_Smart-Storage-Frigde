@@ -2,6 +2,7 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/styleHistorico.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleFooterGeral.css' %}">
 
     <header>
             <nav class="top-nav">
@@ -32,11 +33,14 @@
 <footer>
     <nav>
         <div class="bottom-nav">
-            <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
-                <button id="btn_voltar" class="btn-icon btn-voltar">
-                    <img src="/static/img/voltar.png" alt="Voltar">
-                </button>
-            </a>
+            <div class="footer-left">
+                <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
+                    <button id="btn_voltar" class="btn-icon btn-voltar">
+                        <img src="/static/img/voltar.png" alt="Voltar">
+                    </button>
+                </a>
+            </div>
+            <div class="footer-right"></div>
         </div>
     </nav>
 </footer>
