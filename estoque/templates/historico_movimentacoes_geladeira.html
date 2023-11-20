@@ -1,17 +1,46 @@
 {% load static %}
 
 {% block content %}
-    <h1>Histórico de movimentações - Geladeira: {{ geladeira.pk }}</h1>
+    <link rel="stylesheet" href="{% static 'css/styleHistorico.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleFooterGeral.css' %}">
 
-    <div>
+    <header>
+            <nav class="top-nav">
+                <div class="centered-text">
+                    <div class="logo">
+                        <img src="/static/img/logo.png">
+                    </div>
+                </div>
+                <a>Histórico de movimentações  -  </a><a> {{ geladeira.nome_geladeira }}</a>
+            </nav>
+
+        </header>
+
         {% for data in datas %}
-            <h3>{{ data }}</h3>
-            {% for log in historico %}
-                {% if log.dt_modificacao == data %}
-                        <p>Item:{{ log.item_geladeira.id }} - Descrição:{{ log.descricao }}</p>
-                {% endif %}
-            {% endfor %}
+            <ol style="--length: 5" role="list" class="list-log">
+                <li class="logs">
+                    <h3>{{ data }}</h3>
+                    {% for log in historico %}
+                        {% if log.dt_modificacao == data %}
+                            <p>{{ log.descricao }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+            </ol>
         {% endfor %}
-        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
-    </div>
 {% endblock %}
+
+<footer>
+    <nav>
+        <div class="bottom-nav">
+            <div class="footer-left">
+                <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
+                    <button id="btn_voltar" class="btn-icon btn-voltar">
+                        <img src="/static/img/voltar.png" alt="Voltar">
+                    </button>
+                </a>
+            </div>
+            <div class="footer-right"></div>
+        </div>
+    </nav>
+</footer>

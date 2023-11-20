@@ -1,0 +1,33 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/stylePesquisa.css' %}">
+
+{% if '/geladeiras/' in request.path %}
+    <body>
+      <form class="search-container" method="get" action="{% url 'estoque:geladeiras' %}" id="geladeiraPesquisa">
+        <input type="text" id="search-bar" name="q" placeholder="Pesquisar...">
+        <button type="submit"><img class="search-icon" src="/static/img/icon-lupa.png" alt="search"/></button>
+      </form>
+    </body>
+{% elif '/geladeiras/geladeira/' in request.path %}
+    <body>
+      <form class="search-container" method="get" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
+        <input type="text" id="search-bar" name="q" placeholder="Pesquisar...">
+        <button type="submit"><img class="search-icon" src="/static/img/icon-lupa.png" alt="search"/></button>
+      </form>
+    </body>
+{% elif '/geladeira/produtos_lista/' in request.path %}
+    <body>
+      <form class="search-container" method="get" action="{% url 'estoque:produtos_lista' lista.pk %}">
+        <input type="text" id="search-bar" name="q" placeholder="Pesquisar...">
+        <button type="submit"><img class="search-icon" src="/static/img/icon-lupa.png" alt="search"/></button>
+      </form>
+    </body>
+{% else %}
+    <body>
+      <form class="search-container" method="get" action="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
+        <input type="text" id="search-bar" name="q" placeholder="Pesquisar...">
+        <button type="submit"><img class="search-icon" src="/static/img/icon-lupa.png" alt="search"/></button>
+      </form>
+    </body>
+{% endif %}
+

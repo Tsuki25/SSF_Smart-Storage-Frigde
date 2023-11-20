@@ -1,0 +1,127 @@
+body{
+    background-color: white ;
+    font-family: Montserrat;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.rectangleFree{
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+    background: rgba(191, 173, 217, 0.50);
+    border-radius: 32px;
+    text-align: center;
+    font-size: 24px;
+    position: fixed;
+    margin-top: 150px;
+    width: 100%;
+}
+
+.borderFree{
+    flex-basis: 15%;
+    background: rgba(191, 173, 217, 0.50);
+    border-radius: 32px;
+    margin: 12px;
+}
+
+.title-geladeira{
+    background: #8B65BF;
+    color: white; /* Substitua #000 pela cor desejada em formato hexadecimal, nome da cor ou RGB */
+    text-decoration: none; /* Para remover o sublinhado (opcional) */
+    margin: 0;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.bottom-nav{
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.vertical-bar {
+    width: 3px; /* Largura das barras */
+    height: 150px; /* Altura das barras */
+    background-color: black; /* Cor das barras */
+    transform-origin: bottom; /* Define a origem da transformaÃ§Ã£o na parte inferior */
+    transform: rotate(deg);
+    margin-right: 157px; /* EspaÃ§amento entre as barras */
+    margin-top: -70px; /* EspaÃ§o entre as barras e a parte superior da nav */
+}
+
+.vertical-bar + .vertical-bar {
+    background-color: black; /* Cor da segunda barra */
+}
+
+
+.imgCenter {
+    width: 100px; /* Largura das barras */
+    height: 100px; /* Altura das barras */
+    transform-origin: bottom; /* Define a origem da transformaÃ§Ã£o na parte inferior */
+    transform: rotate(deg);
+    margin-right: 157px; /* EspaÃ§amento entre as barras */
+    margin-top: -45px; /* EspaÃ§o entre as barras e a parte superior da nav */
+}
+
+.imgCenterPerfil {
+    width: 120px; /* Largura das barras */
+    height: 120px; /* Altura das barras */
+    transform-origin: bottom; /* Define a origem da transformaÃ§Ã£o na parte inferior */
+    transform: rotate(deg);
+    margin-right: 157px; /* EspaÃ§amento entre as barras */
+    margin-top: -45px; /* EspaÃ§o entre as barras e a parte superior da nav */
+}
+
+
+.centered-text {
+    display: flex;
+    align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
+    height: 100%; /* Aumente a altura para ocupar toda a altura do elemento pai */
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.top-nav a {
+    font-size: 45px; /* Ajuste o valor do tamanho da fonte conforme necessÃ¡rio */
+    font-style: italic;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: start;
+    align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
+}
+
+.buttonCenter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.borderButton{
+    border: none;
+}
+
+
+.vertical-line {
+    border-left: 1px solid #000; /* Largura e cor da linha vertical */
+    height: 15.8%; /* A altura da linha vertical deve corresponder Ã  altura da navegaÃ§Ã£o */
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+}
+

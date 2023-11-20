@@ -14,6 +14,7 @@ from estoque.forms import UpdateUsuarioForm, ProdutoForm, GeladeiraForm, ListaFo
 from estoque.models import Geladeira, Produto, Item_Geladeira, Lista, Item_Lista, Log_Itens_Geladeira
 
 
+
 class Homepage(TemplateView):
     template_name = "homepage.html"
 
@@ -362,14 +363,16 @@ class HistoricoGeladeira(LoginRequiredMixin, ListView): #View para exibir o hist
         context = super().get_context_data(**kwargs)
 
         dias_carregados = datetime.now().date() - timedelta(days=30)  # Pega a data correspondente a 30 dias atrás
-        # Pega o histórico de dias maiores ou iguais a 30 dias atrás
-        context['historico'] = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados)
+
         geladeira = Geladeira.objects.get(pk=self.kwargs['pk']) #Instancia um objeto de identificação da geladeira
         context['item_geladeira'] = Item_Geladeira.objects.filter(geladeira=geladeira) # Pega todos os objetos de item_geladeira que pertençam a geladeira do histórico
         context['geladeira'] = geladeira
-        datas = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados).values_list('dt_modificacao', flat=True).distinct().order_by('-dt_modificacao')
+        datas = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados, geladeira=geladeira).values_list('dt_modificacao', flat=True).distinct().order_by('-dt_modificacao')
         # Salva todas as datas para as quais existam logs e que estejam dentro dos 30 dias de histórico
         context['datas'] = datas
+
+        # Pega o histórico de dias maiores ou iguais a 30 dias atrás e que sejam de determinada geladeira
+        context['historico'] = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados, geladeira=geladeira)
 
         return context
 

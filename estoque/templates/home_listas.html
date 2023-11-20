@@ -1,17 +1,65 @@
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/styleFooterGeral.css' %}">
+<link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
+<link rel="stylesheet" href="{% static 'css/styleHomeListas.css' %}">
+
+<body>
+        <header>
+            <nav class="top-nav">
+                <div class="centered-text">
+                    <div class="logo">
+                        <img src="/static/img/logo.png">
+                    </div>
+                </div>
+                <a>Listas de {{ geladeira.nome_geladeira }}</a>
+                {% include 'pesquisa.html' %}
+            </nav>
+
+        </header>
 
 {% block content %}
-<div>
-    <h1>PAGINA LISTAS - GELADEIRA: {{ geladeira.nome_geladeira }}</h1>
-    {% for lista in listas %}
-            <section style="background-color: lightseagreen; margin: 10px;">
-                <a href="{% url 'estoque:detalhes_lista' lista.pk %}"><p>{{ lista.titulo_lista }}</p></a>
-                <h3>Descrição:</h3>
-                <p>{{ lista.descricao }}</p>
-                <h3>Data de criação:</h3>
-                <p>{{ lista.dt_criacao }}</p>
-            </section>
-    {% endfor %}
-    <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
-</div>
+    <section class="content-container">
+        {% for lista in listas %}
+            <a href="{% url 'estoque:detalhes_lista' lista.pk %}">
+                <section class="card">
+                    <div class="title">
+                         <h2> {{ lista.titulo_lista }} </h2>
+                    </div>
+                    <div class="desc">
+                         <sub><p>Data de criação: {{ lista.dt_criacao }}</p></sub>
+                        <p><span>Descrição: <br></span>{{ lista.descricao }}</p>
+
+                    </div>
+                </section>
+            </a>
+        {% endfor %}
+    </section>
+     <footer>
+        <nav>
+            <div class="bottom-nav">
+                <div class="footer-left">
+                    <a href="{% url 'estoque:geladeiras' %}">
+                        <button id="btn_voltar" class="btn-icon btn-voltar">
+                            <img src="/static/img/voltar.png" alt="Voltar">
+                        </button>
+                    </a>
+                </div>
+
+                <div class="footer-right">
+                    <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}">
+                        <button id="btn_edit" class="btn-icon">
+                            <img src="/static/img/editar.png" alt="Editar">
+                        </button>
+                    </a>
+
+                    <a href="{% url 'estoque:criar_lista' geladeira.pk %}">
+                        <button id="btn_clista" class="btn-icon">
+                            <img src="/static/img/lista.png" alt="Lista">
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+     </footer>
 {% endblock %}
+<body>

@@ -1,18 +1,9 @@
+{% load static %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleFooterGeral.css' %}">
     <h1>Produtos</h1>
-    {% if geladeira %}
-    <form method="get" action="{% url 'estoque:produtos_geladeira' geladeira.pk %}" id="geladeiraPesquisa" style="display: none">>
-        <input type="text" name="q" placeholder="Pesquisar...">
-        <button type="submit">Pesquisar</button>
-    </form>
-    {% endif %}
-
-    {% if lista %}
-    <form method="get" action="{% url 'estoque:produtos_lista' lista.pk %}" id="listaPesquisa" style="display: none">
-        <input type="text" name="q" placeholder="Pesquisar...">
-        <button type="submit">Pesquisar</button>
-    </form>
-    {% endif %}
+    {% include 'pesquisa.html' %}
 
     <div>
         <a href="{% url 'estoque:cadastrar_produto' %}">
@@ -42,8 +33,30 @@
                 </a>
             {% endif %}
         {% endfor %}
-    {% if geladeira %}<a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><button id="geladeiraVoltar" style="display: none">Voltar</button></a>{% endif %}
-    {% if lista %}<a href="{% url 'estoque:detalhes_lista' lista.pk %}"><button id="listaVoltar" style="display: none">Voltar</button></a>{% endif %}
+
+        <footer>
+            <nav>
+                <div class="bottom-nav">
+                    <div class="footer-left">
+                        {% if geladeira %}
+                            <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" id="geladeira_voltar" style="display: none">
+                                <button id="btn_voltar" class="btn-icon btn-voltar">
+                                    <img src="/static/img/voltar.png" alt="Voltar">
+                                </button>
+                             </a>
+                        {% endif %}
+
+                        {% if lista %}
+                            <a href="{% url 'estoque:detalhes_lista' lista.pk %}" id="lista_voltar" style="display: none">
+                                <button id="btn_voltar" class="btn-icon btn-voltar">
+                                    <img src="/static/img/voltar.png" alt="Voltar">
+                                </button>
+                             </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+         </footer>
     </div>
 {% endblock %}
 

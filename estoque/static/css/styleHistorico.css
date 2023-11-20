@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+* {
+	box-sizing: border-box;
+}
+
+body{
+	height: 1920px;
+	font-family: Montserrat, sans-serif;
+	margin: 0;
+	background-color: white;
+	margin-top: 10%;
+}
+
+.top-nav {
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: start;
+    align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
+    align-content: space-between;
+    left: 0;
+	height: 10%;
+}
+
+.bottom-nav{
+    background-color: #8B65BF;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 15%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.imgCenter {
+    width: 100px; /* Largura das barras */
+    height: 100px; /* Altura das barras */
+    transform-origin: bottom; /* Define a origem da transformaÃ§Ã£o na parte inferior */
+    transform: rotate(deg);
+    margin-right: 157px; /* EspaÃ§amento entre as barras */
+    margin-top: -45px; /* EspaÃ§o entre as barras e a parte superior da nav */
+}
+
+.imgCenterPerfil {
+    width: 120px; /* Largura das barras */
+    height: 120px; /* Altura das barras */
+    transform-origin: bottom; /* Define a origem da transformaÃ§Ã£o na parte inferior */
+    transform: rotate(deg);
+    margin-right: 157px; /* EspaÃ§amento entre as barras */
+    margin-top: -45px; /* EspaÃ§o entre as barras e a parte superior da nav */
+}
+
+.centered-text {
+    display: flex;
+    align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
+    height: 100%; /* Aumente a altura para ocupar toda a altura do elemento pai */
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.top-nav a {
+    font-size: 45px; /* Ajuste o valor do tamanho da fonte conforme necessÃ¡rio */
+    font-style: italic;
+}
+
+.buttonCenter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.borderButton{
+    border: none;
+}
+
+/* CONFIGURANDO CARDS DE CARREGAMENTO DE HISTORICO POR DIAS */
+
+.list-log {
+	list-style: none;
+	counter-reset: list;
+	padding: 0 1rem;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+}
+
+.list-log p {
+	margin: 0 auto;
+	padding: 0.5rem;
+	font-size: 20px;
+	border-bottom: 1px solid #937bc4;
+}
+
+.logs {
+	width: 100%;
+	max-width: 45rem;
+	margin: 1rem auto;
+	padding: 1rem 2rem 2rem;
+	box-shadow: 5px 5px 10px #BFADD9;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	background-color: #d4c6e5;
+}
+
+li::before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: linear-gradient(to right, var(--c1) var(--stop), var(--c2) var(--stop));
+}
+
+h3 {
+	display: flex;
+	align-items: baseline;
+	color: rgb(70 70 70);
+	font-size: 2.25rem;
+	width: 100%;
+}
+

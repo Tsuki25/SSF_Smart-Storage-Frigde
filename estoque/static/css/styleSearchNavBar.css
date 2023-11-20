@@ -1,0 +1,60 @@
+.top-nav {
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
+}
+
+.imgCenter {
+    width: 100px; /* Largura das barras */
+    height: 100px; /* Altura das barras */
+    transform-origin: bottom; /* Define a origem da transformaÃ§Ã£o na parte inferior */
+    transform: rotate(deg);
+    margin-right: 157px; /* EspaÃ§amento entre as barras */
+    margin-top: -45px; /* EspaÃ§o entre as barras e a parte superior da nav */
+}
+
+.imgCenterPerfil {
+    width: 120px; /* Largura das barras */
+    height: 120px; /* Altura das barras */
+    transform-origin: bottom; /* Define a origem da transformaÃ§Ã£o na parte inferior */
+    transform: rotate(deg);
+    margin-right: 157px; /* EspaÃ§amento entre as barras */
+    margin-top: -45px; /* EspaÃ§o entre as barras e a parte superior da nav */
+}
+
+.centered-text {
+    display: flex;
+    align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
+    height: 100%; /* Aumente a altura para ocupar toda a altura do elemento pai */
+    flex-basis: 20%;
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.top-nav a {
+    font-size: 45px; /* Ajuste o valor do tamanho da fonte conforme necessÃ¡rio */
+    font-style: italic;
+    flex-basis: 40%;
+}
+
+.buttonCenter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.borderButton{
+    border: none;
+}

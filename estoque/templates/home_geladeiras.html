@@ -1,23 +1,58 @@
 {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleG.css' %}">
 
-{% block content %}
-    <h1>PAGINA PRINCIPAL GELADEIRAS</h1>
-    <form method="get" action="{% url 'estoque:geladeiras' %}" id="geladeiraPesquisa">
-        <input type="text" name="q" placeholder="Pesquisar...">
-        <button type="submit">Pesquisar</button>
-    </form>
+    <body>
+        <header>
+            <nav class="top-nav">
+                <div class="centered-text">
+                    <div class="logo">
+                        <img src="/static/img/logo.png">
+                    </div>
+                </div>
+                <a>Geladeiras</a>
+                {% include 'pesquisa.html' %}
+            </nav>
+    
+        </header>
 
-    <div>
-        {% for geladeira in geladeiras %}
-            {% if request.user in geladeira.usuarios_proprietarios.all %}
-                <section style="background-color: lightseagreen; margin: 10px;">
-                   <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}"><p>{{ geladeira.nome_geladeira }}</p></a>
-                    {% for usuario in geladeira.usuarios_proprietarios.all %}
-                        <p>{{ usuario }}</p>
-                    {% endfor %}
-                </section>
-            {% endif %}
-        {% endfor %}
-        <a href="{% url 'estoque:criar_geladeira' %}"><button> + </button></a>
-    </div>
-{% endblock %}
+
+        {% block content %}
+        <div class="rectangleFree">
+            {% for geladeira in geladeiras %}
+                {% if request.user in geladeira.usuarios_proprietarios.all %}
+                    <section class="borderFree">
+                        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" class="title-geladeira"><p class="title-geladeira">{{ geladeira.nome_geladeira }}</p></a>
+                        {% for usuario in geladeira.usuarios_proprietarios.all %}
+                            <p>{{ usuario }}</p>
+                        {% endfor %}
+                    </section>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endblock %}
+
+
+
+        <div class="buttonCenter">
+            <a href="{% url 'estoque:criar_geladeira' %}">
+                <button class="borderButton">
+                    <img src="/static/img/plus.png">
+                </button>
+            </a>
+        </div>
+    
+
+
+        <footer>
+            <nav class="bottom-nav">
+                <a href="{% url 'estoque:geladeiras' %}">
+                    <img src="/static/img/geladeira.png" class="imgCenter">
+                </a>
+                <div class="vertical-bar"></div>
+                <a href="{% url 'estoque:profile' %}">
+                    <img src="/static/img/perfil.png" class="imgCenterPerfil">
+                </a>
+            </nav>
+        </footer>
+    </body>

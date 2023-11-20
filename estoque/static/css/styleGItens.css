@@ -1,0 +1,33 @@
+body{
+	height: 1920px;
+	font-family: Montserrat, sans-serif;
+	margin: 0;
+	background-color: white;
+	margin-top: 10%;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.centered-text {
+    display: flex;
+    align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
+    height: 100%; /* Aumente a altura para ocupar toda a altura do elemento pai */
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.top-nav a {
+    font-size: 45px; /* Ajuste o valor do tamanho da fonte conforme necessÃ¡rio */
+    font-style: italic;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: start;
+    align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
+}
+

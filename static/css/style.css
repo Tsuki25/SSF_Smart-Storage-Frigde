@@ -16,6 +16,13 @@ body {
     height: 50%;
 }
 
+.centered-rectangles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajuste a altura conforme necessário para centralizar verticalmente */
+}
+
 .rectangles {
     width: 700px;
     height: 800px;
@@ -51,8 +58,16 @@ body {
     width: 92px; /* Defina a largura desejada */
     height: 92px; /* Defina a altura desejada */
     margin-left: 27px; /* Mova a imagem 20 pixels para a esquerda (ajuste conforme necessário) */
-
 }
+
+.imgDecrease3{
+    
+    width:  166px; /* Defina a largura desejada */
+    height: 92px; /* Defina a altura desejada */
+    margin-top: 20px; /* Adicione uma margem superior para criar espaço */
+    margin-left: 180px; /* Mova a imagem 20 pixels para a esquerda (ajuste conforme necessário) */
+}
+
 
 .buttonRight{
     margin-left: 70px;
@@ -201,4 +216,23 @@ body {
 
 .error-message li {
     list-style-type: none; /* Remove os marcadores (bolinhas) dos elementos <li> */
+}
+
+.rectanglesResPass{
+    width: 700px;
+    height: 800px;
+    background-color: #F2F2F2;
+    border: 2px solid #F2F2F2;
+    margin: 0 auto;
+}
+
+.rectanglesEmailRec{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 280px; /* Largura de 200 pixels */
+    height: 28px; /* Altura de 150 pixels */
+    margin-left: 190px;
+    margin-top: -10px
 }

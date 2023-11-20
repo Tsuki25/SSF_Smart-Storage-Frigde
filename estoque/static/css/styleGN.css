@@ -1,0 +1,105 @@
+button:hover {
+    cursor: pointer;
+}
+
+form{
+    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 50px; /* Adicione bordas arredondadas de 10px */
+    background: #BFADD9;
+    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
+    width: 408px;
+    height: 63px;
+    justify-content: center;
+    margin: auto;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Montserrat;
+    height: 100vh; /* Define a altura do corpo para ocupar toda a altura da tela */
+}
+
+input {
+    font-size: 22px;
+    color: black;
+    border: none;
+    background: #BFADD9;
+}
+
+input#inputSave{
+    background: url('/static/img/salvar.png') center center no-repeat; /* Substitua 'caminho/para/sua/imagem.png' pelo caminho real da sua imagem */
+    background-size: cover; /* Ajusta o tamanho da imagem para cobrir completamente o botão */
+    width: 72px; /* Largura do botão, ajuste conforme necessário */
+    height: 72px; /* Altura do botão, ajuste conforme necessário */
+    border: none;
+    cursor: pointer;
+}
+
+
+label {
+    font-size: 12px;
+    color: purple;
+}
+
+.top-nav {
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    left: 0;
+    height: 10px;
+}
+
+.centered-text {
+    display: flex;
+    align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
+    height: 100%; /* Aumente a altura para ocupar toda a altura do elemento pai */
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.top-nav a {
+    font-size: 45px; /* Ajuste o valor do tamanho da fonte conforme necessÃ¡rio */
+    font-style: italic;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: start;
+    align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
+}
+
+.navbarbar{
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#btn_voltar {
+    background: none;
+    border: none;
+    margin-right: 500px;
+}
+
+#btn_voltar img {
+    width: 72px;
+    height: 72px;
+}

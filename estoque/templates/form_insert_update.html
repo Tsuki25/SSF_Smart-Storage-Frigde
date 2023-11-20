@@ -1,11 +1,42 @@
-{% load crispy_forms_filters %}
-{% block main %}
-{%  load crispy_forms_tags %}
+{% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styleGN.css' %}">
+    </head>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }} <br>
-        <input type="submit" value="Save">
+    <body>
+        <header>
+            <nav class="top-nav">
+                <div class="centered-text">
+                    <div class="logo">
+                        <img src="/static/img/logo.png">
+                    </div>
+                </div>
+                <a>Geladeiras</a>
+            </nav>
+        </header>
 
-    </form>
-{% endblock %}
+        {% load crispy_forms_filters %}
+        {% block main %}
+        {%  load crispy_forms_tags %}
+        
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }} <br>
+                <input type="submit" id="inputSave" value="">
+            </form>
+        
+        {% endblock %} 
+
+        <foooter>
+            <nav class="navbarbar">
+                <a href="{% url 'estoque:geladeiras' %}">
+                    <button id="btn_voltar" class="btn-icon">
+                        <img src="/static/img/voltar.png" alt="Voltar"> 
+                    </button>
+                </a>
+
+            </nav>
+        </footer>
+    </body>
+

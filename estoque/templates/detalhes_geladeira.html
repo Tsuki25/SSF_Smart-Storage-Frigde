@@ -1,23 +1,43 @@
-{% block content %}
-    <!-- Barra de Pesquisa -->
-    <form method="get" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" id="geladeiraPesquisa">
-        <input type="text" name="q" placeholder="Pesquisar...">
-        <button type="submit">Pesquisar</button>
-    </form>
+{% load static %}
 
-    <div>
-        <h1 style="display: block">{{ geladeira.nome_geladeira }}</h1>
-        <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}"><button id="btn_edit">Editar</button></a>
-        <a href="{% url 'estoque:excluir_geladeira' geladeira.pk %}"><button id="btn_excluir">Excluir</button></a>
-        <p>Data de criação: {{ geladeira.dt_criacao }}</p>
+<head>
+    <link rel="stylesheet" href="{% static 'css/styleGItens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleFooterGeral.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
+</head>
 
-        <!-- Botão para adicionar um novo produto a geladeira -->
-        <a href="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
-            <div style="background-color: lightseagreen; width: 100px; height: 100px;">
-                <h1 style="font-size: 50pt">+</h1>
+
+<body>
+    
+    <header>
+        <nav class="top-nav">
+            <div class="centered-text">
+                <div class="logo">
+                    <img src="/static/img/logo.png">
+                </div>
             </div>
-        </a>
+            <a>{{ geladeira.nome_geladeira }}</a>
+            {% include 'pesquisa.html' %}
+        </nav>
 
+    </header>
+
+    {% block content %}
+    <div> 
+
+
+        <div class="buttonCenter">
+
+            <a href="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
+                <button class="borderButton"> 
+                    <img src="/static/img/plus.png">
+                </button>
+            </a>
+            <p id="link_compartilhamento" style="display: none;">
+                <a href="{% url 'estoque:compartilhar_geladeira' geladeira.pk %}">Convite:Geladeira {{ geladeira.nome_geladeira }}</a>
+            </p>
+        </div>
+        <!-- Botão para adicionar um novo produto a geladeira -->
         {% for item in item_geladeira %}
             <div style="background-color: lightseagreen; width: 300px;">
                 <p>{{ item.produto.nome_produto }}</p>
@@ -39,30 +59,65 @@
                 <br>
             </div>
         {% endfor %}
-
     </div>
-    <a href="{% url 'estoque:criar_lista' object.pk %}"><button> Criar Lista </button></a>
-    <a href="{% url 'estoque:listas' geladeira.pk %}"><button> Visualizar Listas de Compras </button></a>
-    <a href="{% url 'estoque:historico_geladeira' geladeira.pk %}"><button> Histórico </button></a>
-    <p></p>
-    <button id="compartilhar_geladeira">Compartilhar Geladeira</button>
-    <p id="link_compartilhamento" style="display: none;">
-        <a href="{% url 'estoque:compartilhar_geladeira' geladeira.pk %}">Convite:Geladeira {{ geladeira.nome_geladeira }}</a>
-    </p>
-    <a href="{% url 'estoque:geladeiras' %}"><button id="btn_voltar">Voltar</button></a>
+    {% endblock %}
 
-{% endblock %}
 
-<script>
-    let botao_compartilhar = document.getElementById("compartilhar_geladeira");
-    let link_compartilhamento = document.getElementById("link_compartilhamento");
+    <footer>
+        <nav>
+            <div class="bottom-nav">
+                <div class="footer-left">
+                    <a href="{% url 'estoque:geladeiras' %}">
+                        <button id="btn_voltar" class="btn-icon btn-voltar">
+                            <img src="/static/img/voltar.png" alt="Voltar">
+                        </button>
+                    </a>
+                </div>
 
-    botao_compartilhar.addEventListener("click", function() {
-        if (link_compartilhamento.style.display === "block"){
-            link_compartilhamento.style.display = "none"
-            link_compartilhamento.style.zIndex = "10"
-        }else{
-            link_compartilhamento.style.display = "block"
-        }
-    });
-</script>
+                <div class="footer-right">
+                    <a href="{% url 'estoque:editar_geladeira' geladeira.pk %}">
+                        <button id="btn_edit" class="btn-icon">
+                            <img src="/static/img/editar.png" alt="Editar">
+                        </button>
+                    </a>
+
+                    <a href="{% url 'estoque:excluir_geladeira' geladeira.pk %}">
+                        <button id="btn_excluir" class="btn-icon">
+                            <img src="/static/img/excluir.png" alt="Excluir">
+                        </button>
+                    </a>
+
+                    <button id="compartilhar_geladeira" >
+                        <img src="/static/img/compart.png" alt="Compartilhar">
+                    </button>
+
+                    <a href="{% url 'estoque:listas' geladeira.pk %}">
+                        <button id="btn_clista" class="btn-icon">
+                            <img src="/static/img/lista.png" alt="Lista">
+                        </button>
+                    </a>
+
+                    <a href="{% url 'estoque:historico_geladeira' geladeira.pk %}">
+                        <button id="btn_historico" class="btn-icon">
+                            <img src="/static/img/historico.png" alt="Historico">
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </footer>
+    
+    <script>
+        let botao_compartilhar = document.getElementById("compartilhar_geladeira");
+        let link_compartilhamento = document.getElementById("link_compartilhamento");
+
+        botao_compartilhar.addEventListener("click", function() {
+            if (link_compartilhamento.style.display === "block"){
+                link_compartilhamento.style.display = "none"
+                link_compartilhamento.style.zIndex = "10"
+            }else{
+                link_compartilhamento.style.display = "block"
+            }
+        });
+    </script>
+</body>
