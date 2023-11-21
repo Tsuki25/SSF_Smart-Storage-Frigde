@@ -114,6 +114,7 @@ button:hover {
 
 .borderButton{
     border: none;
+    background-color: transparent;
 }
 
 
