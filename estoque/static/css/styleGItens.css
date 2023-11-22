@@ -31,3 +31,7 @@ button:hover {
     align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
 }
 
+.borderButton{
+    border: none;
+    background-color: transparent;
+}

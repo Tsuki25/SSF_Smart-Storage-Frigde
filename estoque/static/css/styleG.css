@@ -11,13 +11,13 @@ button:hover {
     display: flex;
     align-items: start;
     flex-direction: row;
-    background: rgba(191, 173, 217, 0.50);
     border-radius: 32px;
     text-align: center;
     font-size: 24px;
     position: fixed;
     margin-top: 150px;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .borderFree{
@@ -114,8 +114,12 @@ button:hover {
 
 .borderButton{
     border: none;
+    background-color: transparent;
 }
 
+.borderButton > img{
+    width: 20wv;
+}
 
 .vertical-line {
     border-left: 1px solid #000; /* Largura e cor da linha vertical */
