@@ -3,6 +3,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1; /* Ensure the button is above other elements */
 }
 
 .borderButton{
@@ -14,7 +15,7 @@
     width: 20wv;
 }
 
-.rectangleFree{
+.rectangleFree {
     display: flex;
     align-items: start;
     flex-direction: row;
@@ -22,14 +23,19 @@
     text-align: center;
     font-size: 24px;
     position: fixed;
-    margin-top: 150px;
     width: 100%;
     flex-wrap: wrap;
+    z-index: 0; /* Ensure the rectangle is below other elements */
 }
-
 .borderFree{
     flex-basis: 15%;
-    background: rgba(191, 173, 217, 0.50);
+    background: #8B65BF;
     border-radius: 32px;
     margin: 12px;
+}
+
+.title-geladeira{
+    color: white; /* Substitua #000 pela cor desejada em formato hexadecimal, nome da cor ou RGB */
+    text-decoration: none; /* Para remover o sublinhado (opcional) */
+    margin: 0;
 }
