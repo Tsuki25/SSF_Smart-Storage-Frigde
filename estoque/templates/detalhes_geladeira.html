@@ -23,9 +23,8 @@
     </header>
 
     {% block content %}
-    <div> 
-        <div class="buttonCenter"  id="buttonCenter">
-
+    <div class="container"> 
+        <div class="ButtonPlus">
             <a href="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
                 <button class="borderButton"> 
                     <img src="/static/img/plus.png">
@@ -36,29 +35,30 @@
             </p>
         </div>
         <!-- Botão para adicionar um novo produto a geladeira -->
-        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <div class="itensFrezze">
             {% for item in item_geladeira %}
-                <div style="background-color: #D9D9D9; width: 300px; height: 341px; border-radius: 30px; margin: 10px; box-sizing: border-box;">
+                <div class="styleItens">
                     
                     <img src="/media/{{ item.produto.imagem_produto }}" style="display: block; margin: auto;" width="100px" height="100px">
 
-                    <form method="post" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="item_id" value="{{ item.id }}">
-                        <label for="quantidade{{ item.id }}">Quantidade</label><br>
-                        <input type="number" id="quantidade{{ item.id }}" name="quantidade{{ item.id }}" value="{{ item.quantidade }}" min="0"><br>
-                        <label for="validade{{ item.id }}">Validade</label><br>
-                        <input type="date" id="validade{{ item.id }}" name="validade{{ item.id }}" value="{{ item.validade|date:'Y-m-d' }}" readonly>
-                        <button type="button" id="btn_validade{{ item.id }}" onclick="document.getElementById('validade{{ item.id }}').readOnly = false; document.getElementById('btn_validade{{ item.id }}').style.display = 'none'">lapis_edicao</button>
-                        <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button>
-                        <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
-                        <button type="submit">Guardar</button>
-                    </form>
+
                     <a href="{% url 'estoque:excluir_item_geladeira' geladeira.pk item.pk %}"><button id="btn_excluir">X</button></a>
                     <br>
-                    <div style="background-color: #565CF9; width: 300px; height: 90px; border-radius: 0 0 10px 10px;"> 
+                    <div style="background-color: #565CF9; width: 300px; height: 90px; border-radius: 0 0 10px 10px; display: flex; justify-content: space-between; padding: 0 10px;"> 
                         <p>{{ item.produto.nome_produto }}</p>
                         <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
+                        <form method="post" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <label for="quantidade{{ item.id }}">Quantidade</label><br>
+                            <input type="number" id="quantidade{{ item.id }}" name="quantidade{{ item.id }}" value="{{ item.quantidade }}" min="0"><br>
+                            <label for="validade{{ item.id }}">Validade</label><br>
+                            <input type="date" id="validade{{ item.id }}" name="validade{{ item.id }}" value="{{ item.validade|date:'Y-m-d' }}" readonly>
+                            <button type="button" id="btn_validade{{ item.id }}" onclick="document.getElementById('validade{{ item.id }}').readOnly = false; document.getElementById('btn_validade{{ item.id }}').style.display = 'none'">lapis_edicao</button>
+                            <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button>
+                            <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
+                            <button type="submit">Guardar</button>
+                        </form>
                     </div> 
                 </div>
 

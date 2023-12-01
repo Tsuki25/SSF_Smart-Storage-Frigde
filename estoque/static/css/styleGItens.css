@@ -35,3 +35,21 @@ button:hover {
     border: none;
     background-color: transparent;
 }
+
+.itensFrezze{
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+.container {
+    display: flex;  
+}
+
+.styleItens{
+    background-color: #D9D9D9; 
+    width: 300px; height: 341px; 
+    border-radius: 30px; 
+    margin: 10px; 
+    box-sizing: border-box;
+}
