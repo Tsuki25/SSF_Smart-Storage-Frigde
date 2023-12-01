@@ -1,0 +1,16 @@
+.borderButton{
+    border: none;
+    background-color: transparent;
+}
+
+.buttonCenter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    display: flex;  
+    margin-top: 200px;
+}

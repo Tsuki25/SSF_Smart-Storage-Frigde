@@ -22,7 +22,7 @@
 
     </header>
 
-    {% block content %}
+{% block content %}
     <div class="container"> 
         <div class="ButtonPlus">
             <a href="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
@@ -39,14 +39,18 @@
             {% for item in item_geladeira %}
                 <div class="styleItens">
                     
+                    <a href="{% url 'estoque:excluir_item_geladeira' geladeira.pk item.pk %}"><button id="btn_excluir">X</button></a>
+
+
                     <img src="/media/{{ item.produto.imagem_produto }}" style="display: block; margin: auto;" width="100px" height="100px">
 
-
-                    <a href="{% url 'estoque:excluir_item_geladeira' geladeira.pk item.pk %}"><button id="btn_excluir">X</button></a>
                     <br>
-                    <div style="background-color: #565CF9; width: 300px; height: 90px; border-radius: 0 0 10px 10px; display: flex; justify-content: space-between; padding: 0 10px;"> 
-                        <p>{{ item.produto.nome_produto }}</p>
-                        <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
+                    <div class="cubo"> 
+                        <div>
+                            <p>{{ item.produto.nome_produto }}</p>
+                            <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
+                        </div>
+                        
                         <form method="post" action="{% url 'estoque:detalhes_geladeira' geladeira.pk %}">
                             {% csrf_token %}
                             <input type="hidden" name="item_id" value="{{ item.id }}">
@@ -54,18 +58,19 @@
                             <input type="number" id="quantidade{{ item.id }}" name="quantidade{{ item.id }}" value="{{ item.quantidade }}" min="0"><br>
                             <label for="validade{{ item.id }}">Validade</label><br>
                             <input type="date" id="validade{{ item.id }}" name="validade{{ item.id }}" value="{{ item.validade|date:'Y-m-d' }}" readonly>
-                            <button type="button" id="btn_validade{{ item.id }}" onclick="document.getElementById('validade{{ item.id }}').readOnly = false; document.getElementById('btn_validade{{ item.id }}').style.display = 'none'">lapis_edicao</button>
+                            <button type="button" id="btn_validade{{ item.id }}" onclick="document.getElementById('validade{{ item.id }}').readOnly = false; document.getElementById('btn_validade{{ item.id }}').style.display = 'none'">Editar</button>
                             <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button>
                             <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
-                            <button type="submit">Guardar</button>
+                            <button type="submit">Salvar</button>
                         </form>
+                        
                     </div> 
                 </div>
 
             {% endfor %}
         </div>
     </div>
-    {% endblock %}
+{% endblock %}
 
 
     <footer>

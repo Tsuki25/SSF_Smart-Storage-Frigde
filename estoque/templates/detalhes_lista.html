@@ -1,43 +1,71 @@
 {% load static %}
-
-<link rel="stylesheet" href="{% static 'css/styleItensGeladeira.css' %}">
-
-{% block content %}
-    <div>
-        <!-- Barra de Pesquisa -->
-        <h1 style="display: block">{{ lista.titulo_lista }}</h1>
-        <p style="display: block">{{ lista.descricao }}</p>
-        <a href="{% url 'estoque:editar_lista' lista.pk %}"><button id="btn_edit">Editar</button></a>
-        <a href="{% url 'estoque:excluir_lista' lista.geladeira.pk lista.pk %}"><button id="btn_excluir">Excluir</button></a>
-        <p>Data de criação: {{ lista.dt_criacao }}</p>
-
-        <!-- Botão para adicionar um novo produto a geladeira -->
-        <a href="{% url 'estoque:produtos_lista' lista.pk %}">
-            <div style="background-color: lightseagreen; width: 100px; height: 100px;">
-                <h1 style="font-size: 50pt">+</h1>
-            </div>
-        </a>
-
-        {% for item in item_lista %}
-            <div style="background-color: lightseagreen">
-                <p>{{ item.produto.nome_produto }}</p>
-                <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
-                <form method="post" action="{% url 'estoque:detalhes_lista' lista.pk %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="item_id" value="{{ item.id }}">
-                    <label for="quantidade{{ item.id }}">Quantidade</label><br>
-                    <input type="number" id="quantidade{{ item.id }}" name="quantidade{{ item.id }}" value="{{ item.quantidade }}" min="0"><br>
-
-                    <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button>
-                    <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
-                    <button type="submit">Guardar</button>
-                </form>
-                <a href="{% url 'estoque:excluir_item_lista' lista.pk item.pk %}"><button id="btn_excluir">X</button></a>
-                <br>
-            </div>
-        {% endfor %}
+    <link rel="stylesheet" href="{% static 'css/styleFooterGeral.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styleLista.css' %}">
 
 
-    </div>
-    <a href="{% url 'estoque:listas' lista.geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
-{% endblock %}
+
+<body>
+    {% block content %}
+        <header>
+            <nav class="top-nav">
+                <div class="centered-text">
+                    <div class="logo">
+                        <img src="/static/img/logo.png">
+                    </div>
+                </div>
+                <a>{{ lista.titulo_lista }}</a>
+                {% include 'pesquisa.html' %}
+            </nav>
+
+        </header>
+        <div>
+            <!-- Botão para adicionar um novo produto a geladeira -->
+            <div class="buttonCenter">
+                <a href="{% url 'estoque:produtos_lista' lista.pk %}">
+                    <button class="borderButton"> 
+                        <img src="/static/img/plus.png">
+                    </button>
+                </a>
+
+                <div class="box">
+                    <h2>CSS List Item Hover Effect</h2>
+                    <ul>
+                        {% for item in item_lista %}
+                        <div style="background-color: lightseagreen">
+                            <p>{{ item.produto.nome_produto }}</p>
+                            <p>{{ item.quantidade }} {{ item.produto.unidade_medida }}</p>
+                            <form method="post" action="{% url 'estoque:detalhes_lista' lista.pk %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="item_id" value="{{ item.id }}">
+                                <label for="quantidade{{ item.id }}">Quantidade</label><br>
+                                <input type="number" id="quantidade{{ item.id }}" name="quantidade{{ item.id }}" value="{{ item.quantidade }}" min="0"><br>
+    
+                                <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) - 1">-</button>
+                                <button type="button" onclick="document.getElementById('quantidade{{ item.id }}').value = parseInt(document.getElementById('quantidade{{ item.id }}').value) + 1">+</button>
+                                <button type="submit">Guardar</button>
+                            </form>
+                            <a href="{% url 'estoque:excluir_item_lista' lista.pk item.pk %}"><button id="btn_excluir">X</button></a>
+                            <br>
+                        </div>
+                        <a href="{% url 'estoque:listas' lista.geladeira.pk %}"><button id="btn_voltar">Voltar</button></a>
+    
+                </div>
+                     {% endfor %}
+                </div>
+                <a href="{% url 'estoque:editar_lista' lista.pk %}"><button id="btn_edit">Editar</button></a>
+                <a href="{% url 'estoque:excluir_lista' lista.geladeira.pk lista.pk %}"><button id="btn_excluir">Excluir</button></a>
+                <p>Data de criação: {{ lista.dt_criacao }}</p>
+
+                
+
+
+
+        </div>
+
+
+        
+    {% endblock %}
+</body>
+
+
