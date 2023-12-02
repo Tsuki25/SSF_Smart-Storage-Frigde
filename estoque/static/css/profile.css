@@ -1,0 +1,37 @@
+.header {
+    background-color: #8B65BF;
+    color: #fff;
+    display:flex;
+}
+
+.button_profile{
+    border-radius: 20px;
+    background-color:rgba(139, 101, 191, 0.5);
+    border: none;
+
+}
+#username{
+    border-radius: 50px;
+    background-color:rgba(139, 101, 191, 0.5);
+    border: none;
+    width: 25vw;
+    height: 3vw;
+}
+
+#email{
+    border-radius: 50px;
+    background-color:rgba(139, 101, 191, 0.5);
+    border: none;
+    width: 25vw;
+    height: 3vw;
+}
+.form{
+    height: 30%;
+    display: flex;
+    align-items:center;
+
+}
+body{
+    margin: 0;
+    padding: 0;
+}

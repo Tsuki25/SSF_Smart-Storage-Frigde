@@ -31,3 +31,53 @@ button:hover {
     align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
 }
 
+.borderButton{
+    border: none;
+    background-color: transparent;
+}
+
+.itensFrezze{
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+.container {
+    display: flex;  
+    margin-top: 200px;
+}
+
+.styleItens{
+    background-color: #D9D9D9; 
+    width: 320px; 
+	height: 200px;
+    border-radius: 30px; 
+    margin: 10px; 
+    box-sizing: border-box;
+}
+
+
+.cubo {
+    background-color: #565CF9; 
+    width: 300px; 
+    height: auto; 
+    border-radius: 0 0 10px 10px; 
+    display: flex; 
+    justify-content: space-between; /* Permite espaço entre os itens filhos */
+    padding: 10px; 
+}
+
+.cubo > div {
+    flex: 1; /* Ocupa todo o espaço disponível */
+    margin-right: 10px; /* Adiciona espaço entre os parágrafos e o formulário */
+}
+
+/* Estilo para os parágrafos */
+.cubo p {
+    margin: 5px 0;
+}
+
+/* Estilo para o formulário */
+.cubo form {
+    flex: 1; /* Ocupa todo o espaço disponível */
+}

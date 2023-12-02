@@ -1,22 +1,38 @@
 {% load static %}
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
-    <link rel="stylesheet" href="{% static 'css/styleFooterGeral.css' %}">
-    <h1>Produtos</h1>
-    {% include 'pesquisa.html' %}
+<link rel="stylesheet" href="{% static 'css/styleProdutos.css' %}">
+<link rel="stylesheet" href="{% static 'css/styleSearchNavBar.css' %}">
+<link rel="stylesheet" href="{% static 'css/styleFooterGeral.css' %}">
 
-    <div>
-        <a href="{% url 'estoque:cadastrar_produto' %}">
-            <div style="background-color: lightseagreen; width: 100px; height: 100px;">
-                <h1 style="font-size: 50pt">+</h1>
+<header>
+    <nav class="top-nav">
+        <div class="centered-text">
+            <div class="logo">
+                <img src="/static/img/logo.png">
             </div>
-        </a>
+        </div>
+        <a>Produtos</a>
+        {% include 'pesquisa.html' %}
+    </nav>
 
+</header> 
+
+    <div class="content">
+
+        <div class="buttonCenter">
+            <a href="{% url 'estoque:cadastrar_produto' %}">
+                <button class="borderButton">
+                    <img src="/static/img/plus.png">
+                </button>
+            </a>
+        </div>
+
+        <div class="rectangleFree">
         {% for produto in produtos %}
             {% if geladeira %}
-                <a href="{% url 'estoque:cadastrar_item_geladeira' geladeira.pk produto.pk %}" id="geladeira{{ produto.pk }}" style="display: none">
-                    <div style="background-color: lightseagreen">
-                        <p>{{ produto.nome_produto }}</p>
+                <a href="{% url 'estoque:cadastrar_item_geladeira' geladeira.pk produto.pk %}" id="geladeira{{ produto.pk }}" style="display: none" class="title-geladeira">
+                    <div class="borderFree">
+                        <pclass="title-prodNome">{{ produto.nome_produto }}</p>
                         <img src="/media/{{ produto.imagem_produto }}" width="100px" height="100px">
                         <p>{{ produto.unidade_medida }}</p>
                     </div>
@@ -24,15 +40,16 @@
             {% endif %}
 
             {% if lista %}
-                <a href="{% url 'estoque:cadastrar_item_lista' lista.pk produto.pk %}" id="lista{{ produto.pk }}" style="display: none">
+                <a href="{% url 'estoque:cadastrar_item_lista' lista.pk produto.pk %}" id="lista{{ produto.pk }}" style="display: none" class="title-geladeira" >
                     <div style="background-color: lightseagreen">
-                        <p>{{ produto.nome_produto }}</p>
+                        <p >{{ produto.nome_produto }}</p>
                         <img src="/media/{{ produto.imagem_produto }}" width="100px" height="100px">
                         <p>{{ produto.unidade_medida }}</p>
                     </div>
                 </a>
             {% endif %}
         {% endfor %}
+        </div> 
 
         <footer>
             <nav>

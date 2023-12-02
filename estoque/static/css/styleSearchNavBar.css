@@ -58,3 +58,7 @@
 .borderButton{
     border: none;
 }
+
+.content{
+    margin-top: 150px;
+}
