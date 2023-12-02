@@ -1,16 +1,61 @@
+
+
 .borderButton{
     border: none;
     background-color: transparent;
+    
+}
+
+.outerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza no eixo horizontal */
+    justify-content: center; /* Centraliza no eixo vertical */
+    width: 1232px;
+    height: 596px;
+    background-color: #BFADD9;
+    margin: auto; /* Margem automática para centralizar na horizontal */
+    margin-top: 19vh; /* Metade da altura da viewport para centralizar verticalmente */
+    overflow-y: auto; /* Adicione esta linha para habilitar a rolagem vertical */
 }
 
 .buttonCenter {
     position: fixed;
-    top: 50%;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);    
+    margin-top: 100px; 
+}
+
+.itemContainer ul {
+    list-style-type: none; /* Remove as bolinhas da lista */
+    display: flex; /* Adiciona o display flex ao elemento <ul> para alinhar os itensIn lado a lado */
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha, se necessário */
+    justify-content: space-between; /* Distribui os itens igualmente no espaço disponível */
+}
+
+.itemContainer {
+    margin-top: 200px; 
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
 .container {
     display: flex;  
     margin-top: 200px;
+}
+
+
+.itensIn{
+    background-color: #8B65BF; 
+    width: 1100px;              
+    height: auto;    
+}
+
+.itemContainer ul {
+    list-style-type: none; /* Remove as bolinhas da lista */
+}
+
+.itemContainer li {
+    /* Se necessário, adicione estilos adicionais para os itens da lista */
 }
