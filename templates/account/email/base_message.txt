@@ -1,7 +1,7 @@
-{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Hello from {{ site_name }}!{% endblocktrans %}
+{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Olá, muito obrigado por acessar o Smart Storage Fridges!{% endblocktrans %}
 
 {% block content %}{% endblock content %}
 
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you for using {{ site_name }}!
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Muito obrigado por acessar Smart Storage Fridges!!
 {{ site_domain }}{% endblocktrans %}
 {% endautoescape %}

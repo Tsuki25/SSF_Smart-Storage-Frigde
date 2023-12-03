@@ -1,12 +1,10 @@
 {% extends "account/email/base_message.txt" %}
 {% load i18n %}
 
-{% block content %}{% autoescape off %}{% blocktrans %}You are receiving this email because you or someone else has requested a
-password for your user account. However, we do not have any record of a user
-with email {{ email }} in our database.
+{% block content %}{% autoescape off %}{% blocktrans %}Você está recebendo este e-mail porque você ou alguém solicitou uma senha para a sua conta de usuário. No entanto, não temos nenhum registro de um usuário com o e-mail {{ email }} em nosso banco de dados.
 
-This mail can be safely ignored if you did not request a password reset.
+Esta mensagem pode ser ignorada com segurança se você não solicitou a redefinição de senha.
 
-If it was you, you can sign up for an account using the link below.{% endblocktrans %}
+Caso tenha sido você quem fez a solicitação ou se deseja criar uma conta, você pode se inscrever usando o link abaixo:{% endblocktrans %}
 
 {{ signup_url }}{% endautoescape %}{% endblock content %}
