@@ -82,13 +82,15 @@ class Geladeiras(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):  # DEFINE O CONTEXTO DE GELADEIRAS
         context = super().get_context_data(**kwargs)
-        context['geladeiras'] = Geladeira.objects.all()  # PEGA TODOS OS OBJETOS GELADEIRA E ADICIONA A UMA LISTA
+        try:
+            context['geladeiras'] = Geladeira.objects.filter(usuarios_proprietarios__email__icontains=self.request.user.email)
+        except Geladeira.DoesNotExist:
+            pass
 
         termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
         if termo_pesquisa:
             context['geladeiras'] = Geladeira.objects.filter(nome_geladeira__icontains=termo_pesquisa)
         return context
-
 
 class DetalhesGeladeira(LoginRequiredMixin, DetailView):
     template_name = "detalhes_geladeira.html"
@@ -233,8 +235,13 @@ class Listas(LoginRequiredMixin, ListView):
         geladeira = Geladeira.objects.get(pk=self.kwargs['pk']) # Instancia um objeto geladeira baseado nessa pk
         context['geladeira'] = geladeira # Passa a instancia como um contexto para o template
         context['listas'] = Lista.objects.filter(geladeira=geladeira) # Passa todas as listas para o template
-        return context
 
+        # UTILIZADO PARA IMPLEMENTAR A BARRA DE PESQUISA NA PAGINA
+        termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
+        if termo_pesquisa:
+            context['listas'] = Lista.objects.filter(titulo_lista__icontains=termo_pesquisa, geladeira=geladeira)
+
+        return context
 
 class DetalhesLista(LoginRequiredMixin, DetailView):
     template_name = "detalhes_lista.html"
@@ -375,7 +382,6 @@ class HistoricoGeladeira(LoginRequiredMixin, ListView): #View para exibir o hist
         context['historico'] = Log_Itens_Geladeira.objects.filter(dt_modificacao__gte=dias_carregados, geladeira=geladeira)
 
         return context
-
 
 class CompartilharGeladeira(LoginRequiredMixin, View):
     def get(self, request, pk):
