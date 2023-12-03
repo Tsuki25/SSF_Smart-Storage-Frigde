@@ -15,34 +15,34 @@
             </nav>
     
         </header>
+        {% if geladeiras is None %}<!-- Se não existe uma geladeira -->
+            <div class="buttonCenter">
+                <a href="{% url 'estoque:criar_geladeira' %}">
+                    <button class="borderButton">
+                        <img src="/static/img/plus.png">
+                    </button>
+                </a>
+            </div>
+        {% else %}
+            {% block content %}
+                <div class="rectangleFree">
+                    <a href="{% url 'estoque:criar_geladeira' %}" class="create_link">
+                        <button class="borderButton">
+                            <img src="/static/img/plus.png">
+                        </button>
+                    </a>
 
-
-        {% block content %}
-        <div class="rectangleFree">
-            {% for geladeira in geladeiras %}
-                {% if request.user in geladeira.usuarios_proprietarios.all %}
-                    <section class="borderFree">
-                        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" class="title-geladeira"><p class="title-geladeira">{{ geladeira.nome_geladeira }}</p></a>
-                        {% for usuario in geladeira.usuarios_proprietarios.all %}
-                            <p>{{ usuario }}</p>
-                        {% endfor %}
-                    </section>
-                {% endif %}
-            {% endfor %}
-        </div>
-        {% endblock %}
-
-
-
-        <div class="buttonCenter">
-            <a href="{% url 'estoque:criar_geladeira' %}">
-                <button class="borderButton">
-                    <img src="/static/img/plus.png">
-                </button>
-            </a>
-        </div>
-    
-
+                    {% for geladeira in geladeiras %}
+                        <section class="borderFree">
+                            <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" class="title-geladeira"><p class="title-geladeira">{{ geladeira.nome_geladeira }}</p></a>
+                            {% for usuario in geladeira.usuarios_proprietarios.all %}
+                                <p class="name_propies">{{ usuario }}</p>
+                            {% endfor %}
+                        </section>
+                {% endfor %}
+                </div>
+            {% endblock %}
+        {% endif %}
 
         <footer>
             <nav class="bottom-nav">

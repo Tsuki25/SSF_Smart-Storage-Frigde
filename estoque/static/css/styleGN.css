@@ -133,3 +133,36 @@ textarea{
     width: 72px;
     height: 72px;
 }
+
+/* TELA DE EXCLUSÃO DE ITENS */
+.title_exclude{
+    font-size: 32px;
+    color: #650165;
+}
+
+.text_exclude{
+    font-size: 20px;
+}
+
+#exclude{
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: 0 0 0 0 transparent;
+}
+
+#btn-exclude{
+    background: url('/static/img/confirm_delete.png') center center no-repeat; /* Substitua 'caminho/para/sua/imagem.png' pelo caminho real da sua imagem */
+    background-size: cover;
+    width: 72px; /* Largura do botão, ajuste conforme necessário */
+    height: 72px;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-left: 37%;
+    margin-right: 30%;
+    border: none;
+}
+
+#btn-exclude img{
+    border: 1px solid #8B65BF;
+}

@@ -7,7 +7,7 @@ button:hover {
     cursor: pointer;
 }
 
-.rectangleFree{
+.rectangleFree {
     display: flex;
     align-items: start;
     flex-direction: row;
@@ -18,22 +18,39 @@ button:hover {
     margin-top: 150px;
     width: 100%;
     flex-wrap: wrap;
+    height: 200px;
 }
 
 .borderFree{
     flex-basis: 15%;
+    height: 100%;
     background: rgba(191, 173, 217, 0.50);
     border-radius: 32px;
     margin: 12px;
 }
 
 .title-geladeira{
-    background: #8B65BF;
+    background: #8B65BD;
     color: white; /* Substitua #000 pela cor desejada em formato hexadecimal, nome da cor ou RGB */
     text-decoration: none; /* Para remover o sublinhado (opcional) */
     margin: 0;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+    text-align: center;
+    height: 30%;
+}
+
+.title-geladeira p{
+    padding: 10% 0 0 0;
+    font-size: 30px;
+}
+
+.title-geladeira:hover{
+    text-decoration: underline;
+}
+
+.name_propies{
+    margin:15px;
 }
 
 .bottom-nav{
@@ -115,10 +132,23 @@ button:hover {
 .borderButton{
     border: none;
     background-color: transparent;
+    padding: 0;
+    margin: 0;
 }
 
-.borderButton > img{
-    width: 20wv;
+.borderButton img{
+    height: 100%;
+}
+
+.create_link{
+    margin: 10px;
+    background-color: rgba(191, 173, 217, 0.50);
+    border-radius: 50px;
+}
+
+.create_link:hover{
+    background-color: #d3c2ec;
+     box-shadow: 3px 3px 0 0 #83689d;
 }
 
 .vertical-line {
