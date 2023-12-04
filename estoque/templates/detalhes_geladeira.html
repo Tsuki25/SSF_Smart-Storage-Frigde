@@ -23,11 +23,11 @@
     </header>
 
 {% block content %}
-    <div class="container"> 
+    <div class="container">
         <div class="ButtonPlus">
             <a href="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
-                <button class="borderButton"> 
-                    <img src="/static/img/plus.png">
+                <button class="borderButton">
+                    <img src="/static/img/plus.png" class="create_link">
                 </button>
             </a>
             <p id="link_compartilhamento" style="display: none;">
@@ -39,7 +39,7 @@
             {% for item in item_geladeira %}
                 <div class="styleItens">
                     
-                    <a href="{% url 'estoque:excluir_item_geladeira' geladeira.pk item.pk %}"><button id="btn_excluir">X</button></a>
+                    <a href="{% url 'estoque:excluir_item_geladeira' geladeira.pk item.pk %}"><button id="btn_exclude"><img src=""></button></a>
 
 
                     <img src="/media/{{ item.produto.imagem_produto }}" style="display: block; margin: auto;" width="100px" height="100px">

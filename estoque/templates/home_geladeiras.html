@@ -16,13 +16,13 @@
     
         </header>
         {% if geladeiras is None %}<!-- Se não existe uma geladeira -->
-            <div class="buttonCenter">
-                <a href="{% url 'estoque:criar_geladeira' %}">
+            <a href="{% url 'estoque:criar_geladeira' %}">
+                <div class="buttonCenter">
                     <button class="borderButton">
                         <img src="/static/img/plus.png">
                     </button>
-                </a>
-            </div>
+                </div>
+            </a>
         {% else %}
             {% block content %}
                 <div class="rectangleFree">

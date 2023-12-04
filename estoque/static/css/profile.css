@@ -5,17 +5,73 @@
 }
 
 .button_profile{
-    border-radius: 20px;
+    border-radius: 30px;
     background-color:rgba(139, 101, 191, 0.5);
     border: none;
+    width: 10vw;
+    height: 2.5vw;
+    color: purple;
+}
+
+.button_profile:hover{
+    background-color: #d4c6e5;
+}
+
+#btn_submit{
+    border-radius: 30px;
+    background-color: rgba(139, 101, 191, 0.5);
+    border: none;
+    width: 10vw;
+    height: 2.5vw;
+}
+
+#btn_edit{
+    cursor: pointer;
+}
+
+.fields{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75%;
+}
+
+
+.form{
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    justify-content: center;
 
 }
+
+.buttons{
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.sup{
+    margin: 0.5vw;
+}
+.bottom{
+    margin: 0.5vw;
+}
+
+#username, #email{
+    padding-left:10px;
+}
+
 #username{
     border-radius: 50px;
     background-color:rgba(139, 101, 191, 0.5);
     border: none;
     width: 25vw;
     height: 3vw;
+
 }
 
 #email{
@@ -24,14 +80,19 @@
     border: none;
     width: 25vw;
     height: 3vw;
-}
-.form{
-    height: 30%;
-    display: flex;
-    align-items:center;
 
 }
+
 body{
     margin: 0;
     padding: 0;
+}
+
+.header h1{
+    padding-left: 5%;
+}
+
+a{
+    text-decoration: none;
+    color: purple;
 }
