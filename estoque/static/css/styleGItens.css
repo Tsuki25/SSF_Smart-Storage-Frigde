@@ -31,3 +31,101 @@ button:hover {
     align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
 }
 
+.borderButton{
+    border: none;
+    background-color: transparent;
+}
+
+.itensFrezze{
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+.container {
+    display: flex;  
+    margin-top: 200px;
+}
+
+.styleItens{
+    background-color: #d4c6e5;
+    width: 320px; 
+	height: 200px;
+    border-radius: 30px; 
+    margin: 10px; 
+    box-sizing: border-box;
+}
+
+
+.cubo {
+    background-color: #8B65BF;
+    width: 300px; 
+    height: auto; 
+    border-radius: 0 0 10px 10px; 
+    display: flex; 
+    justify-content: space-between; /* Permite espaço entre os itens filhos */
+    padding: 10px; 
+}
+
+.cubo > div {
+    flex: 1; /* Ocupa todo o espaço disponível */
+    margin-right: 10px; /* Adiciona espaço entre os parágrafos e o formulário */
+}
+
+/* Estilo para os parágrafos */
+.cubo p {
+    margin: 5px 0;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    padding: 10%;
+    font-weight: bold;
+}
+
+/* Estilo para o formulário */
+.cubo form {
+    flex: 1; /* Ocupa todo o espaço disponível */
+}
+.cubo input{
+    background-color: #d4c6e5;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    border: 2px solid #650165;
+    font-size: 15px;
+    padding: 2px;
+    padding-left: 5px;
+}
+
+.cubo button{
+    background-color: #d4c6e5;
+    border: 2px solid #650165;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.cubo label{
+    font-size: 14px;
+    color: Black;
+    font-weight: bold;
+}
+
+#btn_exclude{
+    background: url('/static/img/confirm_delete.png') center center no-repeat; /* Substitua 'caminho/para/sua/imagem.png' pelo caminho real da sua imagem */
+    background-size: cover;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.create_link{
+    margin: 10px;
+    background-color: rgba(191, 173, 217, 0.50);
+    border-radius: 50px;
+}
+
+.create_link:hover{
+    background-color: #d3c2ec;
+     box-shadow: 3px 3px 0 0 #83689d;
+}

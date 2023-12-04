@@ -1,0 +1,83 @@
+body{
+    margin: 0;
+}
+
+.buttonCenter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.borderButton{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.borderButton img{
+    height: 100%;
+}
+
+
+.borderButton > img{
+    width: 20wv;
+}
+
+.rectangleFree {
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+    border-radius: 32px;
+    text-align: center;
+    font-size: 24px;
+    position: fixed;
+    width: 100%;
+    flex-wrap: wrap;
+    height: 200px;
+    margin-top: 10%;
+    padding: 15px;
+}
+
+.borderFree{
+    flex-basis: 20%;
+    height: 100%;
+    background: rgba(191, 173, 217, 0.50);
+    border-radius: 32px;
+    margin: 10px;
+    background-color: #8B65BF;
+}
+
+.borderFree img{
+    width: 110px;
+    height: 110px;
+    border-radius: 60px;
+    margin: 10px;
+}
+
+p{
+    text-align: center;
+    margin: 0;
+}
+
+.title-prodNome{
+    padding-top: 10px;
+}
+
+.title-geladeira{
+    color: white; /* Substitua #000 pela cor desejada em formato hexadecimal, nome da cor ou RGB */
+    text-decoration: none; /* Para remover o sublinhado (opcional) */
+    margin: 0;
+}
+
+.create_link{
+    margin: 10px;
+    background-color: rgba(191, 173, 217, 0.50);
+    border-radius: 50px;
+}
+
+.create_link:hover{
+    background-color: #d3c2ec;
+     box-shadow: 3px 3px 0 0 #83689d;
+}

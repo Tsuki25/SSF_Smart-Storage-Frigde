@@ -2,17 +2,6 @@ button:hover {
     cursor: pointer;
 }
 
-form{
-    padding: 10px; /* Adicione algum espaço interno para melhor aparência */
-    border-radius: 50px; /* Adicione bordas arredondadas de 10px */
-    background: #BFADD9;
-    display: flex; /* Para fazer com que o retângulo se ajuste ao conteúdo */
-    width: 408px;
-    height: 63px;
-    justify-content: center;
-    margin: auto;
-}
-
 body {
     display: flex;
     flex-direction: column;
@@ -22,26 +11,67 @@ body {
     height: 100vh; /* Define a altura do corpo para ocupar toda a altura da tela */
 }
 
-input {
-    font-size: 22px;
-    color: black;
-    border: none;
-    background: #BFADD9;
+form {
+    padding: 20px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background-color: #BFADD9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    font-family: 'Inter', sans-serif;
 }
 
-input#inputSave{
+form::placeholder{
+    color: white;
+}
+
+input {
+    background-color: #d4c6e5;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #8B65BF;
+    border-radius: 15px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+#inputSave {
     background: url('/static/img/salvar.png') center center no-repeat; /* Substitua 'caminho/para/sua/imagem.png' pelo caminho real da sua imagem */
-    background-size: cover; /* Ajusta o tamanho da imagem para cobrir completamente o botão */
+    background-size: cover;
     width: 72px; /* Largura do botão, ajuste conforme necessário */
-    height: 72px; /* Altura do botão, ajuste conforme necessário */
+    height: 72px;
+    padding: 10px;
+    box-sizing: border-box;
     border: none;
     cursor: pointer;
+    margin-left: 37%;
+    margin-right: 30%;
 }
 
-
 label {
-    font-size: 12px;
-    color: purple;
+    font-size: 20px;
+    color: #650165;
+    padding-left: 7px;
+    font-weight: bold;
+
+}
+
+select{
+    background-color: #d4c6e5;
+    padding: 5px;
+    border: 1px solid #8B65BF;
+    border-radius: 15px;
+}
+
+textarea{
+    background-color: #d4c6e5;
+    padding: 5px;
+    border: 1px solid #8B65BF;
+    border-radius: 15px;
+    width: 98%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
 }
 
 .top-nav {
@@ -102,4 +132,37 @@ label {
 #btn_voltar img {
     width: 72px;
     height: 72px;
+}
+
+/* TELA DE EXCLUSÃO DE ITENS */
+.title_exclude{
+    font-size: 32px;
+    color: #650165;
+}
+
+.text_exclude{
+    font-size: 20px;
+}
+
+#exclude{
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: 0 0 0 0 transparent;
+}
+
+#btn-exclude{
+    background: url('/static/img/confirm_delete.png') center center no-repeat; /* Substitua 'caminho/para/sua/imagem.png' pelo caminho real da sua imagem */
+    background-size: cover;
+    width: 72px; /* Largura do botão, ajuste conforme necessário */
+    height: 72px;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-left: 37%;
+    margin-right: 30%;
+    border: none;
+}
+
+#btn-exclude img{
+    border: 1px solid #8B65BF;
 }

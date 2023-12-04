@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Account Already Exists{% endblocktrans %}
+{% blocktrans %}Uma conta já existe para os dados informados.{% endblocktrans %}
 {% endautoescape %}

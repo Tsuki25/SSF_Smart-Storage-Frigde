@@ -1,6 +1,10 @@
 {% load static %}
     <head>
         <link rel="stylesheet" href="{% static 'css/styleGN.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Noto+Sans:wght@300&display=swap" rel="stylesheet">
+
     </head>
 
     <body>
@@ -8,7 +12,7 @@
             <nav class="top-nav">
                 <div class="centered-text">
                     <div class="logo">
-                        <img src="/static/img/logo.png">
+                         <a href="{% url 'estoque:geladeiras'%}"><img src="/static/img/logo.png"></a>
                     </div>
                 </div>
                 <a>Geladeiras</a>
@@ -18,8 +22,7 @@
         {% load crispy_forms_filters %}
         {% block main %}
         {%  load crispy_forms_tags %}
-        
-            
+                   
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }} <br>
@@ -28,7 +31,7 @@
         
         {% endblock %} 
 
-        <foooter>
+        <footer>
             <nav class="navbarbar">
                 <a href="{% url 'estoque:geladeiras' %}">
                     <button id="btn_voltar" class="btn-icon">

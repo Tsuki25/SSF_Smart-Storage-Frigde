@@ -1,6 +1,35 @@
-<h2>Confirmação de Exclusão</h2>
-<p>Tem certeza de que deseja excluir este registro?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Excluir</button>
-</form>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styleGN.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Noto+Sans:wght@300&display=swap" rel="stylesheet">
+
+<header>
+    <nav class="top-nav">
+        <div class="centered-text">
+            <div class="logo">
+                <a href="{% url 'estoque:geladeiras'%}"><img src="/static/img/logo.png"></a>
+            </div>
+        </div>
+        <a>Geladeiras</a>
+    </nav>
+</header>
+
+{% block main %}
+    <h2 class="title_exclude">Confirmação de Exclusão</h2>
+    <p class="text_exclude">Tem certeza de que deseja excluir este registro?</p>
+    <form method="post" id="exclude">
+        {% csrf_token %}
+        <button type="submit" id="btn-exclude"></button>
+    </form>
+{% endblock %}
+
+    <footer>
+        <nav class="navbarbar">
+            <a href="{% url 'estoque:geladeiras' %}">
+                <button id="btn_voltar" class="btn-icon">
+                    <img src="/static/img/voltar.png" alt="Voltar">
+                </button>
+            </a>
+        </nav>
+    </footer>

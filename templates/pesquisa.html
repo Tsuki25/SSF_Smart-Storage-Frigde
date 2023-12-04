@@ -15,14 +15,21 @@
         <button type="submit"><img class="search-icon" src="/static/img/icon-lupa.png" alt="search"/></button>
       </form>
     </body>
-{% elif '/geladeira/produtos_lista/' in request.path %}
+{% elif '/geladeiras/listas/' in request.path %}
+    <body>
+      <form class="search-container" method="get" action="{% url 'estoque:listas' geladeira.pk%}">
+        <input type="text" id="search-bar" name="q" placeholder="Pesquisar...">
+        <button type="submit"><img class="search-icon" src="/static/img/icon-lupa.png" alt="search"/></button>
+      </form>
+    </body>
+{% elif '/produtos_lista/' in request.path %}
     <body>
       <form class="search-container" method="get" action="{% url 'estoque:produtos_lista' lista.pk %}">
         <input type="text" id="search-bar" name="q" placeholder="Pesquisar...">
         <button type="submit"><img class="search-icon" src="/static/img/icon-lupa.png" alt="search"/></button>
       </form>
     </body>
-{% else %}
+{% elif '/produtos/' in request.path %}
     <body>
       <form class="search-container" method="get" action="{% url 'estoque:produtos_geladeira' geladeira.pk %}">
         <input type="text" id="search-bar" name="q" placeholder="Pesquisar...">

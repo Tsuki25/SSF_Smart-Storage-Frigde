@@ -7,7 +7,7 @@
             <nav class="top-nav">
                 <div class="centered-text">
                     <div class="logo">
-                        <img src="/static/img/logo.png">
+                         <a href="{% url 'estoque:geladeiras'%}"><img src="/static/img/logo.png"></a>
                     </div>
                 </div>
                 <a>Geladeiras</a>
@@ -15,34 +15,34 @@
             </nav>
     
         </header>
-
-
-        {% block content %}
-        <div class="rectangleFree">
-            {% for geladeira in geladeiras %}
-                {% if request.user in geladeira.usuarios_proprietarios.all %}
-                    <section class="borderFree">
-                        <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" class="title-geladeira"><p class="title-geladeira">{{ geladeira.nome_geladeira }}</p></a>
-                        {% for usuario in geladeira.usuarios_proprietarios.all %}
-                            <p>{{ usuario }}</p>
-                        {% endfor %}
-                    </section>
-                {% endif %}
-            {% endfor %}
-        </div>
-        {% endblock %}
-
-
-
-        <div class="buttonCenter">
+        {% if geladeiras is None %}<!-- Se não existe uma geladeira -->
             <a href="{% url 'estoque:criar_geladeira' %}">
-                <button class="borderButton">
-                    <img src="/static/img/plus.png">
-                </button>
+                <div class="buttonCenter">
+                    <button class="borderButton">
+                        <img src="/static/img/plus.png">
+                    </button>
+                </div>
             </a>
-        </div>
-    
+        {% else %}
+            {% block content %}
+                <div class="rectangleFree">
+                    <a href="{% url 'estoque:criar_geladeira' %}" class="create_link">
+                        <button class="borderButton">
+                            <img src="/static/img/plus.png">
+                        </button>
+                    </a>
 
+                    {% for geladeira in geladeiras %}
+                        <section class="borderFree">
+                            <a href="{% url 'estoque:detalhes_geladeira' geladeira.pk %}" class="title-geladeira"><p class="title-geladeira">{{ geladeira.nome_geladeira }}</p></a>
+                            {% for usuario in geladeira.usuarios_proprietarios.all %}
+                                <p class="name_propies">{{ usuario }}</p>
+                            {% endfor %}
+                        </section>
+                {% endfor %}
+                </div>
+            {% endblock %}
+        {% endif %}
 
         <footer>
             <nav class="bottom-nav">
