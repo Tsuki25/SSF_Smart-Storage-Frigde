@@ -1,0 +1,174 @@
+button:hover {
+    cursor: pointer;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Define a altura do corpo para ocupar toda a altura da tela */
+    font-family: Montserrat;
+    background-image: url(../img/Untitled_page-0001.jpg);
+    color: black; /* Define a cor do texto como branco para melhor legibilidade no fundo preto */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+form {
+    padding: 20px; /* Adicione algum espaço interno para melhor aparência */
+    border-radius: 30px; /* Adicione bordas arredondadas de 10px */
+    background-color: #BFADD9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    font-family: 'Inter', sans-serif;
+}
+
+form::placeholder{
+    color: white;
+}
+
+input {
+    background-color: #d4c6e5;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #8B65BF;
+    border-radius: 15px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+#inputSave {
+    background: url('/static/img/salvar.png') center center no-repeat; /* Substitua 'caminho/para/sua/imagem.png' pelo caminho real da sua imagem */
+    background-size: cover;
+    width: 72px; /* Largura do botão, ajuste conforme necessário */
+    height: 72px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+    margin-left: 37%;
+    margin-right: 30%;
+}
+
+label {
+    font-size: 20px;
+    color: #650165;
+    padding-left: 7px;
+    font-weight: bold;
+
+}
+
+select{
+    background-color: #d4c6e5;
+    padding: 5px;
+    border: 1px solid #8B65BF;
+    border-radius: 15px;
+}
+
+textarea{
+    background-color: #d4c6e5;
+    padding: 5px;
+    border: 1px solid #8B65BF;
+    border-radius: 15px;
+    width: 98%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+.top-nav {
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    left: 0;
+    height: 10px;
+}
+
+.centered-text {
+    display: flex;
+    align-items: center; /* Altere para 'align-items: center' para centralizar verticalmente */
+    height: 100%; /* Aumente a altura para ocupar toda a altura do elemento pai */
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.top-nav a {
+    font-size: 45px; /* Ajuste o valor do tamanho da fonte conforme necessÃ¡rio */
+    font-style: italic;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: start;
+    align-items: center; /* Centraliza verticalmente os elementos dentro da barra de navegaÃ§Ã£o */
+}
+
+.navbarbar{
+    background-color: #8B65BF;
+    color: #fff;
+    padding: 70px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#btn_voltar {
+    background: none;
+    border: none;
+    margin-right: 500px;
+}
+
+#btn_voltar img {
+    width: 72px;
+    height: 72px;
+}
+
+/* TELA DE EXCLUSÃO DE ITENS */
+.title_exclude{
+    font-size: 32px;
+    color: #650165;
+}
+
+.text_exclude{
+    font-size: 20px;
+}
+
+#exclude{
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: 0 0 0 0 transparent;
+}
+
+#btn-exclude{
+    background: url('/static/img/confirm_delete.png') center center no-repeat; /* Substitua 'caminho/para/sua/imagem.png' pelo caminho real da sua imagem */
+    background-size: cover;
+    width: 72px; /* Largura do botão, ajuste conforme necessário */
+    height: 72px;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-left: 37%;
+    margin-right: 30%;
+    border: none;
+}
+
+#btn-exclude img{
+    border: 1px solid #8B65BF;
+}

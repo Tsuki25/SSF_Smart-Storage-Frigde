@@ -89,7 +89,7 @@ class Geladeiras(LoginRequiredMixin, ListView):
 
         termo_pesquisa = self.request.GET.get('q')  # Obtém o termo de busca da URL
         if termo_pesquisa:
-            context['geladeiras'] = Geladeira.objects.filter(nome_geladeira__icontains=termo_pesquisa)
+            context['geladeiras'] = Geladeira.objects.filter(usuarios_proprietarios__email__icontains=self.request.user.email,nome_geladeira__icontains=termo_pesquisa)
         return context
 
 class DetalhesGeladeira(LoginRequiredMixin, DetailView):
